@@ -1,1 +1,107 @@
-[]
+[
+    {
+        "id": "4a676664609e550a",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "97bb187e2c8df107",
+        "type": "MySQLdatabase",
+        "name": "crm-db - full access",
+        "host": "crm-db",
+        "port": "3306",
+        "db": "crm-db",
+        "tz": "UTC",
+        "charset": "UTF8"
+    },
+    {
+        "id": "c7ad26d7278d71a7",
+        "type": "mysql",
+        "z": "4a676664609e550a",
+        "mydb": "97bb187e2c8df107",
+        "name": "",
+        "x": 660,
+        "y": 160,
+        "wires": [
+            [
+                "0ce00c2e0eee2aad"
+            ]
+        ]
+    },
+    {
+        "id": "31c64132f9032345",
+        "type": "inject",
+        "z": "4a676664609e550a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 160,
+        "wires": [
+            [
+                "6b61933cdd2430f3"
+            ]
+        ]
+    },
+    {
+        "id": "6b61933cdd2430f3",
+        "type": "change",
+        "z": "4a676664609e550a",
+        "name": "set msg.topic to show databases;",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "show databases;",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "c7ad26d7278d71a7"
+            ]
+        ]
+    },
+    {
+        "id": "0ce00c2e0eee2aad",
+        "type": "debug",
+        "z": "4a676664609e550a",
+        "name": "log",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 160,
+        "wires": []
+    }
+]
