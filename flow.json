@@ -2,10 +2,157 @@
     {
         "id": "4a676664609e550a",
         "type": "tab",
+        "label": "example",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b799064cb3f975fb",
+        "type": "tab",
+        "label": "in",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "805a768837c7900b",
+        "type": "tab",
+        "label": "test",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f409e00b8acde5e1",
+        "type": "tab",
+        "label": "sorting",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e181d79831f12e5d",
+        "type": "tab",
+        "label": "main order",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "62cb6b3a5192492c",
+        "type": "tab",
+        "label": "main dropship",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bddf42db0215867b",
+        "type": "tab",
+        "label": "main pickup",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e021d1d1bf02799b",
+        "type": "tab",
+        "label": "main bag",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "98ca48f3d4300469",
+        "type": "tab",
         "label": "Flow 1",
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "9e9a77f.2571f88",
+        "type": "subflow",
+        "name": "Glob Cache",
+        "info": "ACTION:[\n    Add, \n    Read,\n    Delete\n]\n\nuse {\n    \"payload\":{\n        \"Add\":{\n            \"id\":1,\"val\":10\n        }\n    }\n}",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 40,
+                "wires": [
+                    {
+                        "id": "2825c0f3.fd688"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1560,
+                "y": 340,
+                "wires": [
+                    {
+                        "id": "a4e3568c.c27548",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1560,
+                "y": 540,
+                "wires": [
+                    {
+                        "id": "3c2989e6.e98316",
+                        "port": 0
+                    },
+                    {
+                        "id": "b2ce0a4d.d3c3f8",
+                        "port": 0
+                    },
+                    {
+                        "id": "645967d6.18ecd8",
+                        "port": 0
+                    },
+                    {
+                        "id": "4b3e9b59.2f4bc4",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "GLOB_NAME",
+                "type": "str",
+                "value": "glob_test"
+            },
+            {
+                "name": "ID_KEY",
+                "type": "str",
+                "value": "job.id"
+            }
+        ],
+        "color": "#AAAA66",
+        "inputLabels": [
+            "payload"
+        ],
+        "outputLabels": [
+            "payload",
+            "log"
+        ],
+        "icon": "node-red/db.svg",
+        "status": {
+            "x": 1560,
+            "y": 200,
+            "wires": [
+                {
+                    "id": "52e7a432.8c400c",
+                    "port": 0
+                }
+            ]
+        }
     },
     {
         "id": "97bb187e2c8df107",
@@ -18,9 +165,857 @@
         "charset": "UTF8"
     },
     {
+        "id": "2e26026f.b353be",
+        "type": "elastic-logger-config",
+        "logstashHost": "logstash",
+        "logstashPort": "5044",
+        "minLevel": "debug",
+        "name": "ALL"
+    },
+    {
+        "id": "72bec069c933c2ad",
+        "type": "rollun-openapi-manifest",
+        "name": "CRMEventHandler v1",
+        "schema": {
+            "openapi": "3.0.0",
+            "info": {
+                "version": "1",
+                "title": "CRMEventHandler",
+                "description": "Manifest description"
+            },
+            "servers": [
+                {
+                    "url": "https://crm-node-red.rollun.net/openapi/CRMEventHandler/v1"
+                }
+            ],
+            "tags": [
+                {
+                    "name": "Event"
+                }
+            ],
+            "paths": {
+                "/eventHandler": {
+                    "post": {
+                        "tags": [
+                            "Event"
+                        ],
+                        "summary": "Handle event",
+                        "description": "",
+                        "requestBody": {
+                            "description": "",
+                            "required": true,
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/EventPostRequest"
+                                    }
+                                }
+                            }
+                        },
+                        "responses": {
+                            "200": {
+                                "description": "Success response",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ActionsResponse"
+                                        }
+                                    }
+                                }
+                            },
+                            "500": {
+                                "description": "Some error",
+                                "content": {
+                                    "application/json": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/ErrorResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "components": {
+                "schemas": {
+                    "Message": {
+                        "type": "object",
+                        "properties": {
+                            "level": {
+                                "type": "string",
+                                "enum": [
+                                    "emergency",
+                                    "alert",
+                                    "critical",
+                                    "error",
+                                    "warning",
+                                    "notice",
+                                    "info"
+                                ]
+                            },
+                            "text": {
+                                "type": "string",
+                                "description": "Message, that describes what went wrong"
+                            }
+                        }
+                    },
+                    "ErrorResponse": {
+                        "type": "object",
+                        "required": [
+                            "lifecycleToken"
+                        ],
+                        "properties": {
+                            "lifecycleToken": {
+                                "type": "string"
+                            },
+                            "messages": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        },
+                        "description": "Message field is not required"
+                    },
+                    "SuccessResponse": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/ErrorResponse"
+                            }
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "ActionsResponse": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/SuccessResponse"
+                            }
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "data": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ActionWithEntity"
+                                }
+                            }
+                        }
+                    },
+                    "ActionWithEntity": {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "$ref": "#/components/schemas/Action"
+                            },
+                            "entity": {
+                                "$ref": "#/components/schemas/ActionEntity"
+                            }
+                        }
+                    },
+                    "EventPostRequest": {
+                        "type": "object",
+                        "required": [
+                            "lifecycleToken",
+                            "entity",
+                            "action"
+                        ],
+                        "properties": {
+                            "lifecycleToken": {
+                                "type": "string"
+                            },
+                            "entity": {
+                                "$ref": "#/components/schemas/EventEntity"
+                            },
+                            "action": {
+                                "$ref": "#/components/schemas/CompletedAction"
+                            }
+                        }
+                    },
+                    "CompletedAction": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Action"
+                            }
+                        ],
+                        "properties": {
+                            "startedAt": {
+                                "type": "string",
+                                "example": "2022-09-22 21:53:10",
+                                "description": "mysql date-time"
+                            }
+                        }
+                    },
+                    "Action": {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "data"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": "string"
+                            },
+                            "data": {
+                                "type": "object",
+                                "additionalProperties": true
+                            },
+                            "delay": {
+                                "type": "integer",
+                                "minimum": 0
+                            }
+                        }
+                    },
+                    "EventEntity": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Entity"
+                            }
+                        ],
+                        "required": [
+                            "row"
+                        ],
+                        "properties": {
+                            "row": {
+                                "type": "object",
+                                "required": [
+                                    "id"
+                                ],
+                                "additionalProperties": true,
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "changedFields": {
+                                "type": "object",
+                                "additionalProperties": true
+                            }
+                        }
+                    },
+                    "ActionEntity": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Entity"
+                            }
+                        ],
+                        "required": [
+                            "rowId"
+                        ],
+                        "properties": {
+                            "rowId": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "Entity": {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "name"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "baseURL": "/openapi/CRMEventHandler/v1",
+        "schemaUrl": "https://raw.githubusercontent.com/rollun-com/openapi-manifests/develop/crm_event_handler__v1.yml"
+    },
+    {
+        "id": "52e7a432.8c400c",
+        "type": "function",
+        "z": "9e9a77f.2571f88",
+        "name": "Status",
+        "func": "var counter = 0;\nvar globCache = global.get(env.get(\"GLOB_NAME\"));\n\nfor (var key in globCache) {\n  counter++;\n}\n\nvar fill;\nif ( counter>0) {\n   fill = \"yellow\";\n} else {\n   fill = \"green\";\n}\n\nmsg.payload = {fill:fill,shape:\"ring\",text:\"Count: \"+counter};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1390,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f61ba939.2a9e18",
+        "type": "switch",
+        "z": "9e9a77f.2571f88",
+        "name": "Action",
+        "property": "$keys(payload)[0]\t",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Query",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Read",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Add",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Delete",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 5,
+        "x": 770,
+        "y": 360,
+        "wires": [
+            [
+                "809f153b.1d7cd8"
+            ],
+            [
+                "9e14b985.6f5028"
+            ],
+            [
+                "aef18ab3.2dd678"
+            ],
+            [
+                "a82480a2.b7d5b"
+            ],
+            [
+                "aa898ca9.02bd8"
+            ]
+        ]
+    },
+    {
+        "id": "aa898ca9.02bd8",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"fill\":\"red\",\"shape\":\"ring\",\"text\":\"Wrong Action \\\"\" &  $keys(payload)[0]\t &\"\\\" in glob cache subflow:\" & log.context.globName}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.context.error",
+                "pt": "msg",
+                "to": "\"Wrong Action \\\"\" &  $keys(payload)[0]\t &\"\\\" in glob cache subflow:\" & log.context.globName",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 540,
+        "wires": [
+            [
+                "93c6f28b.10219",
+                "645967d6.18ecd8",
+                "52e7a432.8c400c"
+            ]
+        ]
+    },
+    {
+        "id": "9e14b985.6f5028",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "Read",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t    $globName:=log.context.globName;\t    $glob:=$globalContext($globName);\t    $glob:=$exists($glob)?$glob.*:[];\t    $result:=$glob~>$append([]);\t)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 280,
+        "wires": [
+            [
+                "52e7a432.8c400c",
+                "a4e3568c.c27548"
+            ]
+        ]
+    },
+    {
+        "id": "671fb8a7.9e1008",
+        "type": "function",
+        "z": "9e9a77f.2571f88",
+        "name": "set glob_",
+        "func": "var merge = function() {\n    var obj = {},\n        i = 0,\n        il = arguments.length,\n        key;\n    for (; i < il; i++) {\n        for (key in arguments[i]) {\n            if (arguments[i].hasOwnProperty(key)) {\n                obj[key] = arguments[i][key];\n            }\n        }\n    }\n    return obj;\n};\n\nvar glob;\nvar globName=env.get(\"GLOB_NAME\");\n    globName=globName!==undefined?globName:\"test\";\n    glob=global.get(globName);\n    glob=glob!==undefined?glob:{};\n    glob={...glob,...msg.payload};\n    global.set(globName,glob);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1060,
+        "y": 380,
+        "wires": [
+            [
+                "3c2989e6.e98316",
+                "52e7a432.8c400c",
+                "6b03adbf.ad7e84"
+            ]
+        ]
+    },
+    {
+        "id": "a82480a2.b7d5b",
+        "type": "function",
+        "z": "9e9a77f.2571f88",
+        "name": "Delete glob_",
+        "func": "var globName=env.get(\"GLOB_NAME\");\nglobName=globName!==undefined?globName:\"test\";\nglobal.set(globName,{});\nmsg.payload=globName + \" deleted\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1070,
+        "y": 480,
+        "wires": [
+            [
+                "b2ce0a4d.d3c3f8",
+                "52e7a432.8c400c"
+            ]
+        ]
+    },
+    {
+        "id": "3c2989e6.e98316",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "\"Add to  globCache - \" & log.context.globName",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.context.item",
+                "pt": "msg",
+                "to": "payload.*",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b2ce0a4d.d3c3f8",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": " \"Delete  globCache - \" & log.context.globName",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "645967d6.18ecd8",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "\"Error rin  globCache - \" & log.context.globName",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "error",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93c6f28b.10219",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "$error()",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$error(log.context.error)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aef18ab3.2dd678",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.Add.{$eval($env(\"ID_KEY\")):$}~>$merge()\t\t/*\t{\t    \"payload\": {\t        \"Add\": [\t            {\t                \"id\": \"b\",\t                \"val\": 2\t            },\t            {\t                \"id\": \"c\",\t                \"val\": 3\t            }\t        ]\t    }\t}\t*/\t\t/*\t{\t    \"payload\": {\t        \"Add\": \t            {\t                \"id\": \"b\",\t                \"val\": 2\t            }\t    }\t}\t*/",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 340,
+        "wires": [
+            [
+                "671fb8a7.9e1008"
+            ]
+        ]
+    },
+    {
+        "id": "ff46a584.e43f68",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "\"No message\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "degug",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "log.context.id",
+                "pt": "msg",
+                "to": "ID_KEY",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 280,
+        "wires": [
+            [
+                "f61ba939.2a9e18"
+            ]
+        ]
+    },
+    {
+        "id": "2825c0f3.fd688",
+        "type": "function",
+        "z": "9e9a77f.2571f88",
+        "name": "log={\"context\"",
+        "func": "var globName=env.get(\"GLOB_NAME\");\nglobName=globName!==undefined?globName:\"test\";\nmsg.log={\"context\":{\"globName\":globName}};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "ca9f392d.6d5358"
+            ]
+        ]
+    },
+    {
+        "id": "6b03adbf.ad7e84",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "payload.*",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(payload.*)~>$append([])",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 420,
+        "wires": [
+            [
+                "a4e3568c.c27548"
+            ]
+        ]
+    },
+    {
+        "id": "809f153b.1d7cd8",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "Query",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.context.query",
+                "pt": "msg",
+                "to": "  $query:=\"$glob[\"&payload.Query&\"]\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t    $globName:=log.context.globName;\t    $glob:=$globalContext($globName);\t    $glob:=$exists($glob)?$glob.*:[];\t    $eval(log.context.query) )~>$append([]\t )",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 220,
+        "wires": [
+            [
+                "4b3e9b59.2f4bc4",
+                "a4e3568c.c27548",
+                "52e7a432.8c400c"
+            ]
+        ]
+    },
+    {
+        "id": "ca9f392d.6d5358",
+        "type": "switch",
+        "z": "9e9a77f.2571f88",
+        "name": "is sset $env(\"ID_KEY\"?",
+        "property": "ID_KEY",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "nempty"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "ff46a584.e43f68"
+            ],
+            [
+                "62aa1c93.229b94"
+            ]
+        ]
+    },
+    {
+        "id": "62aa1c93.229b94",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"fill\":\"red\",\"shape\":\"ring\",\"text\":\"Wrong ID_KEY\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "log.context.error",
+                "pt": "msg",
+                "to": "\"Wrong ID_KEY in glob cache subflow:\" & log.context.globName",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 660,
+        "wires": [
+            [
+                "37a55443.38825c",
+                "52e7a432.8c400c"
+            ]
+        ]
+    },
+    {
+        "id": "37a55443.38825c",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "$error()  ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$error(log.context.error)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 700,
+        "wires": [
+            [
+                "645967d6.18ecd8"
+            ]
+        ]
+    },
+    {
+        "id": "4b3e9b59.2f4bc4",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "\"Query from globCache - \" & log.context.globName",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4e3568c.c27548",
+        "type": "change",
+        "z": "9e9a77f.2571f88",
+        "name": "del log",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "log",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1390,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "c7ad26d7278d71a7",
         "type": "mysql",
         "z": "4a676664609e550a",
+        "d": true,
         "mydb": "97bb187e2c8df107",
         "name": "",
         "x": 660,
@@ -70,7 +1065,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "show databases;",
+                "to": "CALL `Test1`;",
                 "tot": "str"
             }
         ],
@@ -105,14 +1100,5046 @@
         "wires": []
     },
     {
-        "id": "3d21351f29087edc",
-        "type": "complete",
+        "id": "d9a0128554bb5561",
+        "type": "comment",
+        "z": "4a676664609e550a",
+        "name": "URLs and credantionals",
+        "info": "DB:\n[phpMyAdmin](https://crm-db-ui.rollun.net/index.php)\nUI access (root) -\nroot:b3MQwwyl4TlF18DnZQy71s02\n\n\nDB access\ncrm:UsYGPYa74dOxHE4d9YF330gn \n---------------\nNode Red:\nurl https://crm-node-red.rollun.net/\nUI Access\nadmin:ruslE83rB4T1FndX\nEncryption key -\n3ks8kG89HyKzm2jPZTD1rWHo\n-----------------\nPHP App\npublic url https://crm-api.rollun.net/\nrepo - https://github.com/rollun-com/rollun-crm (edited) \nrollun-com/rollun-crm\n",
+        "x": 200,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7439a23f6e3a9985",
+        "type": "catch",
         "z": "4a676664609e550a",
         "name": "",
-        "scope": [],
+        "scope": null,
         "uncaught": false,
-        "x": 640,
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "6e66b47f844be564"
+            ]
+        ]
+    },
+    {
+        "id": "6e66b47f844be564",
+        "type": "debug",
+        "z": "4a676664609e550a",
+        "name": "debug Catch nodes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4756ad2af42eff4a",
+        "type": "catch",
+        "z": "4a676664609e550a",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 100,
+        "y": 420,
+        "wires": [
+            [
+                "55a80429c9b14837"
+            ]
+        ]
+    },
+    {
+        "id": "55a80429c9b14837",
+        "type": "change",
+        "z": "4a676664609e550a",
+        "name": "set error ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "$substringAfter(\t   error.message,\t   \"Invalid JSONata expression: \"\t)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "alert",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "log.context.source",
+                "pt": "msg",
+                "to": "error.source",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "log.context.flow",
+                "pt": "msg",
+                "to": "src",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 215,
+        "y": 420,
+        "wires": [
+            [
+                "4bc97a39b25d3c46",
+                "c547142b29d585c1"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4bc97a39b25d3c46",
+        "type": "link out",
+        "z": "4a676664609e550a",
+        "name": "",
+        "links": [
+            "167e569a.cec379",
+            "88521e74.61634",
+            "3c171d0a.f03d02",
+            "4b768188.85ab9"
+        ],
+        "x": 335,
+        "y": 420,
+        "wires": [],
+        "icon": "node-red/file-in.svg"
+    },
+    {
+        "id": "c547142b29d585c1",
+        "type": "debug",
+        "z": "4a676664609e550a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "11bcafd6.1e80a",
+        "type": "inject",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "props": [
+            {
+                "p": "log.message",
+                "v": "7777test",
+                "vt": "str"
+            },
+            {
+                "p": "log.level",
+                "v": "error",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "9922fb31.2dc4d8"
+            ]
+        ]
+    },
+    {
+        "id": "9922fb31.2dc4d8",
+        "type": "change",
+        "z": "b799064cb3f975fb",
+        "name": "log",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log",
+                "pt": "msg",
+                "to": "log.(\t    $exists(level)?\t    $~>|$|{\t            \"level\":level\t    }|\t    :\t        $~>|$|{\t            \"level\":\"critical\",\t            \"message\":\"there is not log.level. Message: \" & message\t        }|\t)\t\t/*\t[\t    {\t        \"log\":         \t            {\t                \"level\":\"debug\",\t                \"message\":\"there is Message\"\t            }\t    },\t    {\t        \"log\":         \t            {\t                \"message\":\"there is Message\",\t                \"context\":{}\t            }\t    }\t]\t*/",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "context",
+                "pt": "msg",
+                "to": "$.(\t\t    (log.level in [\"error\",\"alert\",\"critical\"])?(\t            $merge([\t                $exists(log.context)?log.context:{},\t                $exists(rlln)?\t                {\t                    \"rlln\":rlln\t                }:{},\t                $exists(payload)?\t                {\t                    \"payload\":payload\t                }:{},\t                {\t                    \"globs\":{\t                        \"dlvdCache\":$globalContext(\"dlvdCache\"),\t                        \"saveCache\":$globalContext(\"saveCache\"),\t                        \"RLST\":$globalContext(\"RLST\")\t                    \t                    }\t                }\t            ])    \t        \t    ):(\t        $exists(log.context)?log.context:{}\t    )\t)\t\t/*\t\t\t\t\t\t\t\t    (\t        log.level in [\"error\",\"alert\",\"critical\"]\t            and \t        $exists(log.context)\t    )?\t        rlln\t    :\t        ($exists(log.context)?(log.context):null)\t)\t\t\t[\t    {\t        \"log\":         \t            {\t                \"level\":\"error\",\t                \"message\":\"there is Message\"\t            },\t        \"rlln\":{\"evnt\":{}}   \t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\",\t                \"context\":{\"arr\":[1,2]}\t            },\t        \"rlln\":{\"evnt\":{}}   \t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\",\t                \"context\":{\"arr\":[1,2]}\t            }\t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\"\t            }\t    }\t    \t]\t\t*/",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "message",
+                "pt": "msg",
+                "to": "$exists(log.message)?log.message:\"No message\"\t",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "level",
+                "pt": "msg",
+                "to": "log.level",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "488b08b6.6a9c38",
+                "10fd27ab.b09fa8"
+            ]
+        ]
+    },
+    {
+        "id": "4b768188.85ab9",
+        "type": "link in",
+        "z": "b799064cb3f975fb",
+        "name": "log moneyOut",
+        "links": [
+            "0b9c521f3eb12705",
+            "1725c6765e22f0e6",
+            "29789a67705b32c2",
+            "4bc97a39b25d3c46",
+            "978e3473827caeee",
+            "b7fa68b1cf9e5f46",
+            "d5ad5d5a.eb971",
+            "eb21b76533c5570d",
+            "fbf11159682ef1eb"
+        ],
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "9922fb31.2dc4d8",
+                "979390b2.b1563"
+            ]
+        ],
+        "icon": "node-red/file-out.svg",
+        "l": true
+    },
+    {
+        "id": "979390b2.b1563",
+        "type": "debug",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "488b08b6.6a9c38",
+        "type": "change",
+        "z": "b799064cb3f975fb",
+        "name": "Add id",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.Add",
+                "pt": "msg",
+                "to": "{\t    \"id\":$now(),\t   \"level\": level,\t    \"message\":message,\t    \"context\":context\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "eee17a4.ded2588"
+            ]
+        ]
+    },
+    {
+        "id": "eee17a4.ded2588",
+        "type": "subflow:9e9a77f.2571f88",
+        "z": "b799064cb3f975fb",
+        "name": "_LOGS",
+        "env": [
+            {
+                "name": "GLOB_NAME",
+                "value": "_LOGS",
+                "type": "str"
+            },
+            {
+                "name": "ID_KEY",
+                "value": "id",
+                "type": "str"
+            }
+        ],
+        "x": 320,
         "y": 380,
+        "wires": [
+            [
+                "62de88af.0dc4d8"
+            ],
+            [
+                "924963e99f2dd977"
+            ]
+        ]
+    },
+    {
+        "id": "72520883.8cefc8",
+        "type": "inject",
+        "z": "b799064cb3f975fb",
+        "name": "Read",
+        "props": [
+            {
+                "p": "payload.Read",
+                "v": "{}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "str",
+        "x": 90,
+        "y": 380,
+        "wires": [
+            [
+                "eee17a4.ded2588"
+            ]
+        ]
+    },
+    {
+        "id": "224771b4.acdefe",
+        "type": "inject",
+        "z": "b799064cb3f975fb",
+        "name": "Delete",
+        "props": [
+            {
+                "p": "payload.Delete",
+                "v": "{}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 420,
+        "wires": [
+            [
+                "eee17a4.ded2588"
+            ]
+        ]
+    },
+    {
+        "id": "62de88af.0dc4d8",
+        "type": "debug",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "10fd27ab.b09fa8",
+        "type": "elastic-logger",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "config": "2e26026f.b353be",
+        "level": "debug",
+        "messageField": "msg|message",
+        "contextField": "msg|context",
+        "x": 460,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8e51671f.d8cc58",
+        "type": "catch",
+        "z": "b799064cb3f975fb",
+        "name": "catch",
+        "scope": null,
+        "uncaught": true,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "f69ca424.912438"
+            ]
+        ]
+    },
+    {
+        "id": "f69ca424.912438",
+        "type": "change",
+        "z": "b799064cb3f975fb",
+        "name": "set error ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "$substringAfter(\t   error.message,\t   \"Invalid JSONata expression: \"\t)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "alert",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "log.context.source",
+                "pt": "msg",
+                "to": "error.source",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "log.context.flow",
+                "pt": "msg",
+                "to": "src",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 100,
+        "wires": [
+            [
+                "d5ad5d5a.eb971",
+                "d04eb0cb.602ae"
+            ]
+        ]
+    },
+    {
+        "id": "d5ad5d5a.eb971",
+        "type": "link out",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 460,
+        "y": 120,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "d04eb0cb.602ae",
+        "type": "debug",
+        "z": "b799064cb3f975fb",
+        "name": "log",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 510,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "924963e99f2dd977",
+        "type": "debug",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "6ef347c7c1385c15",
+        "type": "rollun-tables-crud",
+        "z": "805a768837c7900b",
+        "name": "update",
+        "tableURL": "",
+        "url": "http://rollun-crm/api/datastore/TestDataStore",
+        "timeout": "1000000",
+        "idField": "id",
+        "action": "update",
+        "payload": "msg|payload",
+        "log": true,
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "49bb387b6827dec9"
+            ],
+            [
+                "a4b44c2cd095459b"
+            ]
+        ]
+    },
+    {
+        "id": "025f8feb59eece5b",
+        "type": "inject",
+        "z": "805a768837c7900b",
+        "name": "update (success)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"1\",\"field_a\":\"test\"}",
+        "payloadType": "json",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "6ef347c7c1385c15"
+            ]
+        ]
+    },
+    {
+        "id": "49bb387b6827dec9",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a4b44c2cd095459b",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "c5eeed3c.902bc",
+        "type": "rollun-tables-crud",
+        "z": "805a768837c7900b",
+        "name": "query",
+        "tableURL": "",
+        "url": "http://rollun-crm/api/datastore/TestDataStore",
+        "timeout": 10000,
+        "idField": "id",
+        "action": "query",
+        "payload": "const|limit(1,0)",
+        "log": true,
+        "x": 250,
+        "y": 40,
+        "wires": [
+            [
+                "733004b5e50b9efe"
+            ],
+            [
+                "6a375005c71630c0"
+            ]
+        ]
+    },
+    {
+        "id": "d0ff625e18c29368",
+        "type": "inject",
+        "z": "805a768837c7900b",
+        "name": "query",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "c5eeed3c.902bc"
+            ]
+        ]
+    },
+    {
+        "id": "733004b5e50b9efe",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "6a375005c71630c0",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "56337dd2c360f722",
+        "type": "rollun-openapi-client",
+        "z": "805a768837c7900b",
+        "name": "client",
+        "schema": "72bec069c933c2ad",
+        "operation": "post /eventHandler",
+        "server": 0,
+        "body": "msg|payload",
+        "params": "msg|",
+        "headers": "msg|",
+        "query": "msg|",
+        "x": 370,
+        "y": 740,
+        "wires": [
+            [
+                "683734d8dd6600bd"
+            ],
+            [
+                "2cc93e0677015e17"
+            ]
+        ]
+    },
+    {
+        "id": "f09dd5dd3a2055da",
+        "type": "rollun-openapi-in",
+        "z": "805a768837c7900b",
+        "d": true,
+        "name": "service",
+        "schema": "72bec069c933c2ad",
+        "operation": "post /eventHandler",
+        "x": 180,
+        "y": 800,
+        "wires": [
+            [
+                "eda20c50a1233a06",
+                "9f8d66f786bb1ee7"
+            ]
+        ]
+    },
+    {
+        "id": "8b01fd8e6418a318",
+        "type": "rollun-openapi-out",
+        "z": "805a768837c7900b",
+        "name": "",
+        "data": "msg|payload",
+        "messages": "msg|",
+        "statusCode": "msg|",
+        "disableGenerationOfExceptionMessage": false,
+        "x": 200,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "d558769aa8a36cf5",
+        "type": "inject",
+        "z": "805a768837c7900b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lifecycleToken\":\"1234567890QWERTY\",\"entity\":{\"type\":\"deals\",\"name\":\"orders\",\"row\":{\"id\":\"01\",\"status\":\"Archive\"},\"changedFields\":{\"status\":\"Order creation\"}},\"action\":{\"type\":\"update\",\"data\":{\"status\":\"Archive\"},\"delay\":0,\"startedAt\":\"2022-09-22 21:53:10\"}}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 740,
+        "wires": [
+            [
+                "8590fed5aaa6fafd"
+            ]
+        ]
+    },
+    {
+        "id": "683734d8dd6600bd",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "2cc93e0677015e17",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "eda20c50a1233a06",
+        "type": "change",
+        "z": "805a768837c7900b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"lifecycleToken\":\"1234567890QWERTY\",\"messages\":[],\"data\":{}}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 840,
+        "wires": [
+            [
+                "9a21bf4db7594496",
+                "8b01fd8e6418a318"
+            ]
+        ]
+    },
+    {
+        "id": "ca9086a98c9965ad",
+        "type": "rollun-openapi-messages",
+        "z": "805a768837c7900b",
+        "name": "",
+        "oldMessages": "msg|payload.messages",
+        "level": "debug",
+        "fromMsg": "msg|",
+        "text": "const|test",
+        "msgType": "const|test",
+        "x": 200,
+        "y": 940,
+        "wires": [
+            [
+                "125e2c1ca403b6b5"
+            ]
+        ]
+    },
+    {
+        "id": "9f8d66f786bb1ee7",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "9a21bf4db7594496",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "125e2c1ca403b6b5",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "8590fed5aaa6fafd",
+        "type": "http request",
+        "z": "805a768837c7900b",
+        "name": "",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://crm-node-red.rollun.net/openapi/CRMEventHandler/v1/eventHandler",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 290,
+        "y": 680,
+        "wires": [
+            [
+                "f92431b166147e59"
+            ]
+        ]
+    },
+    {
+        "id": "f92431b166147e59",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "376671e71982a7bb",
+        "type": "link in",
+        "z": "805a768837c7900b",
+        "name": "test",
+        "links": [
+            "97951b1b983d0d69"
+        ],
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "319f9926516fedb5"
+            ]
+        ],
+        "l": true,
+        "info": "from sorting"
+    },
+    {
+        "id": "b8aea3430ce954ad",
+        "type": "change",
+        "z": "805a768837c7900b",
+        "name": "b",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "2d5b69c5501cf1a8",
+                "f108471d38ab4972"
+            ]
+        ]
+    },
+    {
+        "id": "e117cb95c5f9a7b6",
+        "type": "switch",
+        "z": "805a768837c7900b",
+        "name": "success",
+        "property": "crm.output.entity.changedFields",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "field_a",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "field_b",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "b421bc05ad717890"
+            ],
+            [
+                "b8aea3430ce954ad"
+            ]
+        ]
+    },
+    {
+        "id": "b421bc05ad717890",
+        "type": "change",
+        "z": "805a768837c7900b",
+        "name": "a",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\":[\t       {\t           \"action\":{\t               \"type\":\"update\",\t               \"context\":{\t                   \"field_b\":\"test\"\t                   },\t               \"delay\":0\t           },\t           \"entity\":{\t               \"type\":\"deals\",\t               \"name\":\"Test\",\t               \"rowId\":\"1\"\t           }\t       }\t   ],\t   \"code\":\"200\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "c303e05561368e55",
+                "f108471d38ab4972"
+            ]
+        ]
+    },
+    {
+        "id": "c303e05561368e55",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "success with action",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "2d5b69c5501cf1a8",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "success",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f108471d38ab4972",
+        "type": "link out",
+        "z": "805a768837c7900b",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 320,
+        "y": 420,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "319f9926516fedb5",
+        "type": "switch",
+        "z": "805a768837c7900b",
+        "name": "",
+        "property": "crm.output.entity.row.field_a",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "test",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "error",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 260,
+        "wires": [
+            [
+                "e117cb95c5f9a7b6"
+            ],
+            [
+                "e800d79ad06bee6b"
+            ]
+        ]
+    },
+    {
+        "id": "d6d721467bf436be",
+        "type": "change",
+        "z": "805a768837c7900b",
+        "name": "system error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1/0",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "720d123dd7d3e696",
+                "66e23a95fe5b8841"
+            ]
+        ]
+    },
+    {
+        "id": "e800d79ad06bee6b",
+        "type": "switch",
+        "z": "805a768837c7900b",
+        "name": "error",
+        "property": "crm.output.entity.changedFields",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "field_a",
+                "vt": "str"
+            },
+            {
+                "t": "hask",
+                "v": "field_b",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "92a81e93c1c5ea6a"
+            ],
+            [
+                "d6d721467bf436be"
+            ]
+        ]
+    },
+    {
+        "id": "92a81e93c1c5ea6a",
+        "type": "change",
+        "z": "805a768837c7900b",
+        "name": "manual error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Something wrong\"\t       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "bfc29be355e22263",
+                "66e23a95fe5b8841"
+            ]
+        ]
+    },
+    {
+        "id": "bfc29be355e22263",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "error 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "720d123dd7d3e696",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "error",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "66e23a95fe5b8841",
+        "type": "link out",
+        "z": "805a768837c7900b",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 320,
+        "y": 600,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "304e7c78f288d1f3",
+        "type": "rollun-tables-crud",
+        "z": "805a768837c7900b",
+        "name": "update",
+        "tableURL": "",
+        "url": "http://rollun-crm/api/datastore/TestDataStore",
+        "timeout": "1000000",
+        "idField": "id",
+        "action": "update",
+        "payload": "msg|payload",
+        "log": true,
+        "x": 770,
+        "y": 40,
+        "wires": [
+            [
+                "ad981033b9fe9ae6"
+            ],
+            [
+                "1235671a7fca080e"
+            ]
+        ]
+    },
+    {
+        "id": "a64fd8ca9685c28c",
+        "type": "inject",
+        "z": "805a768837c7900b",
+        "name": "update (error a)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"1\",\"field_a\":\"error\"}",
+        "payloadType": "json",
+        "x": 620,
+        "y": 40,
+        "wires": [
+            [
+                "304e7c78f288d1f3"
+            ]
+        ]
+    },
+    {
+        "id": "ad981033b9fe9ae6",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "1235671a7fca080e",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "10f97eb7ae2739a4",
+        "type": "rollun-tables-crud",
+        "z": "805a768837c7900b",
+        "name": "update",
+        "tableURL": "",
+        "url": "http://rollun-crm/api/datastore/TestDataStore",
+        "timeout": "1000000",
+        "idField": "id",
+        "action": "update",
+        "payload": "msg|payload",
+        "log": true,
+        "x": 770,
+        "y": 120,
+        "wires": [
+            [
+                "32698b457f72d794"
+            ],
+            [
+                "b7f0517231e63235"
+            ]
+        ]
+    },
+    {
+        "id": "15cd2f8e2785999e",
+        "type": "inject",
+        "z": "805a768837c7900b",
+        "name": "update (error b)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"id\":\"1\",\"field_b\":\"error\"}",
+        "payloadType": "json",
+        "x": 620,
+        "y": 120,
+        "wires": [
+            [
+                "10f97eb7ae2739a4"
+            ]
+        ]
+    },
+    {
+        "id": "32698b457f72d794",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b7f0517231e63235",
+        "type": "debug",
+        "z": "805a768837c7900b",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d170308570565787",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "order",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "orders",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 180,
+        "wires": [
+            [
+                "d4c7cf29592984ee"
+            ],
+            [
+                "2f94643da9ce8576"
+            ]
+        ],
+        "outputLabels": [
+            "order",
+            ""
+        ]
+    },
+    {
+        "id": "0382d331b95435f9",
+        "type": "change",
+        "z": "f409e00b8acde5e1",
+        "name": "set info",
+        "rules": [
+            {
+                "t": "set",
+                "p": "crm.output",
+                "pt": "msg",
+                "to": "openapiRequest.payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 80,
+        "wires": [
+            [
+                "ab5ba5f0d5feab1d",
+                "39a2de5896a98e8d"
+            ]
+        ]
+    },
+    {
+        "id": "ab5ba5f0d5feab1d",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "d4c7cf29592984ee",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "MO",
+        "mode": "link",
+        "links": [
+            "99f994a095ff1072"
+        ],
+        "x": 510,
+        "y": 160,
+        "wires": [],
+        "l": true,
+        "info": "main order"
+    },
+    {
+        "id": "ee8a1da282ad2d1e",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "MD",
+        "mode": "link",
+        "links": [
+            "6242e4ca54d3c938"
+        ],
+        "x": 510,
+        "y": 200,
+        "wires": [],
+        "l": true,
+        "info": "main dropship"
+    },
+    {
+        "id": "c53e7918836acc38",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "MP",
+        "mode": "link",
+        "links": [
+            "75d3acf739c9e638"
+        ],
+        "x": 510,
+        "y": 240,
+        "wires": [],
+        "l": true,
+        "info": "main pickup"
+    },
+    {
+        "id": "0bf3f9a951080b35",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "MB",
+        "mode": "link",
+        "links": [
+            "8bf50d58ba491581"
+        ],
+        "x": 510,
+        "y": 280,
+        "wires": [],
+        "l": true,
+        "info": "main bag"
+    },
+    {
+        "id": "2718fac2545bf071",
+        "type": "catch",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 1280,
+        "y": 40,
+        "wires": [
+            [
+                "8fad5443fcacbea3"
+            ]
+        ]
+    },
+    {
+        "id": "8fad5443fcacbea3",
+        "type": "change",
+        "z": "f409e00b8acde5e1",
+        "name": "set error ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "$substringAfter(\t   error.message,\t   \"Invalid JSONata expression: \"\t)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "alert",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "log.context.source",
+                "pt": "msg",
+                "to": "error.source",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "log.context.flow",
+                "pt": "msg",
+                "to": "src",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 80,
+        "wires": [
+            [
+                "1725c6765e22f0e6",
+                "1e70e252a010fa49"
+            ]
+        ]
+    },
+    {
+        "id": "1725c6765e22f0e6",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "log",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 1250,
+        "y": 120,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "1e70e252a010fa49",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "2e4c0b23fb2415b5",
+        "type": "inject",
+        "z": "f409e00b8acde5e1",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"lifecycle_token\":\"QWERTYUIOPASDFGHJKLZXCVBNM0123456789\",\"entity\":{\"type\":\"deals\",\"name\":\"test\",\"row\":{\"id\":\"row#123\",\"fild_name1\":\"new_value1\",\"fild_name2\":\"new_value2\",\"fild_name3\":\"value3\"},\"changed_filds\":{\"fild_name1\":\"old_value1\",\"fild_name2\":\"old_value2\"}},\"action\":{\"type\":\"update\",\"data\":{\"fild_name1\":\"new_value1\",\"fild_name2\":\"new_value2\"},\"started_at\":\"2022-09-22 21:53:10.224\",\"delay\":0}}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 80,
+        "wires": [
+            [
+                "0382d331b95435f9"
+            ]
+        ]
+    },
+    {
+        "id": "39a2de5896a98e8d",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "deal",
+        "property": "crm.output.entity.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "deals",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "554dae4b85730ce5",
+                "d170308570565787"
+            ],
+            [
+                "1dc27dbff2506710",
+                "6304341fd7ca3b3a"
+            ]
+        ]
+    },
+    {
+        "id": "554dae4b85730ce5",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b942d017b9b9a594",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "97951b1b983d0d69",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "test",
+        "mode": "link",
+        "links": [
+            "bb7bbed2c1a53572",
+            "376671e71982a7bb"
+        ],
+        "x": 510,
+        "y": 320,
+        "wires": [],
+        "l": true,
+        "info": "main bag"
+    },
+    {
+        "id": "a44564ef5cc73192",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1dc27dbff2506710",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "client",
+        "property": "crm.output.entity_type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "clients",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 420,
+        "wires": [
+            [
+                "a44564ef5cc73192",
+                "e9576c54efe7d88d"
+            ],
+            [
+                "ae98b892018efdf3"
+            ]
+        ]
+    },
+    {
+        "id": "ae98b892018efdf3",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "offer",
+        "property": "crm.output.entity_type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "offers",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "b942d017b9b9a594",
+                "e9576c54efe7d88d"
+            ],
+            [
+                "eb21b76533c5570d"
+            ]
+        ]
+    },
+    {
+        "id": "2f94643da9ce8576",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "dropship",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "dropships",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "ee8a1da282ad2d1e"
+            ],
+            [
+                "09c27c9e000bb438"
+            ]
+        ],
+        "outputLabels": [
+            "dropship",
+            ""
+        ]
+    },
+    {
+        "id": "09c27c9e000bb438",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "pickup",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "pickups",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 260,
+        "wires": [
+            [
+                "c53e7918836acc38"
+            ],
+            [
+                "1a6692702ed7dfc8"
+            ]
+        ],
+        "outputLabels": [
+            "dropship",
+            ""
+        ]
+    },
+    {
+        "id": "1a6692702ed7dfc8",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "bag",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "bags",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "0bf3f9a951080b35"
+            ],
+            [
+                "6304341fd7ca3b3a"
+            ]
+        ],
+        "outputLabels": [
+            "bag",
+            ""
+        ]
+    },
+    {
+        "id": "6304341fd7ca3b3a",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "test",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "test",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "97951b1b983d0d69"
+            ],
+            [
+                "2c3ba7ed164eab2d",
+                "e9576c54efe7d88d"
+            ]
+        ]
+    },
+    {
+        "id": "eb21b76533c5570d",
+        "type": "link out",
+        "z": "f409e00b8acde5e1",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 510,
+        "y": 480,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "67f244ac5649799b",
+        "type": "link in",
+        "z": "f409e00b8acde5e1",
+        "name": "success",
+        "links": [
+            "329422367a352006",
+            "fcb74303af5f0373",
+            "583801819f3cd5cd",
+            "93f61e273a9e0008",
+            "26f8134b5775decd",
+            "0e3df07ee2f9cbb2",
+            "b51db25d74bf34d1",
+            "2ffeea1a21b5065c",
+            "9337eeac41497a21",
+            "1115272dcff9ce91",
+            "9c96fd46320c60aa",
+            "b3b7a9f4ebb825b2",
+            "c532fe30dc470178",
+            "2891ad81fc12eb03",
+            "163d18ea855e0705",
+            "fa9ca8e23ab06e77",
+            "f108471d38ab4972",
+            "66e23a95fe5b8841"
+        ],
+        "x": 260,
+        "y": 560,
+        "wires": [
+            [
+                "fbdb6ce4e11a83c5"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "e9576c54efe7d88d",
+        "type": "change",
+        "z": "f409e00b8acde5e1",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"actions\":[]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 500,
+        "wires": [
+            [
+                "fbdb6ce4e11a83c5"
+            ]
+        ]
+    },
+    {
+        "id": "0ee512fb0c9d5346",
+        "type": "rollun-openapi-in",
+        "z": "f409e00b8acde5e1",
+        "name": "service",
+        "schema": "72bec069c933c2ad",
+        "operation": "post /eventHandler",
+        "x": 220,
+        "y": 40,
+        "wires": [
+            [
+                "0382d331b95435f9",
+                "ba87bafd021fbfd4"
+            ]
+        ]
+    },
+    {
+        "id": "ba87bafd021fbfd4",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "2c3ba7ed164eab2d",
+        "type": "debug",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fbdb6ce4e11a83c5",
+        "type": "rollun-openapi-out",
+        "z": "f409e00b8acde5e1",
+        "name": "",
+        "data": "msg|payload.data",
+        "messages": "msg|payload.messages",
+        "statusCode": "msg|payload.code",
+        "disableGenerationOfExceptionMessage": false,
+        "x": 560,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "99f994a095ff1072",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "sorting",
+        "links": [
+            "d4c7cf29592984ee"
+        ],
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "5536039ac52e1939",
+                "877b48aebb598ec3"
+            ]
+        ],
+        "l": true,
+        "info": "from sorting"
+    },
+    {
+        "id": "5536039ac52e1939",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a0d056f295802751",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "autohowtobuy2_1",
+        "property": "INFO.(status=\"Parcels preparation\" and problem_description=\"-\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1490,
+        "y": 80,
+        "wires": [
+            [
+                "a879b89a22aa3cd1"
+            ],
+            [
+                "9862b823cb42f27b"
+            ]
+        ]
+    },
+    {
+        "id": "a879b89a22aa3cd1",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2050,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9862b823cb42f27b",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "end",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2050,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "b48bfedd97217136",
+        "type": "inject",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1340,
+        "y": 40,
+        "wires": [
+            [
+                "a0d056f295802751"
+            ]
+        ]
+    },
+    {
+        "id": "4a93aad174a2947f",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "autohowtobuy2_2",
+        "property": "INFO.(\t   autohowtobuy2=null \t   and \t   howtobuy=null \t   and \t   ship_status!=\"shipped\"\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1470,
+        "y": 180,
+        "wires": [
+            [
+                "6d74e60b3449f035"
+            ],
+            [
+                "347c7867ce086a2c"
+            ]
+        ]
+    },
+    {
+        "id": "6d74e60b3449f035",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1850,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "347c7867ce086a2c",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "end",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1850,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fa5b24f19ba01301",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set url",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 240,
+        "wires": [
+            [
+                "5b7845ecedeaf93e",
+                "46bf3abcfec02bcd"
+            ]
+        ]
+    },
+    {
+        "id": "5b7845ecedeaf93e",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "46bf3abcfec02bcd",
+        "type": "http request",
+        "z": "e181d79831f12e5d",
+        "name": "request to core",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1340,
+        "y": 280,
+        "wires": [
+            [
+                "7b4991c16bb56bc2"
+            ]
+        ]
+    },
+    {
+        "id": "7b4991c16bb56bc2",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1590,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "877b48aebb598ec3",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "creation",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "creation",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "2627ce125722edb4"
+            ],
+            [
+                "e5a8290c9fdc78c4"
+            ]
+        ]
+    },
+    {
+        "id": "fe67338e34d1e452",
+        "type": "inject",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1320,
+        "y": 140,
+        "wires": [
+            [
+                "4a93aad174a2947f"
+            ]
+        ]
+    },
+    {
+        "id": "715ca77a9a671f99",
+        "type": "inject",
+        "z": "e181d79831f12e5d",
+        "name": "test",
+        "props": [
+            {
+                "p": "INFO.output",
+                "v": "{\"lifecycleToken\":\"test\",\"entity\":{\"type\":\"deals\",\"name\":\"orders\",\"row\":{\"id\":\"1\",\"additionalProp1\":{}},\"changedFields\":{\"additionalProp1\":{}}},\"action\":{\"type\":\"upload\",\"data\":{\"additionalProp1\":{}},\"delay\":0,\"startedAt\":\"2022-09-22 21:53:10\"}}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 40,
+        "wires": [
+            [
+                "877b48aebb598ec3"
+            ]
+        ]
+    },
+    {
+        "id": "3d6060580a252306",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "check",
+        "property": "count = 1",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 800,
+        "wires": [
+            [
+                "adc80b154dad9c98"
+            ],
+            [
+                "c4b056e6739c9a4b",
+                "978e3473827caeee"
+            ]
+        ]
+    },
+    {
+        "id": "21d659a8826c662b",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "Order creation",
+        "property": "INFO.output.entity.context.updated_fields.status = \"Order creation\" and\t(\t   INFO.output.entity.data.status = \"Pending\" \t\t   or\t   INFO.output.entity.data.status = \"Parcels preparation\" \t\t   or\t   INFO.output.entity.data.status = \"Archive\"\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1220,
+        "y": 620,
+        "wires": [
+            [
+                "cf0dd37b1f137716"
+            ],
+            [
+                "a5bf1948365891af"
+            ]
+        ]
+    },
+    {
+        "id": "99e232cc72473f01",
+        "type": "catch",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "scope": null,
+        "uncaught": true,
+        "x": 1460,
+        "y": 380,
+        "wires": [
+            [
+                "554bc18623c2d787"
+            ]
+        ]
+    },
+    {
+        "id": "554bc18623c2d787",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set error ",
+        "rules": [
+            {
+                "t": "set",
+                "p": "log.message",
+                "pt": "msg",
+                "to": "$substringAfter(\t   error.message,\t   \"Invalid JSONata expression: \"\t)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "log.level",
+                "pt": "msg",
+                "to": "alert",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "log.context.source",
+                "pt": "msg",
+                "to": "error.source",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "log.context.flow",
+                "pt": "msg",
+                "to": "src",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1440,
+        "y": 420,
+        "wires": [
+            [
+                "0b9c521f3eb12705",
+                "8ffc143396d45355"
+            ]
+        ]
+    },
+    {
+        "id": "0b9c521f3eb12705",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "log",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 1430,
+        "y": 460,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "8ffc143396d45355",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "log",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e5a8290c9fdc78c4",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "update",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "updating",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "d3f99c0720767c7c",
+                "f4bb3f2ff5f2fc52"
+            ],
+            [
+                "e05af014cc1be577"
+            ]
+        ]
+    },
+    {
+        "id": "e05af014cc1be577",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "schedule",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "schedule",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "f0a03072639ab871"
+            ],
+            [
+                "3ad518821707f14e"
+            ]
+        ]
+    },
+    {
+        "id": "3ad518821707f14e",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "scenario",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "click",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 360,
+        "wires": [
+            [
+                "c6e6efb6ee294127"
+            ],
+            [
+                "b7fa68b1cf9e5f46",
+                "11c9997e019c89e1",
+                "0f521a585e1ad71f"
+            ]
+        ]
+    },
+    {
+        "id": "b7fa68b1cf9e5f46",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 530,
+        "y": 420,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "11c9997e019c89e1",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f0a03072639ab871",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "schedule",
+        "mode": "link",
+        "links": [
+            "f8b6bcbdb2d4639a"
+        ],
+        "x": 540,
+        "y": 300,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "f8b6bcbdb2d4639a",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "schedule",
+        "links": [
+            "f0a03072639ab871"
+        ],
+        "x": 180,
+        "y": 2600,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "2627ce125722edb4",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "creation",
+        "mode": "link",
+        "links": [
+            "961818087985745c"
+        ],
+        "x": 540,
+        "y": 140,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "961818087985745c",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "creation",
+        "links": [
+            "2627ce125722edb4"
+        ],
+        "x": 170,
+        "y": 1360,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "4d18e50ed01b0593",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "update f",
+        "mode": "link",
+        "links": [
+            "25ca89f676037c05"
+        ],
+        "x": 540,
+        "y": 260,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "25ca89f676037c05",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "update f",
+        "links": [
+            "4d18e50ed01b0593",
+            "adc80b154dad9c98"
+        ],
+        "x": 180,
+        "y": 960,
+        "wires": [
+            [
+                "c03ee32f43fe6424"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "2cbde205f110e77c",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "click",
+        "links": [
+            "c6e6efb6ee294127"
+        ],
+        "x": 170,
+        "y": 2640,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "c6e6efb6ee294127",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "click",
+        "mode": "link",
+        "links": [
+            "2cbde205f110e77c"
+        ],
+        "x": 530,
+        "y": 340,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d3f99c0720767c7c",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "status updated?",
+        "property": "crm.output.entity.data",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "status",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 280,
+        "y": 240,
+        "wires": [
+            [
+                "d033fcc256ddcbe7"
+            ],
+            [
+                "4d18e50ed01b0593"
+            ]
+        ],
+        "outputLabels": [
+            "yes",
+            "no"
+        ],
+        "info": "#to_do"
+    },
+    {
+        "id": "d033fcc256ddcbe7",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "update s",
+        "mode": "link",
+        "links": [
+            "8502b83e664d6f2d"
+        ],
+        "x": 540,
+        "y": 220,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "f4bb3f2ff5f2fc52",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8502b83e664d6f2d",
+        "type": "link in",
+        "z": "e181d79831f12e5d",
+        "name": "update s",
+        "links": [
+            "d033fcc256ddcbe7"
+        ],
+        "x": 180,
+        "y": 540,
+        "wires": [
+            [
+                "850a2cc16daeba28"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "99ceec9f5dc8f4a1",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "to Parcels preparation",
+        "property": "INFO.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method!=null \t   and \t   date_cr_paid!=null \t   and \t   date_ship_by!=null \t   and \t   date_deliver_by!=null \t   and \t   problem_description=\"-\"\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1260,
+        "y": 1380,
+        "wires": [
+            [
+                "7d7eeec6e8a1d4e4",
+                "3a73dd3a6d76a808"
+            ],
+            [
+                "3c645d33813d40b1"
+            ]
+        ]
+    },
+    {
+        "id": "3a73dd3a6d76a808",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "7d7eeec6e8a1d4e4",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Parcels preparation\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 1420,
+        "wires": [
+            [
+                "5967f48bd9821c99",
+                "329422367a352006"
+            ]
+        ]
+    },
+    {
+        "id": "5967f48bd9821c99",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "3c645d33813d40b1",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "to Pending",
+        "property": "INFO.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method=null \t   and \t   date_cr_paid=null \t   and \t   date_ship_by=null \t   and \t   date_deliver_by=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Order creation\"\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 1480,
+        "wires": [
+            [
+                "8561c5f8399a2720",
+                "96884bdba6abad3d"
+            ],
+            [
+                "25f0d1c004f592f7"
+            ]
+        ]
+    },
+    {
+        "id": "8561c5f8399a2720",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "96884bdba6abad3d",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Pending\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 1520,
+        "wires": [
+            [
+                "afc7f6eb6317f4a4",
+                "fcb74303af5f0373"
+            ]
+        ]
+    },
+    {
+        "id": "afc7f6eb6317f4a4",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "d2fd25733d9b1920",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "Pending",
+        "property": "INFO.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Pending",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1200,
+        "y": 740,
+        "wires": [
+            [
+                "1c354f0cf5c24756"
+            ],
+            [
+                "c988f069c70bae5b"
+            ]
+        ]
+    },
+    {
+        "id": "6faef341bc6ab702",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "Parcels preparation",
+        "property": "INFO.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Parcels preparation",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 860,
+        "wires": [
+            [
+                "181f74402f166f6c"
+            ],
+            [
+                "a08f98ce2ac85952"
+            ]
+        ]
+    },
+    {
+        "id": "e6650d3eeae978f0",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "60 day test",
+        "property": "INFO.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "60 day test",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1210,
+        "y": 980,
+        "wires": [
+            [
+                "052b6aaddcf4fb60"
+            ],
+            [
+                "13af45b78b45a8ce"
+            ]
+        ]
+    },
+    {
+        "id": "850a2cc16daeba28",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "Archive",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 580,
+        "wires": [
+            [
+                "fbf11159682ef1eb",
+                "b6f80a28eb0f2005"
+            ],
+            [
+                "cbe27e0ce7d878d8"
+            ]
+        ]
+    },
+    {
+        "id": "c4b056e6739c9a4b",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "978e3473827caeee",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 530,
+        "y": 880,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "cf0dd37b1f137716",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 660,
+        "wires": [
+            [
+                "d2fd25733d9b1920",
+                "953b8c8c537962f8"
+            ]
+        ]
+    },
+    {
+        "id": "a5bf1948365891af",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 700,
+        "wires": [
+            [
+                "d2fd25733d9b1920",
+                "3c5d0ac26e7a060d"
+            ]
+        ]
+    },
+    {
+        "id": "1c354f0cf5c24756",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 780,
+        "wires": [
+            [
+                "6faef341bc6ab702",
+                "5694914350af742a"
+            ]
+        ]
+    },
+    {
+        "id": "c988f069c70bae5b",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 820,
+        "wires": [
+            [
+                "6faef341bc6ab702",
+                "be314d7f5b4990a1"
+            ]
+        ]
+    },
+    {
+        "id": "181f74402f166f6c",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 900,
+        "wires": [
+            [
+                "e6650d3eeae978f0",
+                "7f1fbbbca930774e"
+            ]
+        ]
+    },
+    {
+        "id": "a08f98ce2ac85952",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 940,
+        "wires": [
+            [
+                "e6650d3eeae978f0",
+                "3de6fd5cfdae6cd2"
+            ]
+        ]
+    },
+    {
+        "id": "052b6aaddcf4fb60",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 1020,
+        "wires": [
+            [
+                "2bcd2629471059b4"
+            ]
+        ]
+    },
+    {
+        "id": "13af45b78b45a8ce",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "0",
+        "rules": [
+            {
+                "t": "set",
+                "p": "tech_info",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1270,
+        "y": 1060,
+        "wires": [
+            [
+                "78af8bd619da6e98"
+            ]
+        ]
+    },
+    {
+        "id": "b6f80a28eb0f2005",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "fbf11159682ef1eb",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 530,
+        "y": 600,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "953b8c8c537962f8",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "3c5d0ac26e7a060d",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "5694914350af742a",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "be314d7f5b4990a1",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "7f1fbbbca930774e",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "3de6fd5cfdae6cd2",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "2bcd2629471059b4",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "78af8bd619da6e98",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1710,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "adc80b154dad9c98",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "update f",
+        "mode": "link",
+        "links": [
+            "25ca89f676037c05"
+        ],
+        "x": 540,
+        "y": 800,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "329422367a352006",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 1440,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "fcb74303af5f0373",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 1560,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "25f0d1c004f592f7",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "to 60 day test",
+        "property": "INFO.output.context.(\t   tracknumbers_in_MP!=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Parcels preparation\"\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1240,
+        "y": 1600,
+        "wires": [
+            [
+                "3193f6eae591b9ed",
+                "55c011629763a430"
+            ],
+            [
+                "83baf1355e730607"
+            ]
+        ]
+    },
+    {
+        "id": "3193f6eae591b9ed",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "55c011629763a430",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"60 day test\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 1640,
+        "wires": [
+            [
+                "71873bcb53878148",
+                "583801819f3cd5cd"
+            ]
+        ]
+    },
+    {
+        "id": "71873bcb53878148",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "583801819f3cd5cd",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 1680,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "83baf1355e730607",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "to Archive",
+        "property": "INFO.output.context.archive_scenario!=null",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1220,
+        "y": 1720,
+        "wires": [
+            [
+                "baedb2533f73db93",
+                "dbe51422d5643d6c"
+            ],
+            [
+                "3d1c817c0f0de6b2"
+            ]
+        ]
+    },
+    {
+        "id": "baedb2533f73db93",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1720,
+        "wires": []
+    },
+    {
+        "id": "dbe51422d5643d6c",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Archive\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 1760,
+        "wires": [
+            [
+                "6b63b31e1f4ce431",
+                "93f61e273a9e0008"
+            ]
+        ]
+    },
+    {
+        "id": "6b63b31e1f4ce431",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "93f61e273a9e0008",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 1800,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "3d1c817c0f0de6b2",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "client canceled amazon",
+        "property": "INFO.output.context.(\t   mp_name=\"Amazon Shoptimistic\" \t   and \t   (\t       status=\"Order creation\"\t       or\t       status=\"Pending\"\t   )\t   and \t   (\t       problem_description=\"client canceled\"\t       or\t       problem_description=\"order canceled\" \t   )\t)",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1270,
+        "y": 1840,
+        "wires": [
+            [
+                "a7416bfc5daa1845",
+                "ecd4a02fbb710e62"
+            ],
+            [
+                "d5eef7f777a38803"
+            ]
+        ]
+    },
+    {
+        "id": "a7416bfc5daa1845",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "ecd4a02fbb710e62",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Archive\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 1880,
+        "wires": [
+            [
+                "3a69570c8d02c07a",
+                "26f8134b5775decd"
+            ]
+        ]
+    },
+    {
+        "id": "3a69570c8d02c07a",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "26f8134b5775decd",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 1920,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "d5eef7f777a38803",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "profit amazon",
+        "property": "$lookup(INFO.output.context , \"cogs\") and INFO.output.context.mp_name=\"Amazon Shoptimistic\"",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1240,
+        "y": 1960,
+        "wires": [
+            [
+                "c859be702b6eb725",
+                "d200ac1eb60e4ce0"
+            ],
+            [
+                "78e03c05d37b3270"
+            ]
+        ]
+    },
+    {
+        "id": "c859be702b6eb725",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "d200ac1eb60e4ce0",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"profit\": INFO.output.context.(price*0.88-cogs)\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 2000,
+        "wires": [
+            [
+                "ff8fed0cfe83ea30",
+                "0e3df07ee2f9cbb2"
+            ]
+        ]
+    },
+    {
+        "id": "ff8fed0cfe83ea30",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "0e3df07ee2f9cbb2",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 2040,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "78e03c05d37b3270",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "profit ebay",
+        "property": "$lookup(INFO.output.context , \"cogs\") and $contains(INFO.output.context.mp_name,\"Ebay\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 1230,
+        "y": 2080,
+        "wires": [
+            [
+                "88b45ae7efdebed9",
+                "78e0724351e31190"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "88b45ae7efdebed9",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "78e0724351e31190",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"profit\": INFO.output.context.(price*0.9-cogs)\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1260,
+        "y": 2120,
+        "wires": [
+            [
+                "a47a8862ba58e24f",
+                "b51db25d74bf34d1"
+            ]
+        ]
+    },
+    {
+        "id": "a47a8862ba58e24f",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1730,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "b51db25d74bf34d1",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1700,
+        "y": 2160,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "0f521a585e1ad71f",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"actions\":[]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "0a9ad0f0ed5aff86"
+            ]
+        ]
+    },
+    {
+        "id": "0a9ad0f0ed5aff86",
+        "type": "http response",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 290,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "cbe27e0ce7d878d8",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "Order creation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"count\":(\t       crm.output.entity.context.updated_fields.status = \"Order creation\" and (\t           crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" \t       )\t   ) ?1:0\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 640,
+        "wires": [
+            [
+                "87ea5eaef5c383c6",
+                "7eb94de50db944b8"
+            ]
+        ]
+    },
+    {
+        "id": "c03ee32f43fe6424",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "to Parcels preparation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method!=null \t   and \t   date_cr_paid!=null \t   and \t   date_ship_by!=null \t   and \t   date_deliver_by!=null \t   and \t   problem_description=\"-\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Parcels preparation\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 1000,
+        "wires": [
+            [
+                "a671abefc88e9be2",
+                "9337eeac41497a21"
+            ]
+        ]
+    },
+    {
+        "id": "a671abefc88e9be2",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "to Pending",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method=null \t   and \t   date_cr_paid=null \t   and \t   date_ship_by=null \t   and \t   date_deliver_by=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Order creation\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Pending\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 1040,
+        "wires": [
+            [
+                "eda8c2a785bfe6f5",
+                "1115272dcff9ce91"
+            ]
+        ]
+    },
+    {
+        "id": "eda8c2a785bfe6f5",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "to 60 day test",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           tracknumbers_in_MP!=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Parcels preparation\"\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"60 day test\"\t           },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 1080,
+        "wires": [
+            [
+                "4addab07d3509f0c",
+                "9c96fd46320c60aa"
+            ]
+        ]
+    },
+    {
+        "id": "4addab07d3509f0c",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "to Archive",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.archive_scenario!=null)\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Archive\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 1120,
+        "wires": [
+            [
+                "b696172fcf8f448a",
+                "b3b7a9f4ebb825b2"
+            ]
+        ]
+    },
+    {
+        "id": "b696172fcf8f448a",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "client canceled amazon",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           mp_name=\"Amazon Shoptimistic\" \t   and \t   (\t               status=\"Order creation\"\t       or\t       status=\"Pending\"\t   \t           )\t   and \t   (\t               problem_description=\"client canceled\"\t       or\t       problem_description=\"order canceled\" \t   \t           )\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"Archive\"\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 1160,
+        "wires": [
+            [
+                "1891076a17d6106a",
+                "c532fe30dc470178"
+            ]
+        ]
+    },
+    {
+        "id": "1891076a17d6106a",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "profit amazon",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and crm.output.context.mp_name=\"Amazon Shoptimistic\"\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.88-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 1200,
+        "wires": [
+            [
+                "f2398d0eee1f04ef",
+                "2891ad81fc12eb03"
+            ]
+        ]
+    },
+    {
+        "id": "f2398d0eee1f04ef",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "profit ebay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 1240,
+        "wires": [
+            [
+                "163d18ea855e0705"
+            ]
+        ]
+    },
+    {
+        "id": "87ea5eaef5c383c6",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "Pending",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"count\":(\t       crm.output.entity.context.updated_fields.status = \"Order creation\" and (\t           crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" \t       )\t   ) ?1:0\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 680,
+        "wires": [
+            [
+                "74b25c8616735bb1",
+                "e9ea0f06712fbdfc"
+            ]
+        ]
+    },
+    {
+        "id": "74b25c8616735bb1",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "Parcels preparation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\"count\":(crm.output.entity.context.updated_fields.status = \"Order creation\" and (    crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" )) ?1:0}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 720,
+        "wires": [
+            [
+                "41da2f510c64e466",
+                "4235ada20245cf6f"
+            ]
+        ]
+    },
+    {
+        "id": "41da2f510c64e466",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "60 day test",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\"count\":(crm.output.entity.context.updated_fields.status = \"Order creation\" and (    crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" )) ?1:0}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 760,
+        "wires": [
+            [
+                "a5422d9e7269a11c",
+                "3d6060580a252306"
+            ]
+        ]
+    },
+    {
+        "id": "7eb94de50db944b8",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "e9ea0f06712fbdfc",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "4235ada20245cf6f",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "a5422d9e7269a11c",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "9337eeac41497a21",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1000,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "1115272dcff9ce91",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1040,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "9c96fd46320c60aa",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1080,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "b3b7a9f4ebb825b2",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1120,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "c532fe30dc470178",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1160,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "2891ad81fc12eb03",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1200,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "163d18ea855e0705",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 540,
+        "y": 1240,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "6242e4ca54d3c938",
+        "type": "link in",
+        "z": "62cb6b3a5192492c",
+        "name": "sorting",
+        "links": [
+            "ee8a1da282ad2d1e"
+        ],
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "6a1fb970c9a5e4ee",
+                "2d3a6d251cfdbd6e"
+            ]
+        ],
+        "l": true,
+        "info": "from sorting"
+    },
+    {
+        "id": "6a1fb970c9a5e4ee",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2d3a6d251cfdbd6e",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"actions\":[]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "e088413b46484351"
+            ]
+        ]
+    },
+    {
+        "id": "e088413b46484351",
+        "type": "http response",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "75d3acf739c9e638",
+        "type": "link in",
+        "z": "bddf42db0215867b",
+        "name": "sorting",
+        "links": [
+            "c53e7918836acc38"
+        ],
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "b5ea65127c3c3327",
+                "219c6a361d488062"
+            ]
+        ],
+        "l": true,
+        "info": "from sorting"
+    },
+    {
+        "id": "b5ea65127c3c3327",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "219c6a361d488062",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"actions\":[]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "5e68634125467298"
+            ]
+        ]
+    },
+    {
+        "id": "5e68634125467298",
+        "type": "http response",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8bf50d58ba491581",
+        "type": "link in",
+        "z": "e021d1d1bf02799b",
+        "name": "sorting",
+        "links": [
+            "0bf3f9a951080b35"
+        ],
+        "x": 230,
+        "y": 100,
+        "wires": [
+            [
+                "78a9ca8926bfc75d",
+                "a07e9d96be3e6fc9"
+            ]
+        ],
+        "l": true,
+        "info": "from sorting"
+    },
+    {
+        "id": "78a9ca8926bfc75d",
+        "type": "debug",
+        "z": "e021d1d1bf02799b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a07e9d96be3e6fc9",
+        "type": "change",
+        "z": "e021d1d1bf02799b",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"actions\": [] \t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "2ffeea1a21b5065c"
+            ]
+        ]
+    },
+    {
+        "id": "2ffeea1a21b5065c",
+        "type": "link out",
+        "z": "e021d1d1bf02799b",
+        "name": "success",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 460,
+        "y": 140,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "7521b2f710c8082b",
+        "type": "catch",
+        "z": "98ca48f3d4300469",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 100,
+        "y": 60,
+        "wires": [
+            [
+                "a27ecfb4c9ddce86"
+            ]
+        ]
+    },
+    {
+        "id": "a27ecfb4c9ddce86",
+        "type": "debug",
+        "z": "98ca48f3d4300469",
+        "name": "debug Catch nodes",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 330,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "d4f4aaf38349178a",
+        "type": "inject",
+        "z": "98ca48f3d4300469",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "$error(\"test\")",
+        "payloadType": "jsonata",
+        "x": 90,
+        "y": 160,
         "wires": [
             []
         ]
