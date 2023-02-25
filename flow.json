@@ -1335,7 +1335,13 @@
             "fbf11159682ef1eb",
             "140b4e12d5d26fcd",
             "6e3c402ec7505f59",
-            "b8bb46f3aa611678"
+            "b8bb46f3aa611678",
+            "3820d8f881f4611d",
+            "63842ab2d8774540",
+            "b558ce1e53f01f64",
+            "f9fbef24bb38c8f0",
+            "1b579b03435de3a4",
+            "0b2d3f231ce0db2c"
         ],
         "x": 220,
         "y": 220,
@@ -1633,7 +1639,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\t   \"payload\":{},\t   \"messages\":[\t       {\t           \"level\":\"debug, error, alert, critical\",\t           \"text\":\"test\"\t    }\t    ],\t   \"crm\":{\t       \"output\":[\t           {\t               \"service\":\"name\",\t               \"request\":\"test\",\t               \"responce\":\"test\"\t               }\t        ]\t    }\t}",
+        "payload": "{\t  \"payload\": {},\t  \"messages\": [\t    {\t      \"level\": \"debug, error, alert, critical\",\t      \"text\": \"test\"\t    }\t  ],\t  \"crm\": {\t    \"output\": {\t      \"lifecycleToken\": \"UO3F6YHD13OWX6TLEAPSMQ07BNK431\",\t      \"entity\": {\t        \"row\": {\t          \"Id\": \"11111\",\t          \"Name\": null,\t          \"IsDraft\": \"0\",\t          \"IsPaid\": \"0\",\t          \"MpName\": \"Amazon Shoptimistic\",\t          \"MpClientId\": null,\t          \"MpOrderNumber\": \"111111111111\",\t          \"MpShipTemplate\": \"WPZI3-RM_pUp_FC_KY_UT\",\t          \"MpOrderNote\": \"test\",\t          \"Problem\": null,\t          \"TracknumbersInMp\": null,\t          \"HowToBuy3\": null,\t          \"HowToBuy3Result\": null,\t          \"HowToBuy3BestShipping\": null,\t          \"HowToBuy4\": \"testData\",\t          \"HowToBuy4Result\": null,\t          \"HowToBuy4BestShipping\": \"test_data\",\t          \"DateCrPayed\": \"2023-02-22 00:00:00\",\t          \"DateShipBy\": \"2023-02-04 00:00:00\",\t          \"DateDeliverBy\": \"2023-02-10 00:00:00\",\t          \"ProblemDescription\": \"test\",\t          \"TimeCreated\": \"2023-02-07 00:00:00\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\",\t          \"Contractor\": \"111111\",\t          \"MpShipMethod\": \"Standard\",\t          \"Owner\": \"111111\",\t          \"FinalPrice\": null,\t          \"Cogs\": null,\t          \"Profit\": null,\t          \"GUID\": null,\t          \"MpUaId\": null,\t          \"Status\": \"12\",\t          \"Tracknumber\": null,\t          \"ArchiveScenario\": null,\t          \"Description\": null,\t          \"Manager\": null,\t          \"StatusName\": \"Order creation\",\t          \"ProgramId\": \"5\",\t          \"ProgramName\": \"Order\"\t        },\t        \"changedFields\": {\t          \"fieldThatWasChanged\": null,\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        },\t        \"type\": \"deal\",\t        \"name\": \"orders\"\t      },\t      \"action\": {\t        \"startedAt\": \"2023-02-23T00:00:00+00:00\",\t        \"type\": \"update\",\t        \"context\": {\t          \"ProblemDescription\": \"test\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        }\t      }\t    }\t  }\t}",
         "payloadType": "jsonata",
         "x": 810,
         "y": 140,
@@ -1657,6 +1663,16 @@
         "statusType": "auto",
         "x": 1000,
         "y": 140,
+        "wires": []
+    },
+    {
+        "id": "061e87156205c12d",
+        "type": "comment",
+        "z": "b799064cb3f975fb",
+        "name": "",
+        "info": "додати в приклад даних інфо про те, що потрібен\nокремий об'єкт в \"crm\", що міститиме \nмасив з екшенами або меседжами",
+        "x": 820,
+        "y": 100,
         "wires": []
     },
     {
@@ -3569,7 +3585,7 @@
         "type": "debug",
         "z": "f409e00b8acde5e1",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3691,7 +3707,7 @@
                 "e9576c54efe7d88d"
             ],
             [
-                "eb21b76533c5570d"
+                "2986636b43ae4fe3"
             ]
         ]
     },
@@ -3828,24 +3844,9 @@
             ],
             [
                 "2c3ba7ed164eab2d",
-                "e9576c54efe7d88d"
+                "2986636b43ae4fe3"
             ]
         ]
-    },
-    {
-        "id": "eb21b76533c5570d",
-        "type": "link out",
-        "z": "f409e00b8acde5e1",
-        "name": "error",
-        "mode": "link",
-        "links": [
-            "4b768188.85ab9"
-        ],
-        "x": 510,
-        "y": 520,
-        "wires": [],
-        "icon": "node-red/file-in.svg",
-        "l": true
     },
     {
         "id": "67f244ac5649799b",
@@ -3873,10 +3874,18 @@
             "66e23a95fe5b8841",
             "2125413a4c695f53",
             "cdf3af48012d0cce",
-            "af653da5b3fe84ba"
+            "af653da5b3fe84ba",
+            "6d0a4a44f52e279d",
+            "560e0aab5d461d7d",
+            "77ec514aabf38f2f",
+            "c504f704e1b09183",
+            "9a05d84989777b4a",
+            "6bf5fea37e67cb68",
+            "31c59739dcb978a2",
+            "f98c960aad2f8882"
         ],
-        "x": 260,
-        "y": 600,
+        "x": 240,
+        "y": 620,
         "wires": [
             [
                 "fbdb6ce4e11a83c5",
@@ -3895,7 +3904,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\"actions\":[]}",
+                "to": "{\"data\": {},\"code\":\"200\"}",
                 "tot": "json"
             }
         ],
@@ -3905,7 +3914,7 @@
         "to": "",
         "reg": false,
         "x": 240,
-        "y": 540,
+        "y": 580,
         "wires": [
             [
                 "fbdb6ce4e11a83c5"
@@ -3950,7 +3959,7 @@
         "type": "debug",
         "z": "f409e00b8acde5e1",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3971,8 +3980,8 @@
         "messages": "msg|payload.messages",
         "statusCode": "msg|payload.code",
         "disableGenerationOfExceptionMessage": false,
-        "x": 560,
-        "y": 600,
+        "x": 600,
+        "y": 540,
         "wires": []
     },
     {
@@ -3988,8 +3997,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 510,
-        "y": 640,
+        "x": 550,
+        "y": 620,
         "wires": []
     },
     {
@@ -4033,7 +4042,7 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "deals",
+                "v": "deal",
                 "vt": "str"
             },
             {
@@ -4051,8 +4060,7 @@
                 "8eae2de569740c26"
             ],
             [
-                "1dc27dbff2506710",
-                "6304341fd7ca3b3a"
+                "1dc27dbff2506710"
             ]
         ]
     },
@@ -4072,6 +4080,33 @@
         "info": "main bag"
     },
     {
+        "id": "2986636b43ae4fe3",
+        "type": "change",
+        "z": "f409e00b8acde5e1",
+        "name": "set error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Entity type `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 540,
+        "wires": [
+            [
+                "fbdb6ce4e11a83c5"
+            ]
+        ]
+    },
+    {
         "id": "99f994a095ff1072",
         "type": "link in",
         "z": "e181d79831f12e5d",
@@ -4080,11 +4115,11 @@
             "d4c7cf29592984ee"
         ],
         "x": 170,
-        "y": 100,
+        "y": 60,
         "wires": [
             [
                 "5536039ac52e1939",
-                "877b48aebb598ec3"
+                "e5a8290c9fdc78c4"
             ]
         ],
         "l": true,
@@ -4103,334 +4138,9 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "a0d056f295802751",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "autohowtobuy2_1",
-        "property": "INFO.(status=\"Parcels preparation\" and problem_description=\"-\")",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 1490,
-        "y": 80,
-        "wires": [
-            [
-                "a879b89a22aa3cd1"
-            ],
-            [
-                "9862b823cb42f27b"
-            ]
-        ]
-    },
-    {
-        "id": "a879b89a22aa3cd1",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2050,
+        "x": 490,
         "y": 60,
         "wires": []
-    },
-    {
-        "id": "9862b823cb42f27b",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "end",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2050,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "b48bfedd97217136",
-        "type": "inject",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1340,
-        "y": 40,
-        "wires": [
-            [
-                "a0d056f295802751"
-            ]
-        ]
-    },
-    {
-        "id": "4a93aad174a2947f",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "autohowtobuy2_2",
-        "property": "INFO.(\t   autohowtobuy2=null \t   and \t   howtobuy=null \t   and \t   ship_status!=\"shipped\"\t)",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            },
-            {
-                "t": "false"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 1470,
-        "y": 180,
-        "wires": [
-            [
-                "6d74e60b3449f035"
-            ],
-            [
-                "347c7867ce086a2c"
-            ]
-        ]
-    },
-    {
-        "id": "6d74e60b3449f035",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1850,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "347c7867ce086a2c",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "end",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1850,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "fa5b24f19ba01301",
-        "type": "change",
-        "z": "e181d79831f12e5d",
-        "name": "set url",
-        "rules": [
-            {
-                "t": "set",
-                "p": "action",
-                "pt": "msg",
-                "to": "[]",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1310,
-        "y": 240,
-        "wires": [
-            [
-                "5b7845ecedeaf93e",
-                "46bf3abcfec02bcd"
-            ]
-        ]
-    },
-    {
-        "id": "5b7845ecedeaf93e",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1590,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "46bf3abcfec02bcd",
-        "type": "http request",
-        "z": "e181d79831f12e5d",
-        "name": "request to core",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 1340,
-        "y": 280,
-        "wires": [
-            [
-                "7b4991c16bb56bc2"
-            ]
-        ]
-    },
-    {
-        "id": "7b4991c16bb56bc2",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1590,
-        "y": 280,
-        "wires": []
-    },
-    {
-        "id": "877b48aebb598ec3",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "creation",
-        "property": "crm.output.event.type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "creation",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 220,
-        "y": 160,
-        "wires": [
-            [
-                "2627ce125722edb4"
-            ],
-            [
-                "e5a8290c9fdc78c4"
-            ]
-        ]
-    },
-    {
-        "id": "fe67338e34d1e452",
-        "type": "inject",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1320,
-        "y": 140,
-        "wires": [
-            [
-                "4a93aad174a2947f"
-            ]
-        ]
-    },
-    {
-        "id": "715ca77a9a671f99",
-        "type": "inject",
-        "z": "e181d79831f12e5d",
-        "name": "test",
-        "props": [
-            {
-                "p": "INFO.output",
-                "v": "{\"lifecycleToken\":\"test\",\"entity\":{\"type\":\"deals\",\"name\":\"orders\",\"row\":{\"id\":\"1\",\"additionalProp1\":{}},\"changedFields\":{\"additionalProp1\":{}}},\"action\":{\"type\":\"upload\",\"data\":{\"additionalProp1\":{}},\"delay\":0,\"startedAt\":\"2022-09-22 21:53:10\"}}",
-                "vt": "json"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "x": 90,
-        "y": 40,
-        "wires": [
-            [
-                "877b48aebb598ec3"
-            ]
-        ]
     },
     {
         "id": "3d6060580a252306",
@@ -4450,8 +4160,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 330,
-        "y": 800,
+        "x": 830,
+        "y": 480,
         "wires": [
             [
                 "adc80b154dad9c98"
@@ -4469,8 +4179,8 @@
         "name": "",
         "scope": null,
         "uncaught": true,
-        "x": 1460,
-        "y": 380,
+        "x": 1340,
+        "y": 40,
         "wires": [
             [
                 "554bc18623c2d787"
@@ -4517,8 +4227,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1440,
-        "y": 420,
+        "x": 1320,
+        "y": 80,
         "wires": [
             [
                 "0b9c521f3eb12705",
@@ -4535,8 +4245,8 @@
         "links": [
             "4b768188.85ab9"
         ],
-        "x": 1430,
-        "y": 460,
+        "x": 1310,
+        "y": 120,
         "wires": [],
         "icon": "node-red/file-in.svg",
         "l": true
@@ -4554,233 +4264,16 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1620,
-        "y": 420,
+        "x": 1500,
+        "y": 80,
         "wires": []
-    },
-    {
-        "id": "e5a8290c9fdc78c4",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "update",
-        "property": "crm.output.event.type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "updating",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 210,
-        "y": 200,
-        "wires": [
-            [
-                "d3f99c0720767c7c",
-                "f4bb3f2ff5f2fc52"
-            ],
-            [
-                "e05af014cc1be577"
-            ]
-        ]
-    },
-    {
-        "id": "e05af014cc1be577",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "schedule",
-        "property": "crm.output.event.type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "schedule",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 220,
-        "y": 320,
-        "wires": [
-            [
-                "f0a03072639ab871"
-            ],
-            [
-                "3ad518821707f14e"
-            ]
-        ]
-    },
-    {
-        "id": "3ad518821707f14e",
-        "type": "switch",
-        "z": "e181d79831f12e5d",
-        "name": "scenario",
-        "property": "crm.output.event.type",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "click",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 220,
-        "y": 360,
-        "wires": [
-            [
-                "c6e6efb6ee294127"
-            ],
-            [
-                "b7fa68b1cf9e5f46",
-                "11c9997e019c89e1",
-                "0f521a585e1ad71f"
-            ]
-        ]
-    },
-    {
-        "id": "b7fa68b1cf9e5f46",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "error",
-        "mode": "link",
-        "links": [
-            "4b768188.85ab9"
-        ],
-        "x": 530,
-        "y": 420,
-        "wires": [],
-        "icon": "node-red/file-in.svg",
-        "l": true
-    },
-    {
-        "id": "11c9997e019c89e1",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 570,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "f0a03072639ab871",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "schedule",
-        "mode": "link",
-        "links": [
-            "f8b6bcbdb2d4639a"
-        ],
-        "x": 540,
-        "y": 300,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "2627ce125722edb4",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "creation",
-        "mode": "link",
-        "links": [
-            "961818087985745c"
-        ],
-        "x": 540,
-        "y": 140,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "961818087985745c",
-        "type": "link in",
-        "z": "e181d79831f12e5d",
-        "name": "creation",
-        "links": [
-            "2627ce125722edb4"
-        ],
-        "x": 170,
-        "y": 1360,
-        "wires": [
-            []
-        ],
-        "l": true
-    },
-    {
-        "id": "4d18e50ed01b0593",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "update f",
-        "mode": "link",
-        "links": [
-            "25ca89f676037c05"
-        ],
-        "x": 540,
-        "y": 260,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "25ca89f676037c05",
-        "type": "link in",
-        "z": "e181d79831f12e5d",
-        "name": "update f",
-        "links": [
-            "4d18e50ed01b0593",
-            "adc80b154dad9c98"
-        ],
-        "x": 180,
-        "y": 960,
-        "wires": [
-            [
-                "c03ee32f43fe6424"
-            ]
-        ],
-        "l": true
-    },
-    {
-        "id": "c6e6efb6ee294127",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "click",
-        "mode": "link",
-        "links": [
-            "2cbde205f110e77c"
-        ],
-        "x": 530,
-        "y": 340,
-        "wires": [],
-        "l": true
     },
     {
         "id": "d3f99c0720767c7c",
         "type": "switch",
         "z": "e181d79831f12e5d",
         "name": "status updated?",
-        "property": "crm.output.entity.data",
+        "property": "crm.output.action.context",
         "propertyType": "msg",
         "rules": [
             {
@@ -4796,13 +4289,13 @@
         "repair": false,
         "outputs": 2,
         "x": 280,
-        "y": 240,
+        "y": 180,
         "wires": [
             [
-                "d033fcc256ddcbe7"
+                "850a2cc16daeba28"
             ],
             [
-                "4d18e50ed01b0593"
+                "c03ee32f43fe6424"
             ]
         ],
         "outputLabels": [
@@ -4810,20 +4303,6 @@
             "no"
         ],
         "info": "#to_do"
-    },
-    {
-        "id": "d033fcc256ddcbe7",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "update s",
-        "mode": "link",
-        "links": [
-            "8502b83e664d6f2d"
-        ],
-        "x": 540,
-        "y": 220,
-        "wires": [],
-        "l": true
     },
     {
         "id": "f4bb3f2ff5f2fc52",
@@ -4838,26 +4317,9 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 180,
+        "x": 490,
+        "y": 100,
         "wires": []
-    },
-    {
-        "id": "8502b83e664d6f2d",
-        "type": "link in",
-        "z": "e181d79831f12e5d",
-        "name": "update s",
-        "links": [
-            "d033fcc256ddcbe7"
-        ],
-        "x": 180,
-        "y": 540,
-        "wires": [
-            [
-                "850a2cc16daeba28"
-            ]
-        ],
-        "l": true
     },
     {
         "id": "850a2cc16daeba28",
@@ -4879,8 +4341,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 220,
-        "y": 580,
+        "x": 760,
+        "y": 260,
         "wires": [
             [
                 "fbf11159682ef1eb",
@@ -4904,8 +4366,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 840,
+        "x": 1070,
+        "y": 520,
         "wires": []
     },
     {
@@ -4917,8 +4379,8 @@
         "links": [
             "4b768188.85ab9"
         ],
-        "x": 530,
-        "y": 880,
+        "x": 1030,
+        "y": 560,
         "wires": [],
         "icon": "node-red/file-in.svg",
         "l": true
@@ -4936,8 +4398,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 560,
+        "x": 1070,
+        "y": 240,
         "wires": []
     },
     {
@@ -4949,8 +4411,8 @@
         "links": [
             "4b768188.85ab9"
         ],
-        "x": 530,
-        "y": 600,
+        "x": 1030,
+        "y": 280,
         "wires": [],
         "icon": "node-red/file-in.svg",
         "l": true
@@ -4964,48 +4426,10 @@
         "links": [
             "25ca89f676037c05"
         ],
-        "x": 540,
-        "y": 800,
+        "x": 1040,
+        "y": 480,
         "wires": [],
         "l": true
-    },
-    {
-        "id": "0f521a585e1ad71f",
-        "type": "change",
-        "z": "e181d79831f12e5d",
-        "name": "set action",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{\"actions\":[]}",
-                "tot": "json"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 260,
-        "y": 400,
-        "wires": [
-            [
-                "0a9ad0f0ed5aff86"
-            ]
-        ]
-    },
-    {
-        "id": "0a9ad0f0ed5aff86",
-        "type": "http response",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 290,
-        "y": 440,
-        "wires": []
     },
     {
         "id": "cbe27e0ce7d878d8",
@@ -5026,8 +4450,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
-        "y": 640,
+        "x": 820,
+        "y": 320,
         "wires": [
             [
                 "87ea5eaef5c383c6",
@@ -5045,7 +4469,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method!=null \t   and \t   date_cr_paid!=null \t   and \t   date_ship_by!=null \t   and \t   date_deliver_by!=null \t   and \t   problem_description=\"-\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Parcels preparation\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "to": "($~>|$|{\"payload\":(crm.output.entity.row.(\t   MpName!=null \t   and \t   MpOrderNumber!=null \t   and \t   MpShipMethod!=null \t   and \t   DateCrPayed!=null \t   and \t   DateShipBy!=null \t   and \t   DateDeliverBy!=null \t   and \t   ProblemDescription=\"-\"\t))\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"15\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -5068,12 +4492,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 260,
-        "y": 1000,
+        "x": 340,
+        "y": 260,
         "wires": [
             [
                 "a671abefc88e9be2",
-                "9337eeac41497a21"
+                "65b6195a151108aa"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -5097,12 +4521,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 230,
-        "y": 1040,
+        "x": 310,
+        "y": 300,
         "wires": [
             [
                 "eda8c2a785bfe6f5",
-                "1115272dcff9ce91"
+                "7a0ee24b993a69fd"
             ]
         ]
     },
@@ -5125,12 +4549,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 240,
-        "y": 1080,
+        "x": 320,
+        "y": 340,
         "wires": [
             [
                 "4addab07d3509f0c",
-                "9c96fd46320c60aa"
+                "0fd65ab6ab71fbf2"
             ]
         ]
     },
@@ -5153,12 +4577,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 220,
-        "y": 1120,
+        "x": 300,
+        "y": 380,
         "wires": [
             [
                 "b696172fcf8f448a",
-                "b3b7a9f4ebb825b2"
+                "041c6ae7e50facfc"
             ]
         ]
     },
@@ -5181,12 +4605,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 1160,
+        "x": 350,
+        "y": 420,
         "wires": [
             [
                 "1891076a17d6106a",
-                "c532fe30dc470178"
+                "65e169a01c409718"
             ]
         ]
     },
@@ -5209,12 +4633,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 240,
-        "y": 1200,
+        "x": 320,
+        "y": 460,
         "wires": [
             [
                 "f2398d0eee1f04ef",
-                "2891ad81fc12eb03"
+                "f605125c568ada39"
             ]
         ]
     },
@@ -5237,11 +4661,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 230,
-        "y": 1240,
+        "x": 310,
+        "y": 500,
         "wires": [
             [
-                "163d18ea855e0705"
+                "4a5da8dad438bc09"
             ]
         ]
     },
@@ -5264,8 +4688,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 260,
-        "y": 680,
+        "x": 800,
+        "y": 360,
         "wires": [
             [
                 "74b25c8616735bb1",
@@ -5292,8 +4716,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 290,
-        "y": 720,
+        "x": 830,
+        "y": 400,
         "wires": [
             [
                 "41da2f510c64e466",
@@ -5320,8 +4744,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 270,
-        "y": 760,
+        "x": 810,
+        "y": 440,
         "wires": [
             [
                 "a5422d9e7269a11c",
@@ -5342,8 +4766,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 640,
+        "x": 1070,
+        "y": 320,
         "wires": []
     },
     {
@@ -5359,8 +4783,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 680,
+        "x": 1070,
+        "y": 360,
         "wires": []
     },
     {
@@ -5376,8 +4800,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 720,
+        "x": 1070,
+        "y": 400,
         "wires": []
     },
     {
@@ -5393,12 +4817,12 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 570,
-        "y": 760,
+        "x": 1070,
+        "y": 440,
         "wires": []
     },
     {
-        "id": "9337eeac41497a21",
+        "id": "6d0a4a44f52e279d",
         "type": "link out",
         "z": "e181d79831f12e5d",
         "name": "answer",
@@ -5406,124 +4830,530 @@
         "links": [
             "67f244ac5649799b"
         ],
-        "x": 540,
-        "y": 1000,
+        "x": 500,
+        "y": 140,
         "wires": [],
         "l": true
     },
     {
-        "id": "1115272dcff9ce91",
-        "type": "link out",
+        "id": "7e2450202cf7ac05",
+        "type": "inject",
         "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
         ],
-        "x": 540,
-        "y": 1040,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "9c96fd46320c60aa",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
-        ],
-        "x": 540,
-        "y": 1080,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "b3b7a9f4ebb825b2",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
-        ],
-        "x": 540,
-        "y": 1120,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "c532fe30dc470178",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
-        ],
-        "x": 540,
-        "y": 1160,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "2891ad81fc12eb03",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
-        ],
-        "x": 540,
-        "y": 1200,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "163d18ea855e0705",
-        "type": "link out",
-        "z": "e181d79831f12e5d",
-        "name": "answer",
-        "mode": "link",
-        "links": [
-            "67f244ac5649799b"
-        ],
-        "x": 540,
-        "y": 1240,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "f8b6bcbdb2d4639a",
-        "type": "link in",
-        "z": "e181d79831f12e5d",
-        "name": "schedule",
-        "links": [
-            "f0a03072639ab871"
-        ],
-        "x": 180,
-        "y": 1420,
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t  \"payload\": {},\t  \"messages\": [\t    {\t      \"level\": \"debug, error, alert, critical\",\t      \"text\": \"test\"\t    }\t  ],\t  \"crm\": {\t    \"output\": {\t      \"lifecycleToken\": \"UO3F6YHD13OWX6TLEAPSMQ07BNK431\",\t      \"entity\": {\t        \"row\": {\t          \"Id\": \"11111\",\t          \"Name\": null,\t          \"IsDraft\": \"0\",\t          \"IsPaid\": \"0\",\t          \"MpName\": \"Amazon Shoptimistic\",\t          \"MpClientId\": null,\t          \"MpOrderNumber\": \"111111111111\",\t          \"MpShipTemplate\": \"WPZI3-RM_pUp_FC_KY_UT\",\t          \"MpOrderNote\": \"test\",\t          \"Problem\": null,\t          \"TracknumbersInMp\": null,\t          \"HowToBuy3\": null,\t          \"HowToBuy3Result\": null,\t          \"HowToBuy3BestShipping\": null,\t          \"HowToBuy4\": \"testData\",\t          \"HowToBuy4Result\": null,\t          \"HowToBuy4BestShipping\": \"test_data\",\t          \"DateCrPayed\": \"2023-02-22 00:00:00\",\t          \"DateShipBy\": \"2023-02-04 00:00:00\",\t          \"DateDeliverBy\": \"2023-02-10 00:00:00\",\t          \"ProblemDescription\": \"test\",\t          \"TimeCreated\": \"2023-02-07 00:00:00\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\",\t          \"Contractor\": \"111111\",\t          \"MpShipMethod\": \"Standard\",\t          \"Owner\": \"111111\",\t          \"FinalPrice\": null,\t          \"Cogs\": null,\t          \"Profit\": null,\t          \"GUID\": null,\t          \"MpUaId\": null,\t          \"Status\": \"12\",\t          \"Tracknumber\": null,\t          \"ArchiveScenario\": null,\t          \"Description\": null,\t          \"Manager\": null,\t          \"StatusName\": \"Order creation\",\t          \"ProgramId\": \"5\",\t          \"ProgramName\": \"Order\"\t        },\t        \"changedFields\": {\t          \"fieldThatWasChanged\": null,\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        },\t        \"type\": \"deal\",\t        \"name\": \"orders\"\t      },\t      \"action\": {\t        \"startedAt\": \"2023-02-23T00:00:00+00:00\",\t        \"type\": \"update\",\t        \"context\": {\t          \"ProblemDescription\": \"test\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        }\t      }\t    }\t  }\t}",
+        "payloadType": "jsonata",
+        "x": 730,
+        "y": 60,
         "wires": [
-            []
+            [
+                "41900ebff2fcd5a4"
+            ]
+        ]
+    },
+    {
+        "id": "41900ebff2fcd5a4",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "616b73537faa012f",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "negative profit",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
         ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "f7688ce519a4f954"
+            ]
+        ]
+    },
+    {
+        "id": "560e0aab5d461d7d",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 580,
+        "y": 660,
+        "wires": [],
         "l": true
     },
     {
-        "id": "2cbde205f110e77c",
-        "type": "link in",
+        "id": "a6df0eb094111d58",
+        "type": "change",
         "z": "e181d79831f12e5d",
-        "name": "click",
-        "links": [
-            "c6e6efb6ee294127"
+        "name": "order shipped",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
         ],
-        "x": 170,
-        "y": 1460,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 580,
         "wires": [
-            []
+            [
+                "b4c5ac6f9ca23c73"
+            ]
+        ]
+    },
+    {
+        "id": "dd6c1f2372da85bf",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "autohowtobuy 2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
         ],
-        "l": true
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 620,
+        "wires": [
+            [
+                "2a27864521276b1d"
+            ]
+        ]
+    },
+    {
+        "id": "3e7ce3647f24f027",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "linked deal autocreation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 350,
+        "y": 660,
+        "wires": [
+            [
+                "560e0aab5d461d7d"
+            ]
+        ]
+    },
+    {
+        "id": "e5a8290c9fdc78c4",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "update",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 100,
+        "wires": [
+            [
+                "d3f99c0720767c7c",
+                "f4bb3f2ff5f2fc52"
+            ],
+            [
+                "2465606a7eb0f17f"
+            ]
+        ]
+    },
+    {
+        "id": "3278b12ab3e4a20a",
+        "type": "comment",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "info": "поміняти на чейндж ноду з функцією ерорки\n\n+ треба зробити глобальну змінну, по якій\nперевіряти, чи чекаємо ми кінцеві автомати\nстатусів, чи ні\n(для можливості переходу з архіву, наприклад)",
+        "x": 760,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bba099c9c28af249",
+        "type": "comment",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "info": "поміняти на чейндж ноду з функцією ерорки",
+        "x": 900,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "65e169a01c409718",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "041c6ae7e50facfc",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "0fd65ab6ab71fbf2",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7a0ee24b993a69fd",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "65b6195a151108aa",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f605125c568ada39",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4a5da8dad438bc09",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f7688ce519a4f954",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "b4c5ac6f9ca23c73",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "2a27864521276b1d",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "6410e4240dfd1dc3",
+        "type": "comment",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "info": "поміняти усю структуру",
+        "x": 880,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "2465606a7eb0f17f",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Entity type `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "6d0a4a44f52e279d"
+            ]
+        ]
+    },
+    {
+        "id": "f4b4ba1cf295e7f6",
+        "type": "inject",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "props": [
+            {
+                "p": "from",
+                "v": "Y",
+                "vt": "str"
+            },
+            {
+                "p": "to",
+                "v": "G",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 270,
+        "y": 920,
+        "wires": [
+            [
+                "c71270b2935edfa5"
+            ]
+        ]
+    },
+    {
+        "id": "a62db6e0fcbcb612",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "c71270b2935edfa5",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "enabled",
+        "rules": [
+            {
+                "t": "set",
+                "p": "enabled",
+                "pt": "msg",
+                "to": "{\"Y\":[\"G\",\"R\"],\"G\":[\"Y\"],\"R\":[\"Y\"]}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 920,
+        "wires": [
+            [
+                "dd621476f704afae"
+            ]
+        ]
+    },
+    {
+        "id": "dd621476f704afae",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "to in $lookup(enable,from) ",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 960,
+        "wires": [
+            [
+                "a62db6e0fcbcb612"
+            ]
+        ]
     },
     {
         "id": "6242e4ca54d3c938",
@@ -5534,12 +5364,12 @@
             "ee8a1da282ad2d1e",
             "c48b558f64f6b2cf"
         ],
-        "x": 230,
-        "y": 100,
+        "x": 170,
+        "y": 60,
         "wires": [
             [
                 "6a1fb970c9a5e4ee",
-                "2d3a6d251cfdbd6e"
+                "e133f1afadfd92f8"
             ]
         ],
         "l": true,
@@ -5558,22 +5388,278 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 410,
-        "y": 100,
+        "x": 490,
+        "y": 60,
         "wires": []
     },
     {
-        "id": "2d3a6d251cfdbd6e",
+        "id": "99ddf822e4a44cdb",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "check",
+        "property": "count = 1",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 870,
+        "y": 480,
+        "wires": [
+            [
+                "46e35b867b39bb42"
+            ],
+            [
+                "f5525050bec84337",
+                "3820d8f881f4611d"
+            ]
+        ]
+    },
+    {
+        "id": "1e26b87d9bc24c00",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "update f",
+        "mode": "link",
+        "links": [
+            "bf3ce955f0045f92"
+        ],
+        "x": 460,
+        "y": 260,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "bf3ce955f0045f92",
+        "type": "link in",
+        "z": "62cb6b3a5192492c",
+        "name": "update f",
+        "links": [
+            "1e26b87d9bc24c00",
+            "46e35b867b39bb42"
+        ],
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "82b1d4e2857854d3"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "e922a2f495b8527d",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "status updated?",
+        "property": "crm.output.action.context",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "status",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 280,
+        "y": 240,
+        "wires": [
+            [
+                "9ab5a664a037f8c3"
+            ],
+            [
+                "1e26b87d9bc24c00"
+            ]
+        ],
+        "outputLabels": [
+            "yes",
+            "no"
+        ],
+        "info": "#to_do"
+    },
+    {
+        "id": "9ab5a664a037f8c3",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "update s",
+        "mode": "link",
+        "links": [
+            "f53aaaf129a43210"
+        ],
+        "x": 460,
+        "y": 220,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "fdda2bf7be95408d",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f53aaaf129a43210",
+        "type": "link in",
+        "z": "62cb6b3a5192492c",
+        "name": "update s",
+        "links": [
+            "9ab5a664a037f8c3"
+        ],
+        "x": 720,
+        "y": 220,
+        "wires": [
+            [
+                "cefe0783e86b04a7"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "cefe0783e86b04a7",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Archive",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 760,
+        "y": 260,
+        "wires": [
+            [
+                "63842ab2d8774540",
+                "382375ef6c6abcc0"
+            ],
+            [
+                "4b99fd88db3c2366"
+            ]
+        ]
+    },
+    {
+        "id": "f5525050bec84337",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3820d8f881f4611d",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 1030,
+        "y": 560,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "382375ef6c6abcc0",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "63842ab2d8774540",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "error",
+        "mode": "link",
+        "links": [
+            "4b768188.85ab9"
+        ],
+        "x": 1030,
+        "y": 280,
+        "wires": [],
+        "icon": "node-red/file-in.svg",
+        "l": true
+    },
+    {
+        "id": "46e35b867b39bb42",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "update f",
+        "mode": "link",
+        "links": [
+            "bf3ce955f0045f92"
+        ],
+        "x": 1040,
+        "y": 480,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "4b99fd88db3c2366",
         "type": "change",
         "z": "62cb6b3a5192492c",
-        "name": "set action",
+        "name": "Parcel creation",
         "rules": [
             {
                 "t": "set",
-                "p": "payload",
+                "p": "count",
                 "pt": "msg",
-                "to": "{\"actions\":[]}",
-                "tot": "json"
+                "to": "$~>|$|{\t   \"count\":(\t       crm.output.entity.context.updated_fields.status = \"Order creation\" and (\t           crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" \t       )\t   ) ?1:0\t}|",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -5581,23 +5667,1348 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 160,
+        "x": 820,
+        "y": 320,
         "wires": [
             [
-                "e088413b46484351"
+                "583e05ed836e9550"
             ]
         ]
     },
     {
-        "id": "e088413b46484351",
-        "type": "http response",
+        "id": "82b1d4e2857854d3",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "to Purchase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($~>|$|{\"payload\":(crm.output.entity.row.(\t   MpName!=null \t   and \t   MpOrderNumber!=null \t   and \t   MpShipMethod!=null \t   and \t   DateCrPayed!=null \t   and \t   DateShipBy!=null \t   and \t   DateDeliverBy!=null \t   and \t   ProblemDescription=\"-\"\t))\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"15\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method!=null \t   and \t   date_cr_paid!=null \t   and \t   date_ship_by!=null \t   and \t   date_deliver_by!=null \t   and \t   problem_description=\"-\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Parcels preparation\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 380,
+        "wires": [
+            [
+                "bff03ede250919ce"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "75e530dd836d3a90",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "to Track-numbers getting",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method=null \t   and \t   date_cr_paid=null \t   and \t   date_ship_by=null \t   and \t   date_deliver_by=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Order creation\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Pending\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 420,
+        "wires": [
+            [
+                "9108212e9c34cb55"
+            ]
+        ]
+    },
+    {
+        "id": "e7d6d8575f7d2610",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "to Tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           tracknumbers_in_MP!=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Parcels preparation\"\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"60 day test\"\t           },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 460,
+        "wires": [
+            [
+                "ac4c9fa7698a7409"
+            ]
+        ]
+    },
+    {
+        "id": "f8f384b7ca6e2069",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "to Archive",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.archive_scenario!=null)\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Archive\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 500,
+        "wires": [
+            [
+                "05c9527da2960e74"
+            ]
+        ]
+    },
+    {
+        "id": "847a35480ee59086",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "problem description",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           mp_name=\"Amazon Shoptimistic\" \t   and \t   (\t               status=\"Order creation\"\t       or\t       status=\"Pending\"\t   \t           )\t   and \t   (\t               problem_description=\"client canceled\"\t       or\t       problem_description=\"order canceled\" \t   \t           )\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"Archive\"\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "270b986e4cbb1c7c"
+            ]
+        ]
+    },
+    {
+        "id": "d7b6960e13592147",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "date label creation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and crm.output.context.mp_name=\"Amazon Shoptimistic\"\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.88-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 580,
+        "wires": [
+            [
+                "0c2f77c5adc4852e"
+            ]
+        ]
+    },
+    {
+        "id": "3135b4cf642f7ab8",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "date entering",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 230,
+        "y": 620,
+        "wires": [
+            [
+                "4c118f18e6e55899"
+            ]
+        ]
+    },
+    {
+        "id": "811ff69f9bd9e4f3",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "Purchase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"count\":(\t       crm.output.entity.context.updated_fields.status = \"Order creation\" and (\t           crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" \t       )\t   ) ?1:0\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 360,
+        "wires": [
+            [
+                "762b438fa2771658"
+            ]
+        ]
+    },
+    {
+        "id": "d86af83e51579adc",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "Track-numbers getting",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\"count\":(crm.output.entity.context.updated_fields.status = \"Order creation\" and (    crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" )) ?1:0}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 400,
+        "wires": [
+            [
+                "2deb118d3215dd88"
+            ]
+        ]
+    },
+    {
+        "id": "d9cdf6b6c6c14bb3",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "Tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "count",
+                "pt": "msg",
+                "to": "$~>|$|{\"count\":(crm.output.entity.context.updated_fields.status = \"Order creation\" and (    crm.output.entity.data.status = \"Pending\"      or    crm.output.entity.data.status = \"Parcels preparation\"      or    crm.output.entity.data.status = \"Archive\" )) ?1:0}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 800,
+        "y": 440,
+        "wires": [
+            [
+                "99ddf822e4a44cdb"
+            ]
+        ]
+    },
+    {
+        "id": "583e05ed836e9550",
+        "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "statusCode": "",
-        "headers": {},
-        "x": 570,
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "762b438fa2771658",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2deb118d3215dd88",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0809c3afc26e826f",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "77ec514aabf38f2f",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 460,
+        "y": 180,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "80777fecf410b6ad",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "total field",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "4c1e61fea5d1eff4"
+            ]
+        ]
+    },
+    {
+        "id": "c504f704e1b09183",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 500,
+        "y": 1100,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "76061129bc826d30",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "returned to sender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 250,
+        "y": 700,
+        "wires": [
+            [
+                "4e30e92a7eadb581"
+            ]
+        ]
+    },
+    {
+        "id": "73a967e92e0c2fed",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "parcel delivered",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 740,
+        "wires": [
+            [
+                "592e757d4c8ecca8"
+            ]
+        ]
+    },
+    {
+        "id": "39ec95cd7df4cc7a",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "archive scenario",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 240,
+        "y": 780,
+        "wires": [
+            [
+                "6cf967d0dcd49052"
+            ]
+        ]
+    },
+    {
+        "id": "ad8f5ad2a55df304",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "update",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "e922a2f495b8527d",
+                "fdda2bf7be95408d"
+            ],
+            [
+                "77ec514aabf38f2f"
+            ]
+        ]
+    },
+    {
+        "id": "a2d75c322a7ed3e1",
+        "type": "comment",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "info": "поміняти на чейндж ноду з функцією ерорки",
+        "x": 620,
         "y": 260,
+        "wires": []
+    },
+    {
+        "id": "15541ce193142853",
+        "type": "comment",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "info": "поміняти на чейндж ноду з функцією ерорки",
+        "x": 900,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e133f1afadfd92f8",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "creation",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "creation",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 100,
+        "wires": [
+            [
+                "491dad057c4db6ec"
+            ],
+            [
+                "ad8f5ad2a55df304"
+            ]
+        ]
+    },
+    {
+        "id": "491dad057c4db6ec",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "creation",
+        "mode": "link",
+        "links": [
+            "590ce20f5fa85117",
+            "162326748d4cb3fe"
+        ],
+        "x": 460,
+        "y": 100,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "5fad950171579e8c",
+        "type": "inject",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t  \"payload\": {},\t  \"messages\": [\t    {\t      \"level\": \"debug, error, alert, critical\",\t      \"text\": \"test\"\t    }\t  ],\t  \"crm\": {\t    \"output\": {\t      \"lifecycleToken\": \"UO3F6YHD13OWX6TLEAPSMQ07BNK431\",\t      \"entity\": {\t        \"row\": {\t          \"Id\": \"11111\",\t          \"Name\": null,\t          \"IsDraft\": \"0\",\t          \"IsPaid\": \"0\",\t          \"MpName\": \"Amazon Shoptimistic\",\t          \"MpClientId\": null,\t          \"MpOrderNumber\": \"111111111111\",\t          \"MpShipTemplate\": \"WPZI3-RM_pUp_FC_KY_UT\",\t          \"MpOrderNote\": \"test\",\t          \"Problem\": null,\t          \"TracknumbersInMp\": null,\t          \"HowToBuy3\": null,\t          \"HowToBuy3Result\": null,\t          \"HowToBuy3BestShipping\": null,\t          \"HowToBuy4\": \"testData\",\t          \"HowToBuy4Result\": null,\t          \"HowToBuy4BestShipping\": \"test_data\",\t          \"DateCrPayed\": \"2023-02-22 00:00:00\",\t          \"DateShipBy\": \"2023-02-04 00:00:00\",\t          \"DateDeliverBy\": \"2023-02-10 00:00:00\",\t          \"ProblemDescription\": \"test\",\t          \"TimeCreated\": \"2023-02-07 00:00:00\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\",\t          \"Contractor\": \"111111\",\t          \"MpShipMethod\": \"Standard\",\t          \"Owner\": \"111111\",\t          \"FinalPrice\": null,\t          \"Cogs\": null,\t          \"Profit\": null,\t          \"GUID\": null,\t          \"MpUaId\": null,\t          \"Status\": \"12\",\t          \"Tracknumber\": null,\t          \"ArchiveScenario\": null,\t          \"Description\": null,\t          \"Manager\": null,\t          \"StatusName\": \"Order creation\",\t          \"ProgramId\": \"5\",\t          \"ProgramName\": \"Order\"\t        },\t        \"changedFields\": {\t          \"fieldThatWasChanged\": null,\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        },\t        \"type\": \"deal\",\t        \"name\": \"orders\"\t      },\t      \"action\": {\t        \"startedAt\": \"2023-02-23T00:00:00+00:00\",\t        \"type\": \"update\",\t        \"context\": {\t          \"ProblemDescription\": \"test\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        }\t      }\t    }\t  }\t}",
+        "payloadType": "jsonata",
+        "x": 730,
+        "y": 120,
+        "wires": [
+            [
+                "96b36d888dc6fb08"
+            ]
+        ]
+    },
+    {
+        "id": "96b36d888dc6fb08",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "270b986e4cbb1c7c",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "05c9527da2960e74",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ac4c9fa7698a7409",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9108212e9c34cb55",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "bff03ede250919ce",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "0c2f77c5adc4852e",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "4c118f18e6e55899",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "4c1e61fea5d1eff4",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "4e30e92a7eadb581",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "592e757d4c8ecca8",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "6cf967d0dcd49052",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b749ec21234eef3f",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "autobuy TR, AU, PU",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($~>|$|{\t   \"payload\":(crm.output.entity.row.(\t       status=\"Pending\"\t       and\t       problem_description=\"-\")\t       )\t?{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/AutoBuyRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 820,
+        "wires": [
+            [
+                "65453f391348cbce"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "29c10fb097061b5a",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "AU, TR, PU get tracknumber",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($~>|$|{\t   \"payload\":(crm.output.entity.row.(\t       tracknumber=\"-\"\t       and\t       problem_description=\"-\")\t       )\t?{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/OrderStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 860,
+        "wires": [
+            [
+                "4cefcb6cf6d561f2"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "2a20195693f29b19",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "TR get prices and tracknumbers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               sr_order_status!=\"Completed\" \t                and\t                sr_order_status!=\"Tracknumber received\" \t                and\t                sr_order_status!=\"Picked Up\"\t                and\t                problem_description=\"-\"\t                and\t                sr_name=\"TuckerRocky\"\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": \"test\",\t                           \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/OrderStatusRu\",\t                           \"method\": \"GET\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 900,
+        "wires": [
+            [
+                "b113ba0a8aba2532"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "e9248178d038954f",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "tracknumber into mp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.problem_description=\"-\"\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": \"test\",\t                           \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TrackNumberToMarketplaceRu\",\t                           \"method\": \"GET\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 940,
+        "wires": [
+            [
+                "94642fa0d5b2b6de"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "b76fe30ccb2495cd",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "tracknumber tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 980,
+        "wires": [
+            [
+                "0301599c911e5921"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "65453f391348cbce",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "4cefcb6cf6d561f2",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "b113ba0a8aba2532",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "94642fa0d5b2b6de",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "0301599c911e5921",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "8cd1b693db5e9746",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Archive",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 820,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4d27060a8c86cf9a",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Parcel creation",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 840,
+        "y": 660,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "194d82ca256b3ea7",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Purchase",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 700,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "85cf4ac1c5c392a7",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Track-numbers getting",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 860,
+        "y": 740,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8b8ed674f230bf30",
+        "type": "switch",
+        "z": "62cb6b3a5192492c",
+        "name": "Tracking",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 820,
+        "y": 780,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "024e125317a7bb22",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "date entering tracknumber",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 1020,
+        "wires": [
+            [
+                "f079c4a3abab1315"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "f079c4a3abab1315",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "211c4da59a257471",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "total from parcel to order",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 1060,
+        "wires": [
+            [
+                "02778f4ce5fdd64b",
+                "c504f704e1b09183"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "02778f4ce5fdd64b",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "5387a3aea90406eb",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "check linked order deal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 1000,
+        "wires": [
+            [
+                "597b99c23bdd8f45"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "597b99c23bdd8f45",
+        "type": "debug",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "162326748d4cb3fe",
+        "type": "link in",
+        "z": "62cb6b3a5192492c",
+        "name": "creation",
+        "links": [
+            "491dad057c4db6ec"
+        ],
+        "x": 750,
+        "y": 940,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "399a6d8141e6c017",
+        "type": "comment",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "info": "доделать ветку",
+        "x": 880,
+        "y": 940,
         "wires": []
     },
     {
@@ -5614,7 +7025,7 @@
         "wires": [
             [
                 "b5ea65127c3c3327",
-                "10498f063bfcf6de"
+                "002d9f070d3369df"
             ]
         ],
         "l": true,
@@ -5638,46 +7049,6 @@
         "wires": []
     },
     {
-        "id": "10498f063bfcf6de",
-        "type": "change",
-        "z": "bddf42db0215867b",
-        "name": "manual error",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": " {\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": {},\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/DealDimensionRu\",\t                   \"method\": \"GET\"         \t               },\t               \"delay\": 0       \t           },\t           \"entity\": {\t               \"type\": \"deals\",\t               \"name\": \"Test\",\t               \"rowId\": \"1\"       \t           }     \t       }   \t   ],\t   \"code\": \"200\" \t}",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 210,
-        "y": 260,
-        "wires": [
-            [
-                "9a6226137bab8225"
-            ]
-        ]
-    },
-    {
-        "id": "9a6226137bab8225",
-        "type": "rollun-openapi-out",
-        "z": "bddf42db0215867b",
-        "name": "",
-        "data": "msg|payload.data",
-        "messages": "msg|payload.messages",
-        "statusCode": "msg|payload.code",
-        "disableGenerationOfExceptionMessage": false,
-        "x": 280,
-        "y": 400,
-        "wires": []
-    },
-    {
         "id": "579db4d69ad24829",
         "type": "rollun-tables-crud",
         "z": "bddf42db0215867b",
@@ -5689,8 +7060,8 @@
         "action": "update",
         "payload": "msg|payload",
         "log": true,
-        "x": 710,
-        "y": 320,
+        "x": 1370,
+        "y": 140,
         "wires": [
             [
                 "0214650ac58be786"
@@ -5717,8 +7088,8 @@
         "topic": "",
         "payload": "{\"Id\":\"119300\",\"Dimensions\":\"test1\"}",
         "payloadType": "json",
-        "x": 560,
-        "y": 320,
+        "x": 1220,
+        "y": 140,
         "wires": [
             [
                 "579db4d69ad24829"
@@ -5737,8 +7108,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 300,
+        "x": 1520,
+        "y": 120,
         "wires": []
     },
     {
@@ -5753,8 +7124,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 340,
+        "x": 1520,
+        "y": 160,
         "wires": []
     },
     {
@@ -5769,8 +7140,8 @@
         "action": "query",
         "payload": "const|limit(1,0)",
         "log": true,
-        "x": 690,
-        "y": 240,
+        "x": 1350,
+        "y": 60,
         "wires": [
             [
                 "2af69543ce14be42"
@@ -5791,8 +7162,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 530,
-        "y": 240,
+        "x": 1190,
+        "y": 60,
         "wires": [
             [
                 "4941ef938dea6bdd"
@@ -5811,8 +7182,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
-        "y": 220,
+        "x": 1520,
+        "y": 40,
         "wires": []
     },
     {
@@ -5827,8 +7198,1245 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 860,
+        "x": 1520,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "cbc7d8ec6205b843",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "update f",
+        "mode": "link",
+        "links": [
+            "c223450b571e3575"
+        ],
+        "x": 520,
+        "y": 300,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "c223450b571e3575",
+        "type": "link in",
+        "z": "bddf42db0215867b",
+        "name": "update f",
+        "links": [
+            "cbc7d8ec6205b843",
+            "8c082edf780738a0"
+        ],
+        "x": 240,
+        "y": 360,
+        "wires": [
+            [
+                "ec9c0b0ce3203bf6"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "7271941473550b76",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "status updated?",
+        "property": "crm.output.action.context",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "hask",
+                "v": "status",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "1613b7b5755714ae"
+            ],
+            [
+                "cbc7d8ec6205b843"
+            ]
+        ],
+        "outputLabels": [
+            "yes",
+            "no"
+        ],
+        "info": "#to_do"
+    },
+    {
+        "id": "1613b7b5755714ae",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "update s",
+        "mode": "link",
+        "links": [
+            "e34bd9df9ac79a39",
+            "9e083b108092bb73"
+        ],
+        "x": 520,
         "y": 260,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "418acefa5b9b907d",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ec9c0b0ce3203bf6",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "to packaging and sending",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($~>|$|{\"payload\":(crm.output.entity.row.(\t   MpName!=null \t   and \t   MpOrderNumber!=null \t   and \t   MpShipMethod!=null \t   and \t   DateCrPayed!=null \t   and \t   DateShipBy!=null \t   and \t   DateDeliverBy!=null \t   and \t   ProblemDescription=\"-\"\t))\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"15\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.(\t   mp_name!=null \t   and \t   mp_order_number!=null \t   and \t   mp_ship_method!=null \t   and \t   date_cr_paid!=null \t   and \t   date_ship_by!=null \t   and \t   date_deliver_by!=null \t   and \t   problem_description=\"-\"\t))\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Parcels preparation\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 400,
+        "wires": [
+            [
+                "f2a2a0ac11d77908"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "50b961e49a34d71f",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "to Tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           tracknumbers_in_MP!=null \t   and \t   problem_description=\"-\"\t   and\t   status=\"Parcels preparation\"\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"60 day test\"\t           },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 440,
+        "wires": [
+            [
+                "6f229de12906dddb"
+            ]
+        ]
+    },
+    {
+        "id": "14ec04c2ab542147",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "to Archive",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\"payload\":(crm.output.context.archive_scenario!=null)\t?{\t   \"actions\": [\t       {\t           \"action\": \"update\",\t           \"entity_id\": \"1\",\t           \"entity_type\": \"deal\",\t           \"entity_data\": {\t               \"status\": \"Archive\"\t           },\t           \"delay\": 0,\t           \"lifecycle_token\": \"1234567890\"         \t       }    \t   ] \t}:{\t   \"actions\": [] \t}}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [
+                "1d62805df46a9504"
+            ]
+        ]
+    },
+    {
+        "id": "53395de14ec8763a",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "problem description",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           mp_name=\"Amazon Shoptimistic\" \t   and \t   (\t               status=\"Order creation\"\t       or\t       status=\"Pending\"\t   \t           )\t   and \t   (\t               problem_description=\"client canceled\"\t       or\t       problem_description=\"order canceled\" \t   \t           )\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"Archive\"\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 720,
+        "wires": [
+            [
+                "968f9d4467b64d80"
+            ]
+        ]
+    },
+    {
+        "id": "1e6df34657dfcf83",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "create rof reserve",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and crm.output.context.mp_name=\"Amazon Shoptimistic\"\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.88-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 800,
+        "wires": [
+            [
+                "9746f473d901c1c1"
+            ]
+        ]
+    },
+    {
+        "id": "1022c0742e54b0d2",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "date entering",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 760,
+        "wires": [
+            [
+                "6d480473ce2bd7c9"
+            ]
+        ]
+    },
+    {
+        "id": "31c59739dcb978a2",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 520,
+        "y": 220,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "0824a4f4826c4414",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "total field",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 560,
+        "wires": [
+            [
+                "4f28f7b7be15a135"
+            ]
+        ]
+    },
+    {
+        "id": "f98c960aad2f8882",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 560,
+        "y": 960,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "cef6b78f1e9b26b9",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "returned to sender",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 600,
+        "wires": [
+            [
+                "dc6e6012669a4d39"
+            ]
+        ]
+    },
+    {
+        "id": "f912c8dd19b83ed2",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "parcel delivered",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 640,
+        "wires": [
+            [
+                "7db66f94c1df37d5"
+            ]
+        ]
+    },
+    {
+        "id": "f9c911465b9da3c4",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "date entering tracknumber",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       $lookup(crm.output.context , \"cogs\") and $contains(crm.output.context.mp_name,\"Ebay\")\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"profit\": INFO.output.context.(price*0.9-cogs)\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 880,
+        "wires": [
+            [
+                "4ddc283c6f254530"
+            ]
+        ]
+    },
+    {
+        "id": "137ee6d989d3adb6",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "update",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "update",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "7271941473550b76",
+                "418acefa5b9b907d"
+            ],
+            [
+                "31c59739dcb978a2"
+            ]
+        ]
+    },
+    {
+        "id": "002d9f070d3369df",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "creation",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "creation",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 280,
+        "y": 140,
+        "wires": [
+            [
+                "fa45783c1e8fc085"
+            ],
+            [
+                "137ee6d989d3adb6"
+            ]
+        ]
+    },
+    {
+        "id": "fa45783c1e8fc085",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "creation",
+        "mode": "link",
+        "links": [
+            "590ce20f5fa85117",
+            "b2c864d4e55bf713"
+        ],
+        "x": 520,
+        "y": 140,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "6de09729f5880540",
+        "type": "inject",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\t  \"payload\": {},\t  \"messages\": [\t    {\t      \"level\": \"debug, error, alert, critical\",\t      \"text\": \"test\"\t    }\t  ],\t  \"crm\": {\t    \"output\": {\t      \"lifecycleToken\": \"UO3F6YHD13OWX6TLEAPSMQ07BNK431\",\t      \"entity\": {\t        \"row\": {\t          \"Id\": \"11111\",\t          \"Name\": null,\t          \"IsDraft\": \"0\",\t          \"IsPaid\": \"0\",\t          \"MpName\": \"Amazon Shoptimistic\",\t          \"MpClientId\": null,\t          \"MpOrderNumber\": \"111111111111\",\t          \"MpShipTemplate\": \"WPZI3-RM_pUp_FC_KY_UT\",\t          \"MpOrderNote\": \"test\",\t          \"Problem\": null,\t          \"TracknumbersInMp\": null,\t          \"HowToBuy3\": null,\t          \"HowToBuy3Result\": null,\t          \"HowToBuy3BestShipping\": null,\t          \"HowToBuy4\": \"testData\",\t          \"HowToBuy4Result\": null,\t          \"HowToBuy4BestShipping\": \"test_data\",\t          \"DateCrPayed\": \"2023-02-22 00:00:00\",\t          \"DateShipBy\": \"2023-02-04 00:00:00\",\t          \"DateDeliverBy\": \"2023-02-10 00:00:00\",\t          \"ProblemDescription\": \"test\",\t          \"TimeCreated\": \"2023-02-07 00:00:00\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\",\t          \"Contractor\": \"111111\",\t          \"MpShipMethod\": \"Standard\",\t          \"Owner\": \"111111\",\t          \"FinalPrice\": null,\t          \"Cogs\": null,\t          \"Profit\": null,\t          \"GUID\": null,\t          \"MpUaId\": null,\t          \"Status\": \"12\",\t          \"Tracknumber\": null,\t          \"ArchiveScenario\": null,\t          \"Description\": null,\t          \"Manager\": null,\t          \"StatusName\": \"Order creation\",\t          \"ProgramId\": \"5\",\t          \"ProgramName\": \"Order\"\t        },\t        \"changedFields\": {\t          \"fieldThatWasChanged\": null,\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        },\t        \"type\": \"deal\",\t        \"name\": \"orders\"\t      },\t      \"action\": {\t        \"startedAt\": \"2023-02-23T00:00:00+00:00\",\t        \"type\": \"update\",\t        \"context\": {\t          \"ProblemDescription\": \"test\",\t          \"TimeUpdated\": \"2023-02-23 00:00:00\"\t        }\t      }\t    }\t  }\t}",
+        "payloadType": "jsonata",
+        "x": 790,
+        "y": 200,
+        "wires": [
+            [
+                "2303aa4198b4bce8"
+            ]
+        ]
+    },
+    {
+        "id": "2303aa4198b4bce8",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "debug 34",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 980,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "968f9d4467b64d80",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "1d62805df46a9504",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6f229de12906dddb",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f2a2a0ac11d77908",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "9746f473d901c1c1",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "6d480473ce2bd7c9",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "4f28f7b7be15a135",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "dc6e6012669a4d39",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "7db66f94c1df37d5",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "4ddc283c6f254530",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "cb287153816a62ef",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "delete rof reserve",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "($~>|$|{\t   \"payload\":(crm.output.entity.row.(\t       status=\"Pending\"\t       and\t       problem_description=\"-\")\t       )\t?{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/AutoBuyRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 310,
+        "y": 840,
+        "wires": [
+            [
+                "fc8c11331ecbabba"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "a315cf40c94ba4a3",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "tracknumber into mp",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.problem_description=\"-\"\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": \"test\",\t                           \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TrackNumberToMarketplaceRu\",\t                           \"method\": \"GET\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:{\t   \"messages\": [],\t   \"data\":[]\t   }\t}|\t).payload",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 680,
+        "wires": [
+            [
+                "14b82783620c1ea7"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "5067155a74cad6f1",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "tracknumber tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "922a7df2c93af25b"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "fc8c11331ecbabba",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "14b82783620c1ea7",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "922a7df2c93af25b",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "6e5ac1347a73bc48",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "Archive",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 880,
+        "y": 500,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "35ecd19b14e4fcf9",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "Parcel creation",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 900,
+        "y": 340,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "66914d1b5c31ba3d",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "Pick-up preparation",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 910,
+        "y": 380,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "692eb55dceece00d",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "Packaging and sending",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 930,
+        "y": 420,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c184c2f36d03c0af",
+        "type": "switch",
+        "z": "bddf42db0215867b",
+        "name": "Tracking",
+        "property": "crm.output.entity.context.updated_fields.status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Archive",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 880,
+        "y": 460,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "ef240641d4a2af8d",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "date entering tracknumber",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 520,
+        "wires": [
+            [
+                "38f5f04e72c9595f"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "38f5f04e72c9595f",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "0314ab4029a88043",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "total from parcel to order",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 330,
+        "y": 920,
+        "wires": [
+            [
+                "79d4af413b849ecb",
+                "f98c960aad2f8882"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "79d4af413b849ecb",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "01774bc0d735a4f0",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "check linked order deal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 760,
+        "wires": [
+            [
+                "3fee22ae8197d041"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "3fee22ae8197d041",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b2c864d4e55bf713",
+        "type": "link in",
+        "z": "bddf42db0215867b",
+        "name": "creation",
+        "links": [
+            "fa45783c1e8fc085"
+        ],
+        "x": 810,
+        "y": 620,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "faf21a012c33b125",
+        "type": "comment",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "info": "доделать ветку",
+        "x": 940,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "9e083b108092bb73",
+        "type": "link in",
+        "z": "bddf42db0215867b",
+        "name": "update s",
+        "links": [
+            "1613b7b5755714ae"
+        ],
+        "x": 880,
+        "y": 300,
+        "wires": [
+            []
+        ],
+        "l": true
+    },
+    {
+        "id": "a49b3a8d7d6d0d48",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "carrier",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$~>|$|{\t   \"payload\":(\t       crm.output.context.(\t           mp_name=\"Amazon Shoptimistic\" \t   and \t   (\t               status=\"Order creation\"\t       or\t       status=\"Pending\"\t   \t           )\t   and \t   (\t               problem_description=\"client canceled\"\t       or\t       problem_description=\"order canceled\" \t   \t           )\t\t       )\t   )\t?{\t       \"actions\": [\t           {\t               \"action\": \"update\",\t               \"entity_id\": \"1\",\t               \"entity_type\": \"deal\",\t               \"entity_data\": {\t                   \"status\": \"Archive\"\t           \t               },\t               \"delay\": 0,\t               \"lifecycle_token\": \"1234567890\"         \t       \t           }    \t   \t       ] \t\t   }:{\t   \"actions\": [] \t}\t}|",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 790,
+        "y": 680,
+        "wires": [
+            [
+                "4f9048810161da82"
+            ]
+        ]
+    },
+    {
+        "id": "4f9048810161da82",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "fa1821fb17ca1610",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "dimensions",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/TracknumberShipStatusRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 800,
+        "wires": [
+            [
+                "02b5575ba01b7524"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "02b5575ba01b7524",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 800,
         "wires": []
     },
     {
@@ -5983,7 +8591,7 @@
         "y": 120,
         "wires": [
             [
-                "aa0faa0cd9baac82"
+                "62f2ce2849c0aca7"
             ],
             [
                 "6d93a63d7aeeed23"
@@ -6009,8 +8617,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 160,
+        "x": 600,
+        "y": 120,
         "wires": [
             []
         ],
@@ -6040,7 +8648,7 @@
         "y": 200,
         "wires": [
             [
-                "1f06dedae45dc130"
+                "318021e4daae21ff"
             ],
             [
                 "c52d71c76a83bebc"
@@ -6066,8 +8674,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
-        "y": 240,
+        "x": 610,
+        "y": 200,
         "wires": [
             []
         ],
@@ -6097,7 +8705,7 @@
         "y": 280,
         "wires": [
             [
-                "ede4ee0f864b5b59"
+                "4348beb57ed29d1b"
             ],
             [
                 "bb9dcdbeb2c4ff5c"
@@ -6123,8 +8731,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 320,
+        "x": 600,
+        "y": 280,
         "wires": [
             []
         ],
@@ -6154,7 +8762,7 @@
         "y": 360,
         "wires": [
             [
-                "1adf530a110bc09d"
+                "f3393ad236b52ed8"
             ],
             [
                 "f7dc6eafc455a172"
@@ -6180,8 +8788,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 350,
-        "y": 400,
+        "x": 630,
+        "y": 360,
         "wires": [
             []
         ],
@@ -6211,7 +8819,7 @@
         "y": 440,
         "wires": [
             [
-                "e86df8881b65c62d"
+                "a83576de15237412"
             ],
             [
                 "1f0a0640f9c1df41"
@@ -6237,8 +8845,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 310,
-        "y": 480,
+        "x": 590,
+        "y": 440,
         "wires": [
             []
         ],
@@ -6268,7 +8876,7 @@
         "y": 560,
         "wires": [
             [
-                "c7096a3356d06a05"
+                "189b7c8c75a21e83"
             ],
             [
                 "7408ce3345f34514"
@@ -6294,8 +8902,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 600,
+        "x": 650,
+        "y": 560,
         "wires": [
             []
         ],
@@ -6335,7 +8943,7 @@
         "y": 640,
         "wires": [
             [
-                "0493222ee7ad9a39"
+                "be041435e6680bac"
             ],
             [
                 "0f146a8d7ea8faaa"
@@ -6361,8 +8969,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 400,
-        "y": 680,
+        "x": 680,
+        "y": 640,
         "wires": [
             []
         ],
@@ -6392,7 +9000,7 @@
         "y": 720,
         "wires": [
             [
-                "a59c3590795612e5"
+                "3358ea77343a62bd"
             ],
             [
                 "9ee747a1edfbe102"
@@ -6418,8 +9026,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 760,
+        "x": 620,
+        "y": 720,
         "wires": [
             []
         ],
@@ -6449,7 +9057,7 @@
         "y": 800,
         "wires": [
             [
-                "d9e97f75252c3620"
+                "8273f3c2a6253fca"
             ],
             [
                 "1c4e2d5e343a018b"
@@ -6475,8 +9083,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 840,
+        "x": 640,
+        "y": 800,
         "wires": [
             []
         ],
@@ -6506,7 +9114,7 @@
         "y": 880,
         "wires": [
             [
-                "ba405346ad8e44a1"
+                "6766660c01305b3a"
             ],
             [
                 "8f3889132b052d86"
@@ -6532,8 +9140,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 920,
+        "x": 650,
+        "y": 880,
         "wires": [
             []
         ],
@@ -6563,7 +9171,7 @@
         "y": 960,
         "wires": [
             [
-                "644973d485b0cd84"
+                "ea186517a07a65a4"
             ],
             [
                 "d4d190c3fdbbc6ca"
@@ -6589,8 +9197,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 1000,
+        "x": 620,
+        "y": 960,
         "wires": [
             []
         ],
@@ -6620,7 +9228,7 @@
         "y": 1040,
         "wires": [
             [
-                "3ba26bb7aa8b9131"
+                "84e0d51db3515b0e"
             ],
             [
                 "4a08a8289282d610"
@@ -6646,8 +9254,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 1080,
+        "x": 640,
+        "y": 1040,
         "wires": [
             []
         ],
@@ -6677,7 +9285,7 @@
         "y": 1120,
         "wires": [
             [
-                "d08538a544367cb4"
+                "58edf4d925388aa4"
             ],
             []
         ]
@@ -6701,11 +9309,408 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 1160,
+        "x": 620,
+        "y": 1120,
         "wires": [
             []
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "151d7547ee77df7b",
+        "type": "comment",
+        "z": "98ca48f3d4300469",
+        "name": "",
+        "info": "винести на головний фло чейндж ноду, \nщо формуватиме відповідь - як еррорку, \nтак і успішний екшен\n\nтобто формувати саме екшен безпосередньо \nпри перевірці умов\nа повну відповідь окремо",
+        "x": 840,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5959c98349a66660",
+        "type": "comment",
+        "z": "98ca48f3d4300469",
+        "name": "",
+        "info": "робити через декілька світч нод:\nспочатку перевіряти, що за сценарій\nпотім, чи виконуються умови\nпотім чейндж з екшеном",
+        "x": 380,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "62f2ce2849c0aca7",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "1",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "aa0faa0cd9baac82"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "318021e4daae21ff",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "2",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "1f06dedae45dc130"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "4348beb57ed29d1b",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "3",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "ede4ee0f864b5b59"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f3393ad236b52ed8",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "4",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 360,
+        "wires": [
+            [
+                "1adf530a110bc09d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a83576de15237412",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "5",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "e86df8881b65c62d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "189b7c8c75a21e83",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "6",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "c7096a3356d06a05"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "be041435e6680bac",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "7",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "7",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 640,
+        "wires": [
+            [
+                "0493222ee7ad9a39"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "3358ea77343a62bd",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "8",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "8",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "a59c3590795612e5"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8273f3c2a6253fca",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "9",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "9",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 800,
+        "wires": [
+            [
+                "d9e97f75252c3620"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "6766660c01305b3a",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "10",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "10",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 880,
+        "wires": [
+            [
+                "ba405346ad8e44a1"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ea186517a07a65a4",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "11",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "11",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 960,
+        "wires": [
+            [
+                "644973d485b0cd84"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "84e0d51db3515b0e",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "12",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "12",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1040,
+        "wires": [
+            [
+                "3ba26bb7aa8b9131"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "58edf4d925388aa4",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "13",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "13",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1120,
+        "wires": [
+            [
+                "d08538a544367cb4"
+            ],
+            []
+        ]
     }
 ]
