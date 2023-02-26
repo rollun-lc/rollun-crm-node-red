@@ -3195,7 +3195,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": " {\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"scenario_request\",\t               \"context\": {\t                   \"scenario_id\": \"0\"\t                   },\t               \"delay\": 0\t      },\t           \"entity\": {\t               \"type\": \"deals\",\t               \"name\": \"test\",\t               \"rowId\": \"1\"       \t           }     \t       }   \t   ],\t   \"code\": \"200\" \t}",
+                "to": " {\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"scenario_request\",\t               \"context\": {\t                   \"scenario_id\": \"0\"\t                   },\t               \"delay\": 0\t      },\t           \"entity\": {\t               \"type\": \"deals\",\t               \"name\": \"orders\",\t               \"rowId\": \"185648\"       \t           }     \t       }   \t   ],\t   \"code\": \"200\" \t}",
                 "tot": "jsonata"
             }
         ],
@@ -3882,7 +3882,13 @@
             "9a05d84989777b4a",
             "6bf5fea37e67cb68",
             "31c59739dcb978a2",
-            "f98c960aad2f8882"
+            "f98c960aad2f8882",
+            "79c2dbc5ca532218",
+            "bc290418bf9f0358",
+            "ae496037bab5f0e8",
+            "8fd16214e1c201da",
+            "869024716b63220b",
+            "1cf4ab431fdd7ed1"
         ],
         "x": 240,
         "y": 620,
@@ -5023,7 +5029,8 @@
         "wires": [
             [
                 "d3f99c0720767c7c",
-                "f4bb3f2ff5f2fc52"
+                "f4bb3f2ff5f2fc52",
+                "19884b1c03be3b97"
             ],
             [
                 "2465606a7eb0f17f"
@@ -5279,8 +5286,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 270,
-        "y": 920,
+        "x": 210,
+        "y": 780,
         "wires": [
             [
                 "c71270b2935edfa5"
@@ -5299,8 +5306,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
-        "y": 960,
+        "x": 540,
+        "y": 820,
         "wires": []
     },
     {
@@ -5322,8 +5329,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 420,
-        "y": 920,
+        "x": 360,
+        "y": 780,
         "wires": [
             [
                 "dd621476f704afae"
@@ -5342,18 +5349,63 @@
                 "t": "jsonata_exp",
                 "v": "to in $lookup(enable,from) ",
                 "vt": "jsonata"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 1,
-        "x": 430,
-        "y": 960,
+        "outputs": 2,
+        "x": 370,
+        "y": 820,
         "wires": [
             [
                 "a62db6e0fcbcb612"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "19884b1c03be3b97",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 100,
+        "y": 720,
+        "wires": [
+            [
+                "8fd16214e1c201da"
             ]
         ]
+    },
+    {
+        "id": "8fd16214e1c201da",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 260,
+        "y": 720,
+        "wires": [],
+        "l": true
     },
     {
         "id": "6242e4ca54d3c938",
@@ -6189,10 +6241,11 @@
         "wires": [
             [
                 "e922a2f495b8527d",
-                "fdda2bf7be95408d"
+                "fdda2bf7be95408d",
+                "151f9867fadde90f"
             ],
             [
-                "77ec514aabf38f2f"
+                "1aec5dca5f297186"
             ]
         ]
     },
@@ -6240,7 +6293,8 @@
         "y": 100,
         "wires": [
             [
-                "491dad057c4db6ec"
+                "491dad057c4db6ec",
+                "151f9867fadde90f"
             ],
             [
                 "ad8f5ad2a55df304"
@@ -7012,6 +7066,74 @@
         "wires": []
     },
     {
+        "id": "151f9867fadde90f",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 40,
+        "wires": [
+            [
+                "869024716b63220b"
+            ]
+        ]
+    },
+    {
+        "id": "869024716b63220b",
+        "type": "link out",
+        "z": "62cb6b3a5192492c",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 920,
+        "y": 40,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "1aec5dca5f297186",
+        "type": "change",
+        "z": "62cb6b3a5192492c",
+        "name": "set error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Entity type `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "77ec514aabf38f2f"
+            ]
+        ]
+    },
+    {
         "id": "75d3acf739c9e638",
         "type": "link in",
         "z": "bddf42db0215867b",
@@ -7261,7 +7383,8 @@
                 "1613b7b5755714ae"
             ],
             [
-                "cbc7d8ec6205b843"
+                "cbc7d8ec6205b843",
+                "03847afe97e5bd05"
             ]
         ],
         "outputLabels": [
@@ -7620,7 +7743,7 @@
         "type": "switch",
         "z": "bddf42db0215867b",
         "name": "update",
-        "property": "crm.output.event.type",
+        "property": "crm.output.action.type",
         "propertyType": "msg",
         "rules": [
             {
@@ -7643,7 +7766,7 @@
                 "418acefa5b9b907d"
             ],
             [
-                "31c59739dcb978a2"
+                "ebd556016c04a11a"
             ]
         ]
     },
@@ -8440,6 +8563,74 @@
         "wires": []
     },
     {
+        "id": "03847afe97e5bd05",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 340,
+        "wires": [
+            [
+                "bc290418bf9f0358"
+            ]
+        ]
+    },
+    {
+        "id": "bc290418bf9f0358",
+        "type": "link out",
+        "z": "bddf42db0215867b",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 680,
+        "y": 340,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "ebd556016c04a11a",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "set error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Entity type `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "31c59739dcb978a2"
+            ]
+        ]
+    },
+    {
         "id": "8bf50d58ba491581",
         "type": "link in",
         "z": "e021d1d1bf02799b",
@@ -8453,7 +8644,7 @@
         "wires": [
             [
                 "78a9ca8926bfc75d",
-                "a07e9d96be3e6fc9"
+                "920ea88d0ee84f71"
             ]
         ],
         "l": true,
@@ -8477,7 +8668,7 @@
         "wires": []
     },
     {
-        "id": "a07e9d96be3e6fc9",
+        "id": "920ea88d0ee84f71",
         "type": "change",
         "z": "e021d1d1bf02799b",
         "name": "set action",
@@ -8486,8 +8677,8 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\t   \"actions\": [] \t}",
-                "tot": "jsonata"
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "json"
             }
         ],
         "action": "",
@@ -8495,25 +8686,25 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
-        "y": 140,
+        "x": 293.33331298828125,
+        "y": 280,
         "wires": [
             [
-                "2ffeea1a21b5065c"
+                "1cf4ab431fdd7ed1"
             ]
         ]
     },
     {
-        "id": "2ffeea1a21b5065c",
+        "id": "1cf4ab431fdd7ed1",
         "type": "link out",
         "z": "e021d1d1bf02799b",
-        "name": "success",
+        "name": "answer",
         "mode": "link",
         "links": [
             "67f244ac5649799b"
         ],
-        "x": 460,
-        "y": 140,
+        "x": 453.33331298828125,
+        "y": 280,
         "wires": [],
         "l": true
     },
@@ -8594,7 +8785,7 @@
                 "62f2ce2849c0aca7"
             ],
             [
-                "6d93a63d7aeeed23"
+                "74323c46fc334028"
             ]
         ]
     },
@@ -8645,7 +8836,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "318021e4daae21ff"
@@ -8675,7 +8866,7 @@
         "to": "",
         "reg": false,
         "x": 610,
-        "y": 200,
+        "y": 160,
         "wires": [
             []
         ],
@@ -8702,7 +8893,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 280,
+        "y": 200,
         "wires": [
             [
                 "4348beb57ed29d1b"
@@ -8732,7 +8923,7 @@
         "to": "",
         "reg": false,
         "x": 600,
-        "y": 280,
+        "y": 200,
         "wires": [
             []
         ],
@@ -8759,7 +8950,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 360,
+        "y": 240,
         "wires": [
             [
                 "f3393ad236b52ed8"
@@ -8789,7 +8980,7 @@
         "to": "",
         "reg": false,
         "x": 630,
-        "y": 360,
+        "y": 240,
         "wires": [
             []
         ],
@@ -8816,7 +9007,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 440,
+        "y": 280,
         "wires": [
             [
                 "a83576de15237412"
@@ -8846,7 +9037,7 @@
         "to": "",
         "reg": false,
         "x": 590,
-        "y": 440,
+        "y": 280,
         "wires": [
             []
         ],
@@ -8873,7 +9064,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 560,
+        "y": 340,
         "wires": [
             [
                 "189b7c8c75a21e83"
@@ -8903,7 +9094,7 @@
         "to": "",
         "reg": false,
         "x": 650,
-        "y": 560,
+        "y": 340,
         "wires": [
             []
         ],
@@ -8915,8 +9106,8 @@
         "z": "98ca48f3d4300469",
         "name": "",
         "info": "",
-        "x": 160,
-        "y": 600,
+        "x": 120,
+        "y": 340,
         "wires": []
     },
     {
@@ -8940,7 +9131,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 640,
+        "y": 380,
         "wires": [
             [
                 "be041435e6680bac"
@@ -8970,7 +9161,7 @@
         "to": "",
         "reg": false,
         "x": 680,
-        "y": 640,
+        "y": 380,
         "wires": [
             []
         ],
@@ -8997,7 +9188,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 720,
+        "y": 420,
         "wires": [
             [
                 "3358ea77343a62bd"
@@ -9027,7 +9218,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 720,
+        "y": 420,
         "wires": [
             []
         ],
@@ -9054,7 +9245,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 800,
+        "y": 460,
         "wires": [
             [
                 "8273f3c2a6253fca"
@@ -9084,7 +9275,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 800,
+        "y": 460,
         "wires": [
             []
         ],
@@ -9111,7 +9302,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 880,
+        "y": 500,
         "wires": [
             [
                 "6766660c01305b3a"
@@ -9141,7 +9332,7 @@
         "to": "",
         "reg": false,
         "x": 650,
-        "y": 880,
+        "y": 500,
         "wires": [
             []
         ],
@@ -9168,7 +9359,7 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 960,
+        "y": 540,
         "wires": [
             [
                 "ea186517a07a65a4"
@@ -9198,7 +9389,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 960,
+        "y": 540,
         "wires": [
             []
         ],
@@ -9225,10 +9416,10 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 1040,
+        "y": 580,
         "wires": [
             [
-                "84e0d51db3515b0e"
+                "3ba26bb7aa8b9131"
             ],
             [
                 "4a08a8289282d610"
@@ -9255,7 +9446,7 @@
         "to": "",
         "reg": false,
         "x": 640,
-        "y": 1040,
+        "y": 580,
         "wires": [
             []
         ],
@@ -9282,12 +9473,14 @@
         "repair": false,
         "outputs": 2,
         "x": 250,
-        "y": 1120,
+        "y": 620,
         "wires": [
             [
                 "58edf4d925388aa4"
             ],
-            []
+            [
+                "7a8e3e87a445a2b9"
+            ]
         ]
     },
     {
@@ -9310,7 +9503,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 1120,
+        "y": 620,
         "wires": [
             []
         ],
@@ -9386,7 +9579,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 200,
+        "y": 160,
         "wires": [
             [
                 "1f06dedae45dc130"
@@ -9415,7 +9608,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 280,
+        "y": 200,
         "wires": [
             [
                 "ede4ee0f864b5b59"
@@ -9444,7 +9637,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 360,
+        "y": 240,
         "wires": [
             [
                 "1adf530a110bc09d"
@@ -9473,7 +9666,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 440,
+        "y": 280,
         "wires": [
             [
                 "e86df8881b65c62d"
@@ -9502,7 +9695,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 560,
+        "y": 340,
         "wires": [
             [
                 "c7096a3356d06a05"
@@ -9531,7 +9724,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 640,
+        "y": 380,
         "wires": [
             [
                 "0493222ee7ad9a39"
@@ -9560,7 +9753,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 720,
+        "y": 420,
         "wires": [
             [
                 "a59c3590795612e5"
@@ -9589,7 +9782,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 800,
+        "y": 460,
         "wires": [
             [
                 "d9e97f75252c3620"
@@ -9618,7 +9811,7 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 880,
+        "y": 500,
         "wires": [
             [
                 "ba405346ad8e44a1"
@@ -9647,39 +9840,10 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 960,
+        "y": 540,
         "wires": [
             [
                 "644973d485b0cd84"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "84e0d51db3515b0e",
-        "type": "switch",
-        "z": "98ca48f3d4300469",
-        "name": "12",
-        "property": "crm.output.action.context.scenario_id",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "12",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 410,
-        "y": 1040,
-        "wires": [
-            [
-                "3ba26bb7aa8b9131"
             ],
             []
         ]
@@ -9705,12 +9869,280 @@
         "repair": false,
         "outputs": 2,
         "x": 410,
-        "y": 1120,
+        "y": 620,
         "wires": [
             [
                 "d08538a544367cb4"
             ],
             []
+        ]
+    },
+    {
+        "id": "7a8e3e87a445a2b9",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "14",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "14",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 680,
+        "wires": [
+            [
+                "18dbc8902f94f130"
+            ],
+            [
+                "8635118675465c03"
+            ]
+        ]
+    },
+    {
+        "id": "3e874dbad2361004",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "tracknumber tracking",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\":\"update\",\t               \"context\":{\t                   \"ArchiveScenario\":\"delivered\"\t                   },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 680,
+        "wires": [
+            []
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "18dbc8902f94f130",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "14",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.(ShipStatus = \"delivered\"\tand\tStatus = \"54\")",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 680,
+        "wires": [
+            [
+                "3e874dbad2361004"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8635118675465c03",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "15",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "15",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 720,
+        "wires": [
+            [
+                "a1b8ab79a5e0d774"
+            ],
+            [
+                "975a18614c5fa6ba"
+            ]
+        ]
+    },
+    {
+        "id": "e6edd5756880c66b",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "check linked order deal",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/CheckLinkedDealRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 720,
+        "wires": [
+            []
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "a1b8ab79a5e0d774",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "15",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.ProblemDescription = \"-\"",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 720,
+        "wires": [
+            [
+                "e6edd5756880c66b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "975a18614c5fa6ba",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "16",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "16",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 760,
+        "wires": [
+            [
+                "8f6ebb022042afe2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8f6ebb022042afe2",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "dimensions",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/DealDimensionRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 760,
+        "wires": [
+            []
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "79c2dbc5ca532218",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 1240,
+        "y": 140,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "74323c46fc334028",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "set error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Scenario id `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1000,
+        "y": 140,
+        "wires": [
+            [
+                "79c2dbc5ca532218"
+            ]
         ]
     }
 ]
