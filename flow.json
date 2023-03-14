@@ -3248,7 +3248,8 @@
             "8db723e502dce30d",
             "78b86276613867de",
             "1ceffe7fa8cd5ccb",
-            "9774fcb4d083f5ad"
+            "9774fcb4d083f5ad",
+            "0b7d98e58437e6ce"
         ],
         "x": 240,
         "y": 780,
@@ -3824,7 +3825,7 @@
         "rules": [
             {
                 "t": "hask",
-                "v": "status",
+                "v": "Status",
                 "vt": "str"
             },
             {
@@ -3834,38 +3835,19 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 280,
-        "y": 260,
+        "x": 1460,
+        "y": 60,
         "wires": [
             [
                 "2c0e22f4eb330fe1"
             ],
-            [
-                "c03ee32f43fe6424"
-            ]
+            []
         ],
         "outputLabels": [
             "yes",
             "no"
         ],
         "info": "#to_do"
-    },
-    {
-        "id": "f4bb3f2ff5f2fc52",
-        "type": "debug",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 630,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "c03ee32f43fe6424",
@@ -3905,8 +3887,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 360,
+        "x": 300,
+        "y": 340,
         "wires": [
             [
                 "65b6195a151108aa",
@@ -3925,7 +3907,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 220,
+        "y": 820,
         "wires": [],
         "l": true
     },
@@ -3980,7 +3962,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 840,
+        "y": 780,
         "wires": [],
         "l": true
     },
@@ -4005,14 +3987,14 @@
         "repair": false,
         "outputs": 2,
         "x": 210,
-        "y": 180,
+        "y": 300,
         "wires": [
             [
-                "f4bb3f2ff5f2fc52",
-                "c03ee32f43fe6424",
-                "0c6f80163b47cd3b"
+                "c03ee32f43fe6424"
             ],
-            []
+            [
+                "2465606a7eb0f17f"
+            ]
         ]
     },
     {
@@ -4029,7 +4011,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 520,
+        "y": 500,
         "wires": []
     },
     {
@@ -4046,7 +4028,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 480,
+        "y": 460,
         "wires": []
     },
     {
@@ -4063,7 +4045,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 440,
+        "y": 420,
         "wires": []
     },
     {
@@ -4080,7 +4062,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 400,
+        "y": 380,
         "wires": []
     },
     {
@@ -4097,7 +4079,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 360,
+        "y": 340,
         "wires": []
     },
     {
@@ -4114,7 +4096,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 560,
+        "y": 540,
         "wires": []
     },
     {
@@ -4131,7 +4113,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 600,
+        "y": 580,
         "wires": []
     },
     {
@@ -4148,7 +4130,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 640,
+        "y": 620,
         "wires": []
     },
     {
@@ -4165,7 +4147,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 680,
+        "y": 660,
         "wires": []
     },
     {
@@ -4173,7 +4155,7 @@
         "type": "debug",
         "z": "e181d79831f12e5d",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -4182,7 +4164,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 720,
+        "y": 700,
         "wires": []
     },
     {
@@ -4195,7 +4177,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Entity type `\"&crm.output.entity.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
+                "to": "{\t   \"data\":[],\t   \"messages\": [\t       {\t           \"level\":\"error\",\t           \"text\": \"Event type `\"&crm.output.event.type&\"` is not found\"       }\t   ],\t   \"code\":\"500\"\t}",
                 "tot": "jsonata"
             }
         ],
@@ -4205,7 +4187,7 @@
         "to": "",
         "reg": false,
         "x": 240,
-        "y": 220,
+        "y": 820,
         "wires": [
             [
                 "6d0a4a44f52e279d"
@@ -4231,7 +4213,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
+        "x": 320,
         "y": 60,
         "wires": [
             [
@@ -4248,7 +4230,7 @@
         "links": [
             "67f244ac5649799b"
         ],
-        "x": 820,
+        "x": 460,
         "y": 60,
         "wires": [],
         "l": true
@@ -4276,8 +4258,8 @@
         "y": 140,
         "wires": [
             [
-                "e5a8290c9fdc78c4",
-                "d12d012b8f73bda1"
+                "d12d012b8f73bda1",
+                "1ada85b2bb4490ec"
             ]
         ]
     },
@@ -4291,7 +4273,7 @@
         "rules": [
             {
                 "t": "jsonata_exp",
-                "v": "crm.output.entity.context.updated_fields.status in $lookup(crm.status.rules,crm.output.entity.data.status) ",
+                "v": "crm.output.entity.context.updated_fields.StatusName in $lookup(crm.status.rules,crm.output.entity.data.StatusName) ",
                 "vt": "jsonata"
             },
             {
@@ -4301,16 +4283,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 310,
-        "y": 300,
+        "x": 1490,
+        "y": 100,
         "wires": [
             [
-                "f3c029ba962e2f4f",
-                "c03ee32f43fe6424"
+                "f3c029ba962e2f4f"
             ],
             [
-                "615b35bb6264cbe1",
-                "c03ee32f43fe6424"
+                "615b35bb6264cbe1"
             ]
         ]
     },
@@ -4327,8 +4307,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 280,
+        "x": 1810,
+        "y": 80,
         "wires": []
     },
     {
@@ -4344,8 +4324,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 320,
+        "x": 1810,
+        "y": 120,
         "wires": []
     },
     {
@@ -4379,7 +4359,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 760,
+        "y": 740,
         "wires": []
     },
     {
@@ -4408,8 +4388,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 840,
+        "x": 300,
+        "y": 780,
         "wires": [
             [
                 "560e0aab5d461d7d"
@@ -4447,8 +4427,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
-        "y": 400,
+        "x": 270,
+        "y": 380,
         "wires": [
             [
                 "7a0ee24b993a69fd",
@@ -4487,8 +4467,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 440,
+        "x": 280,
+        "y": 420,
         "wires": [
             [
                 "0fd65ab6ab71fbf2",
@@ -4527,8 +4507,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 480,
+        "x": 260,
+        "y": 460,
         "wires": [
             [
                 "041c6ae7e50facfc",
@@ -4567,11 +4547,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 720,
+        "x": 280,
+        "y": 700,
         "wires": [
             [
-                "2a27864521276b1d"
+                "2a27864521276b1d",
+                "0c6f80163b47cd3b"
             ]
         ]
     },
@@ -4606,8 +4587,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 760,
+        "x": 310,
+        "y": 740,
         "wires": [
             [
                 "1f12c42fb7fb4cdc",
@@ -4646,8 +4627,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 520,
+        "x": 310,
+        "y": 500,
         "wires": [
             [
                 "65e169a01c409718",
@@ -4665,7 +4646,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and crm.output.entity.row.MpName=\"Amazon Shoptimistic\"\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.(FinalPrice*0.88-Cogs)                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null}|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and crm.output.entity.row.MpName=\"Amazon Shoptimistic\"\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.88-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null}|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -4686,8 +4667,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 560,
+        "x": 280,
+        "y": 540,
         "wires": [
             [
                 "f605125c568ada39",
@@ -4705,7 +4686,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and $contains(crm.output.entity.row.MpName,\"Ebay\")\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.(FinalPrice*0.9-Cogs)                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and $contains(crm.output.entity.row.MpName,\"Ebay\")\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.9-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -4726,24 +4707,14 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
-        "y": 600,
+        "x": 270,
+        "y": 580,
         "wires": [
             [
                 "4a5da8dad438bc09",
                 "150066217e4dc617"
             ]
         ]
-    },
-    {
-        "id": "4ada0b17d2491b0f",
-        "type": "comment",
-        "z": "e181d79831f12e5d",
-        "name": "",
-        "info": "$num",
-        "x": 160,
-        "y": 600,
-        "wires": []
     },
     {
         "id": "150066217e4dc617",
@@ -4755,7 +4726,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(crm.output.entity.row.Profit<0)\t   \t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"ProblemDescription\": \"negative profit\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":($number(crm.output.entity.row.Profit)<0)\t   \t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"ProblemDescription\": \"negative profit\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -4776,8 +4747,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 640,
+        "x": 280,
+        "y": 620,
         "wires": [
             [
                 "f7688ce519a4f954",
@@ -4816,12 +4787,136 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 340,
-        "y": 680,
+        "x": 280,
+        "y": 660,
         "wires": [
             [
                 "b4c5ac6f9ca23c73",
                 "0b566ba068f6caee"
+            ]
+        ]
+    },
+    {
+        "id": "1ada85b2bb4490ec",
+        "type": "switch",
+        "z": "e181d79831f12e5d",
+        "name": "creation",
+        "property": "crm.output.event.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "creation",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "82dba3eb9142a3ec"
+            ],
+            [
+                "e5a8290c9fdc78c4"
+            ]
+        ]
+    },
+    {
+        "id": "82dba3eb9142a3ec",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "problem description \"-\"",
+        "rules": [
+            {
+                "t": "set",
+                "p": "crm.response",
+                "pt": "msg",
+                "to": "{\t   \"messages\": [],\t   \"data\":[\t       {\t           \"action\":{\t               \"type\":\"update\",\t               \"context\":{\t                   \"ProblemDescription\": \"-\"                                       \t                       },\t               \"delay\":0                            \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t   \"code\":\"200\"     \t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "0412e9479fccefb3",
+                "b56716357307c19f"
+            ]
+        ]
+    },
+    {
+        "id": "0412e9479fccefb3",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0b7d98e58437e6ce",
+        "type": "link out",
+        "z": "e181d79831f12e5d",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 600,
+        "y": 260,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "b56716357307c19f",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "crm.response.data!=null ? crm.response.data : {}",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "crm.response",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "0b7d98e58437e6ce"
             ]
         ]
     },
