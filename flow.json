@@ -1620,7 +1620,10 @@
             "32d5b5ed10ac5521",
             "c9ef158d4ba7ece1",
             "47af50d69cab6b9e",
-            "4583e1764ff118a9"
+            "4583e1764ff118a9",
+            "cd8d5e63824cfb1c",
+            "07eaf81cea8bbec7",
+            "57a400967e8e6b9a"
         ],
         "x": 240,
         "y": 780,
@@ -3501,13 +3504,13 @@
         "id": "42339712359e9c45",
         "type": "change",
         "z": "98ca48f3d4300469",
-        "name": "тест перенесение с Роки товаров в мешок",
+        "name": "products to bag",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/DealDimensionRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"megaplan_request\",\t               \"context\": {\t                   \"url\": \"http://megaplan-crm/api/webhook/AddProductsToBag\"\t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
                 "tot": "jsonata"
             }
         ],
@@ -3516,10 +3519,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 690,
+        "x": 600,
         "y": 1440,
         "wires": [
-            []
+            [
+                "07eaf81cea8bbec7"
+            ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
     },
@@ -3527,13 +3532,13 @@
         "id": "bfdb6724958e8702",
         "type": "change",
         "z": "98ca48f3d4300469",
-        "name": "перенесение с мешка в посылки цен",
+        "name": "price to pickup",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"remote_request\",\t               \"context\": {\t                   \"headers\": {},\t                   \"body\": \"test\",\t                   \"url\": \"https://209011489117811111111:9UimaBCT@rollun.net/api/webhook/DealDimensionRu\",\t                   \"method\": \"GET\"         \t               \t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
+                "to": "{\t   \"messages\": [],\t   \"data\": [\t       {\t           \"action\": {\t               \"type\": \"megaplan_request\",\t               \"context\": {\t                   \"url\": \"http://megaplan-crm/api/webhook/AddPriceToPickup\"\t                       },\t               \"delay\": 0       \t           \t                   },\t           \"entity\":{\t               \"type\":crm.output.entity.type,\t               \"name\":crm.output.entity.name,\t               \"rowId\":crm.output.entity.row.id           \t               \t                   }   \t       \t               }   \t   \t           ],\t   \"code\": \"200\" \t\t       }",
                 "tot": "jsonata"
             }
         ],
@@ -3542,10 +3547,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
+        "x": 600,
         "y": 1400,
         "wires": [
-            []
+            [
+                "57a400967e8e6b9a"
+            ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
     },
@@ -4116,7 +4123,7 @@
         "y": 1440,
         "wires": [
             [
-                "42339712359e9c45"
+                "69829d60680be585"
             ],
             []
         ]
@@ -4294,6 +4301,106 @@
         "wires": [
             [
                 "c9ef158d4ba7ece1"
+            ]
+        ]
+    },
+    {
+        "id": "cd8d5e63824cfb1c",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 960,
+        "y": 560,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "07eaf81cea8bbec7",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 960,
+        "y": 1460,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "57a400967e8e6b9a",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 960,
+        "y": 1400,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "69829d60680be585",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "rule",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.FinalPrice = \"0\"\tor\tcrm.output.entity.row.FinalPrice = null\tor\tcrm.output.entity.row.FinalPrice = 0",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1440,
+        "wires": [
+            [
+                "42339712359e9c45"
+            ],
+            [
+                "4f2deb0c071a6ee3"
+            ]
+        ]
+    },
+    {
+        "id": "4f2deb0c071a6ee3",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 1480,
+        "wires": [
+            [
+                "07eaf81cea8bbec7"
             ]
         ]
     },
