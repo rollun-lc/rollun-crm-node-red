@@ -1259,7 +1259,9 @@
         "name": "test",
         "props": [
             {
-                "p": "payload"
+                "p": "openapiRequest.payload",
+                "v": "{\"lifecycleToken\":\"7ZU2CUWG0BJB6UN0GHGEUQ71WJ7N8Z\",\"entity\":{\"row\":{\"Id\":\"149420\",\"Name\":null,\"IsDraft\":\"0\",\"IsPaid\":\"0\",\"MpName\":\"Amazon Shoptimistic\",\"MpClientId\":null,\"MpOrderNumber\":\"113-8777752-3930653\",\"MpShipTemplate\":\"HB2IP-Ground_3day\",\"MpOrderNote\":null,\"Problem\":null,\"TracknumbersInMp\":null,\"HowToBuy3\":null,\"HowToBuy3Result\":null,\"HowToBuy3BestShipping\":null,\"HowToBuy4\":null,\"HowToBuy4Result\":null,\"HowToBuy4BestShipping\":null,\"DateCrPayed\":null,\"DateShipBy\":null,\"DateDeliverBy\":null,\"ProblemDescription\":\"-\",\"TimeCreated\":\"2023-04-25 15:47:50\",\"TimeUpdated\":\"2023-04-25 15:47:51\",\"Contractor\":\"1001343\",\"MpShipMethod\":null,\"Owner\":null,\"FinalPrice\":\"68.82\",\"Cogs\":null,\"Profit\":\"60.56\",\"GUID\":null,\"MpUaId\":null,\"Status\":\"13\",\"Tracknumber\":null,\"ArchiveScenario\":null,\"Description\":null,\"Manager\":null,\"StatusName\":\"Pending\",\"ProgramId\":\"5\",\"ProgramName\":\"Order\"},\"type\":\"deal\",\"name\":\"orders\"},\"action\":{\"startedAt\":\"2023-04-25T15:47:51+00:00\",\"type\":\"scenario_request\",\"context\":{\"scenario_id\":\"47\"}}}",
+                "vt": "json"
             }
         ],
         "repeat": "",
@@ -1267,8 +1269,6 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"lifecycle_token\":\"QWERTYUIOPASDFGHJKLZXCVBNM0123456789\",\"entity\":{\"type\":\"deals\",\"name\":\"test\",\"row\":{\"id\":\"row#123\",\"fild_name1\":\"new_value1\",\"fild_name2\":\"new_value2\",\"fild_name3\":\"value3\"},\"changed_filds\":{\"fild_name1\":\"old_value1\",\"fild_name2\":\"old_value2\"}},\"action\":{\"type\":\"update\",\"data\":{\"fild_name1\":\"new_value1\",\"fild_name2\":\"new_value2\"},\"started_at\":\"2022-09-22 21:53:10.224\",\"delay\":0}}",
-        "payloadType": "json",
         "x": 90,
         "y": 80,
         "wires": [
@@ -1655,7 +1655,10 @@
             "a18d5c721938616b",
             "6453419bc39835ed",
             "e0598ee5cddfa31a",
-            "4841b53dde7785e3"
+            "4841b53dde7785e3",
+            "10d7ba5ad33f33b5",
+            "fad071aacdb2e280",
+            "f5ae42272ab8bea6"
         ],
         "x": 240,
         "y": 920,
@@ -3735,7 +3738,7 @@
         "type": "debug",
         "z": "98ca48f3d4300469",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -5306,7 +5309,7 @@
             "67f244ac5649799b"
         ],
         "x": 820,
-        "y": 2960,
+        "y": 3040,
         "wires": [],
         "l": true
     },
@@ -5330,7 +5333,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 2960,
+        "y": 3040,
         "wires": [
             [
                 "d6dbd0e4c6885c63"
@@ -7209,7 +7212,7 @@
                 "d2e012f5e308b8a1"
             ],
             [
-                "8f1fac91e2662c2a"
+                "3c811382f85cd73e"
             ]
         ]
     },
@@ -7423,6 +7426,208 @@
         "y": 1020,
         "wires": [],
         "l": true
+    },
+    {
+        "id": "3c811382f85cd73e",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "46",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "46",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 2960,
+        "wires": [
+            [
+                "ffc1399a97e089b8"
+            ],
+            [
+                "643bc9340a2242e9"
+            ]
+        ]
+    },
+    {
+        "id": "ffc1399a97e089b8",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "duplicates check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/dublicatescheck\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\":0                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }           \t           ],\t           \"code\":\"200\"     \t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 2960,
+        "wires": [
+            [
+                "10d7ba5ad33f33b5"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "10d7ba5ad33f33b5",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 820,
+        "y": 2960,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "fad071aacdb2e280",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 820,
+        "y": 3000,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "643bc9340a2242e9",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "47",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "47",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 3000,
+        "wires": [
+            [
+                "a63e4d4f47133490"
+            ],
+            [
+                "8f1fac91e2662c2a"
+            ]
+        ]
+    },
+    {
+        "id": "a63e4d4f47133490",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "date check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t    (\t     $exists(crm.output.entity.row.DateShipBy)\t        and\t        crm.output.entity.row.DateShipBy!=null\t        and\t        (\t            $millis()-$toMillis(\t                 crm.output.entity.row.DateShipBy,\t                \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\"\t            )\t        )\t        /86400000\t        >\t        7\t    )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"update\",\t                       \"context\":{\t                           \"ProblemDescription\": \"OLD DEAL\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }           \t           ],\t           \"code\":\"200\"     \t       }:\t       {\"data\": {},\"code\":\"200\"}\t)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 3000,
+        "wires": [
+            [
+                "8738bdf38a44d5b5",
+                "fad071aacdb2e280"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "034fb8c5ea99ac57",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "date check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t   $millis()-$toMillis(\t       crm.output.entity.row.DateShipBy,\t       \"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\"\t   )\t)/86400000>7)\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"update\",\t                       \"context\":{\t                           \"ProblemDescription\": \"OLD DEAL\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }           \t           ],\t           \"code\":\"200\"     \t       }:null\t\t   }|\t\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1070,
+        "y": 3000,
+        "wires": [
+            []
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "8738bdf38a44d5b5",
+        "type": "debug",
+        "z": "98ca48f3d4300469",
+        "name": "debug 31",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 3080,
+        "wires": []
     },
     {
         "id": "b3caec21cbdb2ae9",
@@ -8333,7 +8538,7 @@
         "type": "debug",
         "z": "414b8641d06f1829",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9227,7 +9432,7 @@
         "type": "debug",
         "z": "e181d79831f12e5d",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -9352,7 +9557,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               MpName!=null \t   and \t   MpOrderNumber!=null \t   and \t   MpShipMethod!=null \t   and \t   DateCrPayed!=null \t   and \t   DateShipBy!=null \t   and \t   DateDeliverBy!=null \t   and \t   ProblemDescription=\"-\"\t   and\t   (StatusName=\"Order creation\" or StatusName=\"Pending\")\t)\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"14\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:null\t}|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"MpName\")\t               or\t               $lookup(crm.output.action.context, \"MpOrderNumber\")\t               or\t               $lookup(crm.output.action.context, \"MpShipMethod\")\t               or \t               $lookup(crm.output.action.context, \"DateCrPayed\")\t               or\t               $lookup(crm.output.action.context, \"DateShipBy\")\t               or\t               $lookup(crm.output.action.context, \"DateDeliverBy\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               MpName!=null \t   and \t   MpOrderNumber!=null \t   and \t   MpShipMethod!=null \t   and \t   DateCrPayed!=null \t   and \t   DateShipBy!=null \t   and \t   DateDeliverBy!=null \t   and \t   ProblemDescription=\"-\"\t   and\t   (StatusName=\"Order creation\" or StatusName=\"Pending\")\t)\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"14\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:null\t}|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9374,7 +9579,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 240,
+        "y": 320,
         "wires": [
             [
                 "65b6195a151108aa",
@@ -9393,7 +9598,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 720,
+        "y": 800,
         "wires": [],
         "l": true
     },
@@ -9407,7 +9612,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 680,
+        "y": 760,
         "wires": [],
         "l": true
     },
@@ -9432,7 +9637,7 @@
         "repair": false,
         "outputs": 2,
         "x": 210,
-        "y": 200,
+        "y": 280,
         "wires": [
             [
                 "c03ee32f43fe6424"
@@ -9456,7 +9661,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 400,
+        "y": 480,
         "wires": []
     },
     {
@@ -9473,7 +9678,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 360,
+        "y": 440,
         "wires": []
     },
     {
@@ -9490,7 +9695,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 320,
+        "y": 400,
         "wires": []
     },
     {
@@ -9507,7 +9712,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 280,
+        "y": 360,
         "wires": []
     },
     {
@@ -9524,7 +9729,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 240,
+        "y": 320,
         "wires": []
     },
     {
@@ -9541,7 +9746,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 440,
+        "y": 520,
         "wires": []
     },
     {
@@ -9558,7 +9763,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 480,
+        "y": 560,
         "wires": []
     },
     {
@@ -9575,7 +9780,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 520,
+        "y": 600,
         "wires": []
     },
     {
@@ -9592,7 +9797,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 560,
+        "y": 640,
         "wires": []
     },
     {
@@ -9609,7 +9814,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 600,
+        "y": 680,
         "wires": []
     },
     {
@@ -9632,7 +9837,7 @@
         "to": "",
         "reg": false,
         "x": 240,
-        "y": 720,
+        "y": 800,
         "wires": [
             [
                 "6d0a4a44f52e279d"
@@ -9653,7 +9858,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 640,
+        "y": 720,
         "wires": []
     },
     {
@@ -9683,7 +9888,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 680,
+        "y": 760,
         "wires": [
             [
                 "560e0aab5d461d7d"
@@ -9700,7 +9905,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               MpName!=null     \t               and     \t               MpOrderNumber!=null     \t               and     \t               MpShipMethod=null     \t               and     \t               DateCrPayed=null     \t               and     \t               DateShipBy=null     \t               and     \t               DateDeliverBy=null     \t               and     \t               ProblemDescription=\"-\"    \t               and    \t               StatusName=\"Order creation\" \t           )        \t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"13\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"MpName\")\t               or\t               $lookup(crm.output.action.context, \"MpOrderNumber\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               MpName!=null     \t               and     \t               MpOrderNumber!=null     \t               and     \t               MpShipMethod=null     \t               and     \t               DateCrPayed=null     \t               and     \t               DateShipBy=null     \t               and     \t               DateDeliverBy=null     \t               and     \t               ProblemDescription=\"-\"    \t               and    \t               StatusName=\"Order creation\" \t           )        \t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"13\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9722,7 +9927,7 @@
         "to": "",
         "reg": false,
         "x": 270,
-        "y": 280,
+        "y": 360,
         "wires": [
             [
                 "7a0ee24b993a69fd",
@@ -9740,7 +9945,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               TracknumbersInMp!=null     \t               and      \t               ProblemDescription=\"-\"    \t               and    \t               StatusName in [\"Parcels preparation\",\"Order creation\",\"Pending\"]\t           )        \t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"15\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"TracknumbersInMp\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               TracknumbersInMp!=null     \t               and      \t               ProblemDescription=\"-\"    \t               and    \t               StatusName in [\"Parcels preparation\",\"Order creation\",\"Pending\"]\t           )        \t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"15\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9762,7 +9967,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 320,
+        "y": 400,
         "wires": [
             [
                 "0fd65ab6ab71fbf2",
@@ -9780,7 +9985,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(ArchiveScenario!=null and StatusName!=\"Archive\")\t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"16\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(crm.output.action.context, \"ArchiveScenario\")\t           and\t           crm.output.entity.row.(\t               ArchiveScenario!=null \t               and \t               StatusName!=\"Archive\")\t       ) ?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"16\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                                              \t                   }                           \t               }                   \t           ],\t           \"code\": \"200\"          \t       }:null \t   }| \t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9802,7 +10007,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 360,
+        "y": 440,
         "wires": [
             [
                 "041c6ae7e50facfc",
@@ -9820,7 +10025,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               crm.output.entity.row.(\t                   ProblemDescription=\"-\" \t                    and \t                    StatusName=\"Parcels preparation\" \t                    and\t                    HowToBuy4=null\t                    and \t                    TracknumbersInMp=null\t                    and \t                    MpShipMethod!=\"International\"\t           )\t           )\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"3\"                                       \t                       },\t                       \"delay\":0                           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t            (\t               $lookup(crm.output.action.context, \"Status\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           (\t               crm.output.entity.row.(\t                   ProblemDescription=\"-\" \t                    and \t                    StatusName=\"Parcels preparation\" \t                    and\t                    HowToBuy4=null\t                    and \t                    TracknumbersInMp=null\t                    and \t                    MpShipMethod!=\"International\"\t           )\t           )\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"3\"                                       \t                       },\t                       \"delay\":60                           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9842,7 +10047,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 600,
+        "y": 680,
         "wires": [
             [
                 "2a27864521276b1d",
@@ -9860,7 +10065,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\")\t                and \t                HowToBuy4BestShipping!=null\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\")\t                and \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9882,7 +10087,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "1f12c42fb7fb4cdc",
@@ -9922,7 +10127,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 400,
+        "y": 480,
         "wires": [
             [
                 "65e169a01c409718",
@@ -9938,9 +10143,16 @@
         "rules": [
             {
                 "t": "set",
+                "p": "crm.output.entity.row.Cogs",
+                "pt": "msg",
+                "to": "crm.output.entity.row.Cogs=null ? 0 : crm.output.entity.row.Cogs",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and crm.output.entity.row.MpName=\"Amazon Shoptimistic\"\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.88-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null}|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t                $lookup(crm.output.action.context, \"Cogs\") \t                or\t                $lookup(crm.output.action.context, \"FinalPrice\")\t                or  \t                crm.output.action.context.Profit=null\t            )\t       and \t       crm.output.entity.row.MpName=\"Amazon Shoptimistic\"\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.88-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null}|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -9962,7 +10174,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 440,
+        "y": 520,
         "wires": [
             [
                 "f605125c568ada39",
@@ -9978,9 +10190,16 @@
         "rules": [
             {
                 "t": "set",
+                "p": "crm.output.entity.row.Cogs",
+                "pt": "msg",
+                "to": "crm.output.entity.row.Cogs=null ? 0 : crm.output.entity.row.Cogs",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t       $lookup(crm.output.action.context, \"Cogs\") and $contains(crm.output.entity.row.MpName,\"Ebay\")\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.9-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t                $lookup(crm.output.action.context, \"Cogs\") \t                or\t                $lookup(crm.output.action.context, \"FinalPrice\")\t                or \t                crm.output.action.context.Profit=null\t            )\t       and \t       $contains(crm.output.entity.row.MpName,\"Ebay\")\t   )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Profit\": crm.output.entity.row.($number(FinalPrice)*0.9-$number(Cogs))                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -10002,7 +10221,7 @@
         "to": "",
         "reg": false,
         "x": 270,
-        "y": 480,
+        "y": 560,
         "wires": [
             [
                 "4a5da8dad438bc09",
@@ -10027,7 +10246,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"Profit\"\t               )\t           )and($number(crm.output.entity.row.Profit)<0 and crm.output.entity.row.ProblemDescription!=\"negative profit\")\t   \t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"ProblemDescription\": \"negative profit\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"Profit\"\t               )\t           )\t           and\t           (\t               $number(crm.output.entity.row.Profit)<0 \t               and \t               crm.output.entity.row.ProblemDescription!=\"negative profit\"\t            )\t   \t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"ProblemDescription\": \"negative profit\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -10049,7 +10268,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 520,
+        "y": 600,
         "wires": [
             [
                 "f7688ce519a4f954",
@@ -10089,7 +10308,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 560,
+        "y": 640,
         "wires": [
             [
                 "b4c5ac6f9ca23c73",
@@ -10152,7 +10371,7 @@
         "wires": [
             [
                 "0412e9479fccefb3",
-                "b56716357307c19f"
+                "ecc2639578e0cc5c"
             ]
         ]
     },
@@ -10183,7 +10402,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 160,
+        "y": 240,
         "wires": [],
         "l": true
     },
@@ -10214,12 +10433,128 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 160,
+        "y": 240,
         "wires": [
             [
                 "0b7d98e58437e6ce"
             ]
         ]
+    },
+    {
+        "id": "ecc2639578e0cc5c",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "date check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                        \"context\": {\t                        \"scenario_id\": \"47\"\t                       },\t                       \"delay\":0                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }           \t           ],\t           \"code\":\"200\"     \t       }",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "73198c81f35f44c3",
+                "1eed867f1714a8b7"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "73198c81f35f44c3",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1eed867f1714a8b7",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "duplicates check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                        \"context\": {\t                        \"scenario_id\": \"46\"\t                       },\t                       \"delay\":0                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }           \t           ],\t           \"code\":\"200\"     \t       }",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "b56716357307c19f",
+                "ed92cb8765b2a375"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "ed92cb8765b2a375",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
     },
     {
         "id": "597b99c23bdd8f45",
@@ -10359,7 +10694,7 @@
         "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -10921,7 +11256,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               MpOrderNumber!=null \t               and \t               MpName!=null \t               and \t               SrName!=null \t               /*\t               and \t               SrName!=\"RockyMountain\"\t               */\t               and \t               SrShipMethod!=null\t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Parcel creation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"105\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"MpOrderNumber\")\t               or\t               $lookup(crm.output.action.context, \"MpName\")\t               or\t               $lookup(crm.output.action.context, \"SrName\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t               or\t               $lookup(crm.output.action.context, \"SrShipMethod\")\t           ) \t           and\t           crm.output.entity.row.(\t               MpOrderNumber!=null \t               and \t               MpName!=null \t               and \t               SrName!=null \t               /*\t               and \t               SrName!=\"RockyMountain\"\t               */\t               and \t               SrShipMethod!=null\t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Parcel creation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"105\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -10962,7 +11297,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               SrOrderNumber!=null \t               and \t               SrPaymentCard!=null \t               and \t               ProblemDescription=\"-\"\t               and \t               StatusName in [\"Parcel creation\",\"Purchase\"] \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"106\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"SrOrderNumber\")\t               or\t               $lookup(crm.output.action.context, \"SrPaymentCard\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               SrOrderNumber!=null \t               and \t               SrPaymentCard!=null \t               and \t               ProblemDescription=\"-\"\t               and \t               StatusName in [\"Parcel creation\",\"Purchase\"] \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"106\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11003,7 +11338,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               Carrier!=null \t               and \t               Carrier!=\"-\" \t               and \t               ProblemDescription=\"-\"\t               and\t               Tracknumber!=\"-\" \t               and\t               Tracknumber!=null\t               and \t               DateEnteringTracknumberIntoMp!=null\t               and\t               StatusName in [\"Parcel creation\",\"Purchase\",\"Track-numbers getting\"]\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"107\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Carrier\")\t               or\t               $lookup(crm.output.action.context, \"Tracknumber\")\t               or\t               $lookup(crm.output.action.context, \"DateEnteringTracknumberIntoMp\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               Carrier!=null \t               and \t               Carrier!=\"-\" \t               and \t               ProblemDescription=\"-\"\t               and\t               Tracknumber!=\"-\" \t               and\t               Tracknumber!=null\t               and \t               DateEnteringTracknumberIntoMp!=null\t               and\t               StatusName in [\"Parcel creation\",\"Purchase\",\"Track-numbers getting\"]\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"107\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11044,7 +11379,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               ArchiveScenario!=null \t               and \t               StatusName!=\"Archive\"\t           )\t\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"108\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"ArchiveScenario\")\t           and\t           crm.output.entity.row.(\t               ArchiveScenario!=null \t               and \t               StatusName!=\"Archive\"\t           )\t\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"108\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11331,7 +11666,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(EnterTracknumber=\"don't enter\" and DateEnteringTracknumberIntoMp=null)\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"DateEnteringTracknumberIntoMp\": \"2023-01-01 00:01:00\"\t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"EnterTracknumber\")\t               or \t               $lookup(crm.output.action.context, \"DateEnteringTracknumberIntoMp\")\t           ) \t           and\t           crm.output.entity.row.(\t               EnterTracknumber=\"don't enter\" \t               and \t               DateEnteringTracknumberIntoMp=null\t            )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"DateEnteringTracknumberIntoMp\": \"2023-01-01 00:01:00\"\t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11413,7 +11748,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"ProblemDescription\"\t               )\t               or\t               $lookup(\t                   crm.output.action.context,\t                   \"Status\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               StatusName=\"Track-numbers getting\"\t               and \t               ProblemDescription=\"-\"\t               and \t               SrName in [\t                   \"Autodist\",\t                   \"TuckerRocky\",\t                   \"PartsUnlimited\"\t               ]\t               and \t               (\t                   Carrier=null\t               or\t               Carrier=\"-\"\t               )\t               and \t               (\t                   Tracknumber=null\t               or\t               Tracknumber=\"-\"\t               )\t               )\t       \t       ))\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":14400                          \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":28800                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":43200                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":57600                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":72000                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       } ,{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":86400                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       } ,{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":144000                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":201600                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":244800                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":288000                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },{\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":302400                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       }\t            ],\t           \"code\": \"200\" \t\t       \t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(\t                   crm.output.action.context,\t                   \"ProblemDescription\"\t               )\t               or\t               $lookup(\t                   crm.output.action.context,\t                   \"Status\"\t               )\t           )and\t           (\t               crm.output.entity.row.(\t                   StatusName=\"Track-numbers getting\"\t               and \t               ProblemDescription=\"-\"\t               and \t               SrName in [\t                       \"Autodist\",\t                       \"TuckerRocky\",\t                       \"PartsUnlimited\"\t               ]\t               and \t               (\t                       Carrier=null\t               or\t               Carrier=\"-\"\t               )\t               and \t               (\t                       Tracknumber=null\t               or\t               Tracknumber=\"-\"\t               )\t               )\t       \t       )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":240*60                          \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":480*60                          \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":720*60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":840*60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":960*60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":1200*60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       } ,\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":86400                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       } ,\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":144000                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":201600                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":244800                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":288000                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"9\"                                       \t                       },\t                       \"delay\":302400                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               }   \t       }\t            ],\t           \"code\": \"200\" \t\t       \t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11618,7 +11953,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"Total\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scheme_id\": \"5\", \t                           \"scenario_id\": \"5\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"Total\")\t       )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scheme_id\": \"5\", \t                           \"scenario_id\": \"5\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11674,7 +12009,7 @@
         "type": "debug",
         "z": "bddf42db0215867b",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11703,7 +12038,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               Tracknumber!=null \t   \t               and \t   \t               Tracknumber!=\"-\"\t   \t               and \t   \t               EnterTracknumber!=null \t   \t               and \t   \t               DateEnteringTracknumberIntoMp!=null \t   \t               and \t   \t               BagLink!=null \t   \t               and \t   \t               BagLink!=\"-\" \t   \t               and \t   \t               ProblemDescription=\"-\"\t   \t               and\t   \t               StatusName=\"Pick-up preparation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"52\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Tracknumber\")\t               or\t               $lookup(crm.output.action.context, \"EnterTracknumber\")\t               or\t               $lookup(crm.output.action.context, \"DateEnteringTracknumberIntoMp\")\t               or \t               $lookup(crm.output.action.context, \"BagLink\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               Tracknumber!=null \t               and \t               Tracknumber!=\"-\"\t               and \t               EnterTracknumber!=null \t               and \t               DateEnteringTracknumberIntoMp!=null \t               and \t               BagLink!=null \t               and \t               BagLink!=\"-\" \t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Pick-up preparation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"52\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12476,7 +12811,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               WasPacked=\"yes\" \t   \t               and \t   \t               ProblemDescription=\"-\"\t   \t               and\t   \t               StatusName=\"Packaging and sending\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"53\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"WasPacked\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               WasPacked=\"yes\" \t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Packaging and sending\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"53\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12517,7 +12852,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(ArchiveScenario!=null and StatusName!=\"Archive\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"54\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"ArchiveScenario\")\t           and\t           crm.output.entity.row.(ArchiveScenario!=null and StatusName!=\"Archive\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"54\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12681,7 +13016,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               Tracknumber!=null\t   \t               \t               \t                and\t                DateEnteringTracknumberIntoMp=null\t                and  \t   \t               \t               \t                ProblemDescription=\"-\"\t   \t               \t               \t                and\t   \t               \t               \t                StatusName=\"Pick-up preparation\" \t           \t           \t           )\t       \t       \t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"12\"                                       \t                       \t                       },\t                       \"delay\":120                            \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   \t                   }   \t       \t               \t               \t               \t               }   \t   \t           \t           \t           \t           ],\t           \"code\": \"200\" \t\t       \t       \t       \t       }:null\t\t   \t   \t   }|\t\t\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Tracknumber\")\t               or\t               $lookup(crm.output.action.context, \"DateEnteringTracknumberIntoMp\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               Tracknumber!=null\t                and\t                DateEnteringTracknumberIntoMp=null\t                and  \t                ProblemDescription=\"-\"\t                and\t                StatusName=\"Pick-up preparation\" \t           )\t       \t       \t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"12\"                                       \t                       \t                       },\t                       \"delay\":120                            \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   \t                   }   \t       \t               \t               \t               \t               }   \t   \t           \t           \t           \t           ],\t           \"code\": \"200\" \t\t       \t       \t       \t       }:null\t\t   \t   \t   }|\t\t\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12722,7 +13057,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"WasPacked\"\t               )\t           and\t           crm.output.entity.row.(\t               StatusName=\"Tracking\"\t               and \t               SrName=\"RollunOffice\"\t               and \t               ProblemDescription=\"-\"\t               and \t               Sender!=null\t               and \t               WasPacked!=null\t               and \t               DateRofReservation!=null\t               and \t               DateRofSubtraction=null\t               )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"19\"\t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"WasPacked\"\t               )\t           and\t           crm.output.entity.row.( \t               SrName=\"RollunOffice\"\t               and \t               ProblemDescription=\"-\"\t               and \t               Sender!=null\t               and \t               WasPacked!=null\t               and \t               DateRofReservation!=null\t               and \t               DateRofSubtraction=null\t               )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"19\"\t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12763,7 +13098,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"Tracknumber\"\t               )\t           )\t           and\t           crm.output.entity.row.(\t               (\t                   MpName=\"Ebay Plaisir\"\t                   or\t                   MpName=\"Ebay Rollun\"\t               )\t               and \t               Tracknumber!=null \t   \t               \t               and \t   \t               \t               Tracknumber!=\"-\"\t   \t               \t               and \t\t               (\t                   EnterTracknumber=\"products in order\"\t\t                    or\t                    EnterTracknumber=\"products in parcel\"\t               )   \t               \t               and \t   \t               \t               DateEnteringTracknumberIntoMp=null \t   \t               \t               and \t   \t               \t               BagLink!=null \t   \t               \t               and \t   \t               \t               BagLink!=\"-\" \t   \t               \t               and \t   \t               \t               ProblemDescription=\"-\"\t   \t               \t               and\t   \t               \t               StatusName=\"Pick-up preparation\" \t           \t           )\t       \t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"11\"                                       \t                       },\t                       \"delay\":120                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   }   \t       \t               \t               \t               },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"12\"                                       \t                       },\t                       \"delay\":900                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   }   \t       \t               \t               \t               }   \t   \t           \t           \t           ],\t           \"code\": \"200\" \t\t       \t       \t       }:null\t\t   \t   }|\t\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"Tracknumber\"\t               )\t           )\t           and\t           crm.output.entity.row.(\t               (\t                   MpName=\"Ebay Plaisir\"\t                   or\t                   MpName=\"Ebay Rollun\"\t               )\t               and \t               Tracknumber!=null \t               and \t               Tracknumber!=\"-\"\t               and \t               (\t                    EnterTracknumber=\"products in order\"\t                    or\t                    EnterTracknumber=\"products in parcel\"\t               )   \t               and \t               DateEnteringTracknumberIntoMp=null \t               and \t               BagLink!=null \t               and \t               BagLink!=\"-\" \t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Pick-up preparation\" \t           )\t       \t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"11\"                                       \t                       },\t                       \"delay\":120                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   }   \t       \t               \t               \t               },\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"12\"                                       \t                       },\t                       \"delay\":900                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   }   \t       \t               \t               \t               }   \t   \t           \t           \t           ],\t           \"code\": \"200\" \t\t       \t       \t       }:null\t\t   \t   }|\t\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12845,7 +13180,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"Total\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scheme_id\": \"5\", \t                           \"scenario_id\": \"5\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"Total\")\t       )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scheme_id\": \"5\", \t                           \"scenario_id\": \"5\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -12983,7 +13318,7 @@
         "type": "debug",
         "z": "e021d1d1bf02799b",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -13579,7 +13914,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.ArchiveScenario!=null\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"24\"\t                       \t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   \t                   }   \t       \t               \t               \t               }   \t   \t           \t           \t           ],\t           \"code\": \"200\" \t\t       \t       \t       }:null\t\t   \t   }|\t\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"ArchiveScenario\")\t           and\t           crm.output.entity.row.ArchiveScenario!=null\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"24\"\t                       },\t                       \"delay\": 0    \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id    \t                   }  \t               }  \t           ],\t           \"code\": \"200\" \t       }:null\t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -13836,7 +14171,7 @@
         "id": "5f6c0c7fec25ad53",
         "type": "change",
         "z": "e021d1d1bf02799b",
-        "name": "items into pickup",
+        "name": "items into bag",
         "rules": [
             {
                 "t": "set",
@@ -13863,7 +14198,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 290,
+        "x": 280,
         "y": 640,
         "wires": [
             [
@@ -14129,7 +14464,7 @@
         "type": "debug",
         "z": "cd39ac09273f5605",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -14499,7 +14834,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"StatusName\")\t               or\t               $lookup(crm.output.action.context, \"LabelCreator\")\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Status\")\t               or\t               $lookup(crm.output.action.context, \"LabelCreator\")\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -14971,7 +15306,7 @@
         "type": "debug",
         "z": "d7cd6c87a33b6389",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -15341,7 +15676,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               StatusName=\"Waiting_for_sending\"\t               and\t               ProblemDescription=\"-\"\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"34\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context,\"Status\")\t                or \t                $lookup(crm.output.action.context,\"ProblemDescription\")\t            )\t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting_for_sending\"\t               and\t               ProblemDescription=\"-\"\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"34\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -15980,7 +16315,7 @@
         "type": "debug",
         "z": "c7627bdbbbf8f486",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -17081,7 +17416,7 @@
         "type": "debug",
         "z": "cce016f7fd2b5ab6",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
