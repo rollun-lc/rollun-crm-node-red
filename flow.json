@@ -1314,7 +1314,7 @@
         "repair": false,
         "outputs": 2,
         "x": 270,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "e9576c54efe7d88d"
@@ -1345,7 +1345,7 @@
         "repair": false,
         "outputs": 2,
         "x": 270,
-        "y": 800,
+        "y": 840,
         "wires": [
             [
                 "e9576c54efe7d88d"
@@ -1662,7 +1662,7 @@
             "9d3a89e3d860317e"
         ],
         "x": 240,
-        "y": 920,
+        "y": 960,
         "wires": [
             [
                 "5dd8099fdf62fc26",
@@ -1692,7 +1692,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 840,
+        "y": 880,
         "wires": [
             [
                 "d667fa193322e6ad"
@@ -1742,7 +1742,7 @@
         "statusCode": "msg|payload.code",
         "disableGenerationOfExceptionMessage": false,
         "x": 680,
-        "y": 920,
+        "y": 960,
         "wires": []
     },
     {
@@ -1759,7 +1759,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 610,
-        "y": 960,
+        "y": 1000,
         "wires": []
     },
     {
@@ -1859,7 +1859,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "ea067f848a29d43b"
@@ -1886,7 +1886,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 720,
+        "y": 760,
         "wires": [
             [
                 "b053668bef248bed"
@@ -2155,12 +2155,8 @@
                 "7778c9322acbe9e0"
             ],
             [
-                "6321f920855bea4e"
+                "b232bc82f882b3e6"
             ]
-        ],
-        "outputLabels": [
-            "bag",
-            ""
         ]
     },
     {
@@ -2183,7 +2179,7 @@
         "to": "",
         "reg": false,
         "x": 410,
-        "y": 680,
+        "y": 720,
         "wires": [
             [
                 "4283bf12d98e63f0"
@@ -2200,7 +2196,7 @@
             "67f244ac5649799b"
         ],
         "x": 580,
-        "y": 680,
+        "y": 720,
         "wires": [],
         "l": true
     },
@@ -2214,7 +2210,7 @@
             "67f244ac5649799b"
         ],
         "x": 580,
-        "y": 720,
+        "y": 760,
         "wires": [],
         "l": true
     },
@@ -2228,7 +2224,7 @@
             "67f244ac5649799b"
         ],
         "x": 580,
-        "y": 840,
+        "y": 880,
         "wires": [],
         "l": true
     },
@@ -2242,7 +2238,7 @@
             "67f244ac5649799b"
         ],
         "x": 580,
-        "y": 880,
+        "y": 920,
         "wires": [],
         "l": true
     },
@@ -2315,8 +2311,43 @@
         "messageField": "const|Set info to rollun-crm",
         "contextField": "msg|payload",
         "x": 640,
-        "y": 1000,
+        "y": 1040,
         "wires": []
+    },
+    {
+        "id": "b232bc82f882b3e6",
+        "type": "switch",
+        "z": "f409e00b8acde5e1",
+        "name": "fba orders",
+        "property": "crm.output.entity.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "fba_orders",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 360,
+        "y": 680,
+        "wires": [
+            [
+                "7778c9322acbe9e0"
+            ],
+            [
+                "6321f920855bea4e"
+            ]
+        ],
+        "outputLabels": [
+            "bag",
+            ""
+        ]
     },
     {
         "id": "7521b2f710c8082b",
@@ -9377,7 +9408,7 @@
         "y": 960,
         "wires": [
             [
-                "d1e2a28ad5fa606e"
+                "afa95d6514720d5a"
             ],
             [
                 "5e12262eea8be2c6"
@@ -9425,6 +9456,64 @@
         "y": 960,
         "wires": [],
         "l": true
+    },
+    {
+        "id": "afa95d6514720d5a",
+        "type": "switch",
+        "z": "414b8641d06f1829",
+        "name": "rule",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.ProblemDescription=\"-\"",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 1080,
+        "wires": [
+            [
+                "d1e2a28ad5fa606e"
+            ],
+            [
+                "ab694b5a608aba5c"
+            ]
+        ]
+    },
+    {
+        "id": "ab694b5a608aba5c",
+        "type": "change",
+        "z": "414b8641d06f1829",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1120,
+        "wires": [
+            [
+                "9d3a89e3d860317e"
+            ]
+        ]
     },
     {
         "id": "99f994a095ff1072",
