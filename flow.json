@@ -1659,7 +1659,8 @@
             "10d7ba5ad33f33b5",
             "fad071aacdb2e280",
             "f5ae42272ab8bea6",
-            "9d3a89e3d860317e"
+            "9d3a89e3d860317e",
+            "99bbee840f5ec1cd"
         ],
         "x": 240,
         "y": 960,
@@ -9027,7 +9028,7 @@
             "67f244ac5649799b"
         ],
         "x": 680,
-        "y": 1000,
+        "y": 1040,
         "wires": [],
         "l": true
     },
@@ -9051,7 +9052,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 1000,
+        "y": 1040,
         "wires": [
             [
                 "33b2e6f223a5928e"
@@ -9411,7 +9412,7 @@
                 "afa95d6514720d5a"
             ],
             [
-                "5e12262eea8be2c6"
+                "ae0a74e6029248b5"
             ]
         ]
     },
@@ -9419,13 +9420,13 @@
         "id": "d1e2a28ad5fa606e",
         "type": "change",
         "z": "414b8641d06f1829",
-        "name": "labels",
+        "name": "labels purchase",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/labels\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }",
+                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/labelsPurchase\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }",
                 "tot": "jsonata"
             }
         ],
@@ -9434,7 +9435,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 400,
         "y": 960,
         "wires": [
             [
@@ -9477,8 +9478,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 390,
-        "y": 1080,
+        "x": 950,
+        "y": 920,
         "wires": [
             [
                 "d1e2a28ad5fa606e"
@@ -9507,13 +9508,86 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 400,
-        "y": 1120,
+        "x": 960,
+        "y": 960,
         "wires": [
             [
                 "9d3a89e3d860317e"
             ]
         ]
+    },
+    {
+        "id": "ae0a74e6029248b5",
+        "type": "switch",
+        "z": "414b8641d06f1829",
+        "name": "24",
+        "property": "crm.output.action.context.button_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "24",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 1000,
+        "wires": [
+            [
+                "4a574c25fdac3eef"
+            ],
+            [
+                "5e12262eea8be2c6"
+            ]
+        ]
+    },
+    {
+        "id": "4a574c25fdac3eef",
+        "type": "change",
+        "z": "414b8641d06f1829",
+        "name": "labels merging",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/labelsMerging\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1000,
+        "wires": [
+            [
+                "99bbee840f5ec1cd"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "99bbee840f5ec1cd",
+        "type": "link out",
+        "z": "414b8641d06f1829",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 680,
+        "y": 1000,
+        "wires": [],
+        "l": true
     },
     {
         "id": "99f994a095ff1072",
