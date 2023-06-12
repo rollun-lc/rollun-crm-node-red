@@ -9468,7 +9468,7 @@
         "rules": [
             {
                 "t": "jsonata_exp",
-                "v": "crm.output.entity.row.ProblemDescription=\"-\"",
+                "v": "crm.output.entity.row.ProblemDescription=\"-\" and crm.output.entity.row.Tracknumber=null",
                 "vt": "jsonata"
             },
             {
