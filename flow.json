@@ -9468,7 +9468,7 @@
         "rules": [
             {
                 "t": "jsonata_exp",
-                "v": "crm.output.entity.row.ProblemDescription=\"-\" and crm.output.entity.row.Tracknumber=null",
+                "v": "crm.output.entity.row.ProblemDescription=\"-\" and (crm.output.entity.row.Tracknumber=null or crm.output.entity.row.Tracknumber=\"\")",
                 "vt": "jsonata"
             },
             {
@@ -9482,10 +9482,12 @@
         "y": 920,
         "wires": [
             [
-                "d1e2a28ad5fa606e"
+                "d1e2a28ad5fa606e",
+                "53045022df4fd8e8"
             ],
             [
-                "ab694b5a608aba5c"
+                "ab694b5a608aba5c",
+                "cd69bf07a909341c"
             ]
         ]
     },
@@ -9588,6 +9590,39 @@
         "y": 1000,
         "wires": [],
         "l": true
+    },
+    {
+        "id": "cd69bf07a909341c",
+        "type": "debug",
+        "z": "414b8641d06f1829",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "53045022df4fd8e8",
+        "type": "debug",
+        "z": "414b8641d06f1829",
+        "name": "debug 32",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 900,
+        "wires": []
     },
     {
         "id": "99f994a095ff1072",
@@ -18220,7 +18255,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.(\t               StatusName=\"Returns_getting\"\t               and\t               SrReturnNumber!=null\t               and \t               ParselInfo!=null\t               and \t               ParselInfo!=\"no_need\"\t               and \t               ProblemDescription=\"-\"\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"65\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(\t                   crm.output.action.context,\t                   \"SrReturnNumber\"\t               )\t               or\t               $lookup(\t                   crm.output.action.context,\t                   \"ParselInfo\"\t               )\t               or\t               $lookup(\t                   crm.output.action.context,\t                   \"ProblemDescription\"\t               )\t            )\t               and\t           crm.output.entity.row.(\t               StatusName=\"Returns_getting\"\t               and\t               SrReturnNumber!=null\t               and \t               ParselInfo!=null\t               and \t               ParselInfo!=\"no_need\"\t               and \t               ProblemDescription=\"-\"\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"65\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
