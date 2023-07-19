@@ -9439,7 +9439,8 @@
         "y": 960,
         "wires": [
             [
-                "9d3a89e3d860317e"
+                "9d3a89e3d860317e",
+                "e96d995f0e966aac"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -9622,6 +9623,22 @@
         "statusType": "auto",
         "x": 1160,
         "y": 900,
+        "wires": []
+    },
+    {
+        "id": "e96d995f0e966aac",
+        "type": "debug",
+        "z": "414b8641d06f1829",
+        "name": "debug 33",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 860,
         "wires": []
     },
     {
@@ -10910,7 +10927,7 @@
         "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11088,7 +11105,7 @@
         "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11677,7 +11694,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context,\"Trackumber\")\t           )\t           and\t           crm.output.entity.row.(\t               Carrier in [\"USPS\",\"FEDEX\",\"UPS\",\"ONTRAC\"] \t               and \t               MpName=\"Amazon Shoptimistic\" \t               and \t               DateLabelCreation=null\t               and \t               Trackumber!=\"-\"\t               and \t               Trackumber!=null\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"6\"\t                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context,\"Tracknumber\")\t           )\t           and\t           crm.output.entity.row.(\t               DateLabelCreation=null\t               and \t               Tracknumber!=\"-\"\t               and \t               Tracknumber!=null\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"6\"\t                       },\t                       \"delay\": 60  \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id\t                   } \t               }  \t           ],\t           \"code\": \"200\" \t       }:null\t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
