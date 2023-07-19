@@ -10927,7 +10927,7 @@
         "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -11105,7 +11105,7 @@
         "type": "debug",
         "z": "62cb6b3a5192492c",
         "name": "",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -13512,7 +13512,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"ProblemDescription\"\t               )\t           )and(\t           crm.output.entity.row.(\t               StatusName=\"Parcel creation\"\t               and \t               SrName=\"RollunOffice\"\t               and \t               ProblemDescription=\"-\"\t               and \t               Sender!=null\t               and \t               DateRofReservation=null\t               )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"18\"\t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(\t                   crm.output.action.context,\t                   \"ProblemDescription\"\t               )\t               or\t               $lookup(\t                   crm.output.action.context,\t                   \"Sender\"\t               )\t           )and(\t           crm.output.entity.row.(\t               SrName=\"RollunOffice\"\t               and \t               ProblemDescription=\"-\"\t               and \t               Sender!=null\t               and \t               DateRofReservation=null\t               )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"scenario_request\",\t                       \"context\": {\t                           \"scenario_id\": \"18\"\t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
