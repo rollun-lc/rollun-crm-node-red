@@ -1661,7 +1661,8 @@
             "f5ae42272ab8bea6",
             "9d3a89e3d860317e",
             "99bbee840f5ec1cd",
-            "2c7283a3bc57cff9"
+            "2c7283a3bc57cff9",
+            "548eea90d1b08bb4"
         ],
         "x": 240,
         "y": 960,
@@ -5343,7 +5344,7 @@
             "67f244ac5649799b"
         ],
         "x": 820,
-        "y": 3120,
+        "y": 3200,
         "wires": [],
         "l": true
     },
@@ -5367,7 +5368,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 3120,
+        "y": 3200,
         "wires": [
             [
                 "d6dbd0e4c6885c63"
@@ -7575,7 +7576,7 @@
                 "a63e4d4f47133490"
             ],
             [
-                "8f1fac91e2662c2a"
+                "53aa545b5f5610a6"
             ]
         ]
     },
@@ -7612,7 +7613,7 @@
         "type": "switch",
         "z": "98ca48f3d4300469",
         "name": "48",
-        "property": "crm.output.action.context.button_id",
+        "property": "crm.output.action.context.scenario_id",
         "propertyType": "msg",
         "rules": [
             {
@@ -7634,7 +7635,7 @@
                 "abca3d4249297263"
             ],
             [
-                "8f1fac91e2662c2a"
+                "251c8eedae96f7ce"
             ]
         ]
     },
@@ -7737,6 +7738,137 @@
                 "2c7283a3bc57cff9"
             ]
         ]
+    },
+    {
+        "id": "251c8eedae96f7ce",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "49",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "49",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 3120,
+        "wires": [
+            [
+                "1892170d1d4ba26b"
+            ],
+            [
+                "8f1fac91e2662c2a"
+            ]
+        ]
+    },
+    {
+        "id": "1892170d1d4ba26b",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "rule",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.(ProblemDescription=\"-\" and StatusName=\"60 day test\")",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 3120,
+        "wires": [
+            [
+                "746805197e2b115d"
+            ],
+            [
+                "5dd96948b7df1fef"
+            ]
+        ]
+    },
+    {
+        "id": "746805197e2b115d",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "delivery check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/deliveryCheck\",\t                           \"method\": \"POST\"         \t                       },\t                       \"delay\": 0       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t                   }   \t               }   \t           ],\t           \"code\": \"200\" \t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 3120,
+        "wires": [
+            [
+                "548eea90d1b08bb4"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "5dd96948b7df1fef",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 3160,
+        "wires": [
+            [
+                "548eea90d1b08bb4"
+            ]
+        ]
+    },
+    {
+        "id": "548eea90d1b08bb4",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 820,
+        "y": 3140,
+        "wires": [],
+        "l": true
     },
     {
         "id": "b3caec21cbdb2ae9",
@@ -9946,7 +10078,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 800,
+        "y": 840,
         "wires": [],
         "l": true
     },
@@ -9960,7 +10092,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 760,
+        "y": 800,
         "wires": [],
         "l": true
     },
@@ -10185,7 +10317,7 @@
         "to": "",
         "reg": false,
         "x": 240,
-        "y": 800,
+        "y": 840,
         "wires": [
             [
                 "6d0a4a44f52e279d"
@@ -10236,7 +10368,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "560e0aab5d461d7d"
@@ -10413,7 +10545,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\")\t                and \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\"\t                or\t                MpShipMethod=\"Other\")\t                and \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -10439,7 +10571,7 @@
         "wires": [
             [
                 "1f12c42fb7fb4cdc",
-                "9c8426cbc8b9099f"
+                "af8129f17e572842"
             ]
         ]
     },
@@ -10902,6 +11034,63 @@
         "statusType": "auto",
         "x": 630,
         "y": 200,
+        "wires": []
+    },
+    {
+        "id": "af8129f17e572842",
+        "type": "change",
+        "z": "e181d79831f12e5d",
+        "name": "delivery check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t            $lookup(crm.output.action.context, \"Status\")\t           and\t           (\t               crm.output.entity.row.(\t                   ProblemDescription=\"-\" \t                    and \t                    StatusName=\"60 day test\" \t                )\t           )\t           and \t           (\t                $round(\t                    ($toMillis(\t                    crm.output.entity.row.DateDeliverBy,\"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")\t                    -$toMillis\t                    ($now(UTC)))\t                /1000)\t            ) > 0\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"49\"                                       \t                       },\t                       \"delay\":$round(($toMillis(crm.output.entity.row.DateDeliverBy,\"[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]\")-$toMillis($now(UTC)))/1000)                          \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 760,
+        "wires": [
+            [
+                "9c8426cbc8b9099f",
+                "2968c8c46fe09fd5"
+            ]
+        ]
+    },
+    {
+        "id": "2968c8c46fe09fd5",
+        "type": "debug",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 760,
         "wires": []
     },
     {
@@ -20512,7 +20701,8 @@
         "y": 220,
         "wires": [
             [
-                "979390b2.b1563"
+                "979390b2.b1563",
+                "9922fb31.2dc4d8"
             ]
         ],
         "icon": "node-red/file-out.svg",
