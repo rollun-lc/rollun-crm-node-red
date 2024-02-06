@@ -1663,7 +1663,8 @@
             "99bbee840f5ec1cd",
             "2c7283a3bc57cff9",
             "548eea90d1b08bb4",
-            "37fc45fefb4702c4"
+            "37fc45fefb4702c4",
+            "47f9421036c42343"
         ],
         "x": 240,
         "y": 960,
@@ -9482,7 +9483,7 @@
             "67f244ac5649799b"
         ],
         "x": 680,
-        "y": 1120,
+        "y": 1160,
         "wires": [],
         "l": true
     },
@@ -9506,7 +9507,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 1120,
+        "y": 1160,
         "wires": [
             [
                 "33b2e6f223a5928e"
@@ -9999,7 +10000,7 @@
                 "4a574c25fdac3eef"
             ],
             [
-                "5e12262eea8be2c6"
+                "845a936b5d131226"
             ]
         ]
     },
@@ -10077,6 +10078,79 @@
         "x": 700,
         "y": 960,
         "wires": []
+    },
+    {
+        "id": "845a936b5d131226",
+        "type": "switch",
+        "z": "414b8641d06f1829",
+        "name": "25",
+        "property": "crm.output.action.context.button_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "25",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 1120,
+        "wires": [
+            [
+                "e953f783aef69e18"
+            ],
+            [
+                "5e12262eea8be2c6"
+            ]
+        ]
+    },
+    {
+        "id": "e953f783aef69e18",
+        "type": "change",
+        "z": "414b8641d06f1829",
+        "name": "delivery check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/deliveryCheck\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 1120,
+        "wires": [
+            [
+                "47f9421036c42343"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "47f9421036c42343",
+        "type": "link out",
+        "z": "414b8641d06f1829",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 680,
+        "y": 1120,
+        "wires": [],
+        "l": true
     },
     {
         "id": "99f994a095ff1072",
@@ -10775,7 +10849,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":\t           (\t               crm.output.entity.row.(\t                   MpName=\"Amazon Shoptimistic\" \t   and \t   (\t                       StatusName=\"Order creation\"\t       or\t       StatusName=\"Pending\"\t   \t           )\t   and \t   (\t                       ProblemDescription=\"client canceled\"\t       or\t       ProblemDescription=\"order canceled\" \t   \t           )\t\t       )\t           )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"16\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":\t           (\t               crm.output.entity.row.(\t                   MpName=\"Amazon Shoptimistic\" \t   and \t   (\t                       StatusName=\"Order creation\"\t       or\t       StatusName=\"Pending\"\t   \t           )\t   and \t   (\t                       ProblemDescription=\"client canceled\"\t       or\t       ProblemDescription=\"order canceled\" \t   \t           )\t\t       )\t           )\t?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"ArchiveScenario\": \"canceled\"                        \t                       },\t                       \"delay\": 0                                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
