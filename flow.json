@@ -1664,7 +1664,8 @@
             "2c7283a3bc57cff9",
             "548eea90d1b08bb4",
             "37fc45fefb4702c4",
-            "47f9421036c42343"
+            "47f9421036c42343",
+            "a6be058f453ea4e1"
         ],
         "x": 240,
         "y": 960,
@@ -10229,13 +10230,6 @@
                 "pt": "msg",
                 "to": "error.source",
                 "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "log.context.flow",
-                "pt": "msg",
-                "to": "src",
-                "tot": "str"
             }
         ],
         "action": "",
@@ -10809,7 +10803,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\"\t                or\t                MpShipMethod=\"Other\")\t                and \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                /*\t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\"\t                or\t                MpShipMethod=\"Other\")\t                and\t                */ \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -11384,7 +11378,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context,\"Status\")\t           and\t           (\t            crm.output.entity.row.(\t                ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                HowToBuy4Result=null\t                and \t                MpName=\"Amazon Shoptimistic\"\t                and \t                (\t                    $contains(MpShipTemplate,\"test\")\t                    or\t                    $contains(MpShipTemplate,\"PU_DS_\")\t                )\t            )\t        )\t    )?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"50\"                                       \t                       },\t                       \"delay\":0                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context,\"Status\")\t           and\t           (\t            crm.output.entity.row.(\t                ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                HowToBuy4Result=null\t                and \t                MpName=\"Amazon Shoptimistic\"\t                and \t                (\t                    $contains(MpShipTemplate,\"test\")\t                    or\t                    $contains(MpShipTemplate,\"PU_DS_\")\t                    or\t                    $contains(MpShipTemplate,\"AU_DS_\")\t                )\t            )\t        )\t    )?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"50\"                                       \t                       },\t                       \"delay\":0                       \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -15883,7 +15877,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Status\")\t               /*\t               or\t               $lookup(crm.output.action.context, \"LabelCreator\")\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t               */\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Status\")\t               or\t               $lookup(crm.output.action.context, \"FinalPrice\")\t               /*\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t               */\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t               and \t               FinalPrice!=0\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -21081,13 +21075,6 @@
             },
             {
                 "t": "set",
-                "p": "context",
-                "pt": "msg",
-                "to": "$.(\t\t    (log.level in [\"error\",\"alert\",\"critical\"])?(\t            $merge([\t                $exists(log.context)?log.context:{},\t                $exists(rlln)?\t                {\t                    \"rlln\":rlln\t                }:{},\t                $exists(payload)?\t                {\t                    \"payload\":payload\t                }:{},\t                {\t                    \"globs\":{\t                        \"dlvdCache\":$globalContext(\"dlvdCache\"),\t                        \"saveCache\":$globalContext(\"saveCache\"),\t                        \"RLST\":$globalContext(\"RLST\")\t                    \t                    }\t                }\t            ])    \t        \t    ):(\t        $exists(log.context)?log.context:{}\t    )\t)\t\t/*\t\t\t\t\t\t\t\t    (\t        log.level in [\"error\",\"alert\",\"critical\"]\t            and \t        $exists(log.context)\t    )?\t        rlln\t    :\t        ($exists(log.context)?(log.context):null)\t)\t\t\t[\t    {\t        \"log\":         \t            {\t                \"level\":\"error\",\t                \"message\":\"there is Message\"\t            },\t        \"rlln\":{\"evnt\":{}}   \t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\",\t                \"context\":{\"arr\":[1,2]}\t            },\t        \"rlln\":{\"evnt\":{}}   \t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\",\t                \"context\":{\"arr\":[1,2]}\t            }\t    },\t    {\t        \"log\":         \t            {\t                \"level\":\"info\",\t                \"message\":\"there is Message\"\t            }\t    }\t    \t]\t\t*/",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
                 "p": "message",
                 "pt": "msg",
                 "to": "$exists(log.message)?log.message:\"No message\"\t",
@@ -21099,6 +21086,13 @@
                 "pt": "msg",
                 "to": "log.level",
                 "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"data\":[],\t   \"messages\": message,\t   \"code\":\"500\" \t}",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -21111,7 +21105,8 @@
         "wires": [
             [
                 "488b08b6.6a9c38",
-                "10fd27ab.b09fa8"
+                "10fd27ab.b09fa8",
+                "a6be058f453ea4e1"
             ]
         ]
     },
@@ -21315,7 +21310,7 @@
         "config": "2e26026f.b353be",
         "level": "debug",
         "messageField": "msg|message",
-        "contextField": "msg|context",
+        "contextField": "msg|",
         "x": 460,
         "y": 300,
         "wires": []
@@ -21661,5 +21656,19 @@
         "x": 1030,
         "y": 620,
         "wires": []
+    },
+    {
+        "id": "a6be058f453ea4e1",
+        "type": "link out",
+        "z": "b799064cb3f975fb",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 460,
+        "y": 260,
+        "wires": [],
+        "l": true
     }
 ]
