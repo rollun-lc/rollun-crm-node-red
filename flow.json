@@ -10803,7 +10803,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                /*\t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\"\t                or\t                MpShipMethod=\"Other\")\t                and\t                */ \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":((\t               $lookup(\t                   crm.output.action.context,\t                   \"HowToBuy4BestShipping\"\t               )\t           )and\t           (\t           crm.output.entity.row.(\t               ProblemDescription=\"-\" \t                and \t                StatusName=\"Parcels preparation\" \t                and\t                TracknumbersInMp=null\t                and \t                /*\t                (MpShipMethod=\"Standard\"\t                or\t                MpShipMethod=\"FreeEconomy\"\t                or\t                MpShipMethod=\"Other\")\t                and\t                */ \t                (\t                    HowToBuy4BestShipping!=null\t                    and\t                    HowToBuy4BestShipping!=\"null\"\t                    and\t                    $not($contains(HowToBuy4BestShipping, \"wps_ds\"))\t                )\t           ))\t       ) ?{\t           \"messages\": [],\t           \"data\":[\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"4\"                                       \t                       },\t                       \"delay\":60                            \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id                            \t                   }                    \t               }            \t           ],\t           \"code\":\"200\"     \t       }:null \t   }|\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -10829,7 +10829,7 @@
         "wires": [
             [
                 "1f12c42fb7fb4cdc",
-                "af8129f17e572842"
+                "a060c84986130c1d"
             ]
         ]
     },
@@ -11329,8 +11329,7 @@
         "y": 760,
         "wires": [
             [
-                "2968c8c46fe09fd5",
-                "a060c84986130c1d"
+                "2968c8c46fe09fd5"
             ]
         ]
     },
@@ -11407,6 +11406,16 @@
                 "9c8426cbc8b9099f"
             ]
         ]
+    },
+    {
+        "id": "dd92e073d3a85eb7",
+        "type": "comment",
+        "z": "e181d79831f12e5d",
+        "name": "",
+        "info": "для АВ",
+        "x": 100,
+        "y": 520,
+        "wires": []
     },
     {
         "id": "597b99c23bdd8f45",
@@ -12895,6 +12904,26 @@
         "wires": []
     },
     {
+        "id": "d2a44b3f19fa1580",
+        "type": "comment",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "info": "для АВ",
+        "x": 100,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d7939187baaa5176",
+        "type": "comment",
+        "z": "62cb6b3a5192492c",
+        "name": "",
+        "info": "для АВ",
+        "x": 100,
+        "y": 960,
+        "wires": []
+    },
+    {
         "id": "75d3acf739c9e638",
         "type": "link in",
         "z": "bddf42db0215867b",
@@ -13822,7 +13851,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"FinalPrice\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Total\": crm.output.entity.row.($number(FinalPrice)+1) \t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"FinalPrice\")\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Total\": crm.output.entity.row.($number(FinalPrice)+1.35) \t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
@@ -14266,7 +14295,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.SrShipMethod in \t           [\t            \"2Day\",\t            \"Standard Overnight\",\t            \"Express Saver\",\t            \"Home Delivery\"\t               ]       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Carrier\": \"FEDEX\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           crm.output.entity.row.SrShipMethod in \t           [\t            \"2Day One Rate Envelope\",\t            \"2Day One Rate Pak\",\t            \"2Day One Rate Box\",\t            \"2Day One Rate Small Box\",\t            \"2Day One Rate Medium Box\",\t            \"2Day One Rate Large Box\",\t            \"2Day One Rate Extra Large Box\",\t            \"Standard Overnight\",\t            \"Express Saver\",\t            \"Home Delivery\"\t               ]       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Carrier\": \"FEDEX\"\t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
