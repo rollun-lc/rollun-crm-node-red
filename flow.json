@@ -1665,7 +1665,8 @@
             "548eea90d1b08bb4",
             "37fc45fefb4702c4",
             "47f9421036c42343",
-            "a6be058f453ea4e1"
+            "a6be058f453ea4e1",
+            "62a886bd85186641"
         ],
         "x": 240,
         "y": 960,
@@ -5347,7 +5348,7 @@
             "67f244ac5649799b"
         ],
         "x": 820,
-        "y": 3320,
+        "y": 3400,
         "wires": [],
         "l": true
     },
@@ -5371,7 +5372,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 3320,
+        "y": 3400,
         "wires": [
             [
                 "d6dbd0e4c6885c63"
@@ -7900,7 +7901,7 @@
                 "63c9e2db916b9fb5"
             ],
             [
-                "8f1fac91e2662c2a"
+                "4c52c930a40ed3d0"
             ]
         ]
     },
@@ -8059,6 +8060,137 @@
         "wires": [
             [
                 "0cd73f3a51d670af"
+            ]
+        ]
+    },
+    {
+        "id": "7c3f360380be2149",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "rule",
+        "property": "true",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "crm.output.entity.row.ProblemDescription=\"-\" and (crm.output.entity.row.Tracknumber=null or crm.output.entity.row.Tracknumber=\"\")",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 350,
+        "y": 3340,
+        "wires": [
+            [
+                "23169a3a59562a85"
+            ],
+            [
+                "08b53f9210feed8d"
+            ]
+        ]
+    },
+    {
+        "id": "08b53f9210feed8d",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "set action",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"data\": {},\"code\":\"200\"}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 3360,
+        "wires": [
+            [
+                "62a886bd85186641"
+            ]
+        ]
+    },
+    {
+        "id": "23169a3a59562a85",
+        "type": "change",
+        "z": "98ca48f3d4300469",
+        "name": "labels purchase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"remote_request\",\t                       \"context\": {\t                           \"headers\": {},\t                           \"body\": crm.output.entity.row,\t                           \"url\": \"https://crm-callbacks.rollun.net/labelsPurchase\",\t                           \"method\": \"POST\"         \t               \t                       },\t                       \"delay\": 0       \t           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id           \t               \t                   }   \t       \t               }   \t   \t           ],\t           \"code\": \"200\" \t\t       }",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 3320,
+        "wires": [
+            [
+                "62a886bd85186641"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "62a886bd85186641",
+        "type": "link out",
+        "z": "98ca48f3d4300469",
+        "name": "answer",
+        "mode": "link",
+        "links": [
+            "67f244ac5649799b"
+        ],
+        "x": 820,
+        "y": 3340,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "4c52c930a40ed3d0",
+        "type": "switch",
+        "z": "98ca48f3d4300469",
+        "name": "51",
+        "property": "crm.output.action.context.scenario_id",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "51",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 3340,
+        "wires": [
+            [
+                "7c3f360380be2149"
+            ],
+            [
+                "8f1fac91e2662c2a"
             ]
         ]
     },
@@ -13025,13 +13157,6 @@
         "rules": [
             {
                 "t": "set",
-                "p": "crm.response",
-                "pt": "msg",
-                "to": "{\"messages\":[],\"data\":[],\"code\":200}",
-                "tot": "json"
-            },
-            {
-                "t": "set",
                 "p": "payload",
                 "pt": "msg",
                 "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Tracknumber\")\t               or\t               $lookup(crm.output.action.context, \"EnterTracknumber\")\t               or\t               $lookup(crm.output.action.context, \"DateEnteringTracknumberIntoMp\")\t               or \t               $lookup(crm.output.action.context, \"BagLink\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t           ) \t           and\t           crm.output.entity.row.(\t               Tracknumber!=null \t               and \t               Tracknumber!=\"-\"\t               and \t               EnterTracknumber!=null \t               and \t               DateEnteringTracknumberIntoMp!=null \t               and \t               BagLink!=null \t               and \t               BagLink!=\"-\" \t               and \t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Pick-up preparation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"52\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
@@ -13056,7 +13181,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 440,
+        "y": 360,
         "wires": [
             [
                 "f2a2a0ac11d77908",
@@ -13075,7 +13200,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 1000,
+        "y": 960,
         "wires": [],
         "l": true
     },
@@ -13089,7 +13214,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 960,
+        "y": 920,
         "wires": [],
         "l": true
     },
@@ -13114,10 +13239,10 @@
         "repair": false,
         "outputs": 2,
         "x": 210,
-        "y": 400,
+        "y": 280,
         "wires": [
             [
-                "ec9c0b0ce3203bf6"
+                "d2d4fa9e238fc297"
             ],
             [
                 "ebd556016c04a11a"
@@ -13148,7 +13273,7 @@
         "y": 80,
         "wires": [
             [
-                "a49b3a8d7d6d0d48"
+                "58019965cf6a68cc"
             ],
             [
                 "137ee6d989d3adb6"
@@ -13169,7 +13294,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 240,
+        "y": 120,
         "wires": []
     },
     {
@@ -13186,7 +13311,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 520,
+        "y": 440,
         "wires": []
     },
     {
@@ -13203,7 +13328,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 480,
+        "y": 400,
         "wires": []
     },
     {
@@ -13220,7 +13345,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 440,
+        "y": 360,
         "wires": []
     },
     {
@@ -13237,7 +13362,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 800,
+        "y": 760,
         "wires": []
     },
     {
@@ -13254,7 +13379,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
@@ -13271,7 +13396,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 640,
+        "y": 600,
         "wires": []
     },
     {
@@ -13288,7 +13413,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 680,
+        "y": 640,
         "wires": []
     },
     {
@@ -13305,7 +13430,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 880,
+        "y": 840,
         "wires": []
     },
     {
@@ -13322,7 +13447,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 840,
+        "y": 800,
         "wires": []
     },
     {
@@ -13339,7 +13464,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 720,
+        "y": 680,
         "wires": []
     },
     {
@@ -13356,7 +13481,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 760,
+        "y": 720,
         "wires": []
     },
     {
@@ -13373,7 +13498,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 560,
+        "y": 520,
         "wires": []
     },
     {
@@ -13390,7 +13515,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 920,
+        "y": 880,
         "wires": []
     },
     {
@@ -13407,7 +13532,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 280,
+        "y": 160,
         "wires": []
     },
     {
@@ -13448,8 +13573,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
-        "y": 120,
+        "x": 950,
+        "y": 220,
         "wires": [
             [
                 "4f9048810161da82",
@@ -13470,8 +13595,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 120,
+        "x": 1330,
+        "y": 220,
         "wires": []
     },
     {
@@ -13488,7 +13613,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 320,
+        "y": 200,
         "wires": []
     },
     {
@@ -13511,7 +13636,7 @@
         "to": "",
         "reg": false,
         "x": 240,
-        "y": 1000,
+        "y": 960,
         "wires": [
             [
                 "31c59739dcb978a2"
@@ -13528,7 +13653,7 @@
             "67f244ac5649799b"
         ],
         "x": 600,
-        "y": 360,
+        "y": 240,
         "wires": [],
         "l": true
     },
@@ -13655,7 +13780,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 360,
+        "y": 240,
         "wires": [
             [
                 "921375c64483d73b"
@@ -13689,7 +13814,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 960,
+        "y": 920,
         "wires": [
             [
                 "f98c960aad2f8882"
@@ -13728,7 +13853,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 240,
+        "y": 120,
         "wires": [
             [
                 "968f9d4467b64d80",
@@ -13768,7 +13893,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 280,
+        "y": 160,
         "wires": [
             [
                 "3fee22ae8197d041",
@@ -13808,7 +13933,7 @@
         "to": "",
         "reg": false,
         "x": 270,
-        "y": 320,
+        "y": 200,
         "wires": [
             [
                 "02b5575ba01b7524",
@@ -13848,7 +13973,7 @@
         "to": "",
         "reg": false,
         "x": 270,
-        "y": 480,
+        "y": 400,
         "wires": [
             [
                 "6f229de12906dddb",
@@ -13889,11 +14014,11 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 520,
+        "y": 440,
         "wires": [
             [
                 "1d62805df46a9504",
-                "8868fdce2daedef1"
+                "cba5f235a8c4c5bc"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -13930,7 +14055,7 @@
         "to": "",
         "reg": false,
         "x": 260,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "101268757c0520e9",
@@ -13971,7 +14096,7 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 800,
+        "y": 760,
         "wires": [
             [
                 "3fe7b9b5b437342e",
@@ -14012,7 +14137,7 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 840,
+        "y": 800,
         "wires": [
             [
                 "fc8c11331ecbabba",
@@ -14053,7 +14178,7 @@
         "to": "",
         "reg": false,
         "x": 320,
-        "y": 680,
+        "y": 640,
         "wires": [
             [
                 "8e7f34048a42c91b",
@@ -14094,7 +14219,7 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "eefa36edef2ea50f",
@@ -14135,7 +14260,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 640,
+        "y": 600,
         "wires": [
             [
                 "73313b3b1bf2676f",
@@ -14176,7 +14301,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 760,
+        "y": 720,
         "wires": [
             [
                 "d7933e31a0e4a92b",
@@ -14217,7 +14342,7 @@
         "to": "",
         "reg": false,
         "x": 310,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "7323df2a347a64ef",
@@ -14258,7 +14383,7 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 880,
+        "y": 840,
         "wires": [
             [
                 "70842c8a4bf0ca03",
@@ -14299,7 +14424,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 720,
+        "y": 680,
         "wires": [
             [
                 "5459aa01553a0fea",
@@ -14321,8 +14446,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 160,
+        "x": 1330,
+        "y": 260,
         "wires": []
     },
     {
@@ -14338,8 +14463,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 630,
-        "y": 200,
+        "x": 1330,
+        "y": 300,
         "wires": []
     },
     {
@@ -14373,8 +14498,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
-        "y": 160,
+        "x": 950,
+        "y": 260,
         "wires": [
             [
                 "814e4e58aa630038",
@@ -14413,14 +14538,136 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 250,
-        "y": 200,
+        "x": 950,
+        "y": 300,
         "wires": [
             [
-                "58019965cf6a68cc",
                 "a486df7336b43eec"
             ]
         ]
+    },
+    {
+        "id": "187cf2d582785a9a",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d2d4fa9e238fc297",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "to Pickup preparation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "crm.response",
+                "pt": "msg",
+                "to": "{\"messages\":[],\"data\":[],\"code\":200}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t               $lookup(crm.output.action.context, \"Tracknumber\")\t           and\t           crm.output.entity.row.(\t               Tracknumber!=null \t               and \t               Tracknumber!=\"-\"\t               and\t               ProblemDescription=\"-\"\t               and\t               StatusName=\"Parcel creation\" \t           )\t       \t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\": \"update\",\t                       \"context\": {\t                           \"Status\": \"51\"\t                       \t                       },\t                       \"delay\": 0       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "ec9c0b0ce3203bf6",
+                "187cf2d582785a9a"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
+    },
+    {
+        "id": "486681877eab0d55",
+        "type": "debug",
+        "z": "bddf42db0215867b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "cba5f235a8c4c5bc",
+        "type": "change",
+        "z": "bddf42db0215867b",
+        "name": "labels purchase",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           $lookup(crm.output.action.context, \"Dimensions\")\t           and \t           Tracknumber=null\t           and \t           LabelProvider=\"Amazon\"\t           and \t           ProblemDescription=\"-\"\t           and \t           StatusName=\"Parcel creation\"\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\":{\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"51\"                                       \t                       },\t                       \"delay\":60                           \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id       \t                        }\t               }         \t           ],\t           \"code\": \"200\" \t       }:null\t\t   }|\t\t).payload",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "crm.response.data",
+                "pt": "msg",
+                "to": "payload=null ? crm.response.data : crm.response.data ~>$append(payload.data)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [
+                "8868fdce2daedef1",
+                "486681877eab0d55"
+            ]
+        ],
+        "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
     },
     {
         "id": "8bf50d58ba491581",
@@ -14733,7 +14980,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 600,
+        "y": 640,
         "wires": []
     },
     {
@@ -14846,7 +15093,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 630,
-        "y": 640,
+        "y": 600,
         "wires": []
     },
     {
@@ -15243,7 +15490,7 @@
         "wires": [
             [
                 "d9de69c283e52cef",
-                "7aef0c36ce6a3bb3"
+                "5f6c0c7fec25ad53"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -15287,11 +15534,11 @@
         "to": "",
         "reg": false,
         "x": 290,
-        "y": 600,
+        "y": 640,
         "wires": [
             [
                 "60eb3a8fcbc51c6f",
-                "5f6c0c7fec25ad53"
+                "980fd897e42af7e3"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -15328,11 +15575,11 @@
         "to": "",
         "reg": false,
         "x": 280,
-        "y": 640,
+        "y": 600,
         "wires": [
             [
                 "26b6cb7c8e033ad1",
-                "980fd897e42af7e3"
+                "7aef0c36ce6a3bb3"
             ]
         ],
         "info": "спочатку визначати, чи потрібно щось робити - \r\nв змінну \"умова\"\r\nпотім визначати, що саме робити"
@@ -15963,7 +16210,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Status\")\t               or\t               $lookup(crm.output.action.context, \"FinalPrice\")\t               /*\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t               */\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t               and \t               FinalPrice!=0\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
+                "to": "(\t   $~>|$|{\t       \"payload\":(\t           (\t               $lookup(crm.output.action.context, \"Status\")\t               /*\t               or\t               $lookup(crm.output.action.context, \"FinalPrice\")\t               or\t               $lookup(crm.output.action.context, \"ReturnLocation\")\t               or \t               $lookup(crm.output.action.context, \"ProblemDescription\")\t               */\t           ) \t           and\t           crm.output.entity.row.(\t               StatusName=\"Waiting for receiving\"\t               and\t               LabelCreator!=null\t               and\t               ReturnLocation!=null\t               and \t               ProblemDescription=\"-\"\t               and \t               FinalPrice!=0\t           )\t       )\t?{\t           \"messages\": [],\t           \"data\": [\t               {\t                   \"action\": {\t                       \"type\":\"scenario_request\",\t                       \"context\":{\t                           \"scenario_id\": \"26\"                                       \t                       },\t                       \"delay\": 60       \t           \t                   \t                   },\t                   \"entity\":{\t                       \"type\":crm.output.entity.type,\t                       \"name\":crm.output.entity.name,\t                       \"rowId\":crm.output.entity.row.Id          \t               \t                   \t                   }   \t       \t               \t               }   \t   \t           \t           ],\t           \"code\": \"200\" \t\t       \t       }:null\t\t   }|\t\t).payload",
                 "tot": "jsonata"
             },
             {
