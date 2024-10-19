@@ -201,9 +201,7 @@
             "21e83248c886bd0b"
         ],
         "x": 194,
-        "y": 759,
-        "w": 472,
-        "h": 202
+        "y": 759
     },
     {
         "id": "2e26026f.b353be",
@@ -2415,7 +2413,7 @@
         "type": "debug",
         "z": "98ca48f3d4300469",
         "name": "debug Catch nodes",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
